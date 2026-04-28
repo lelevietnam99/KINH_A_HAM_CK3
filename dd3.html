@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ôn thi Kinh Tăng Nhất A Hàm - Câu 12</title>
+    <style>
+        :root {
+            --primary-color: #5D4037; /* Nâu sòng */
+            --secondary-color: #E65100; /* Cam pháp phục */
+            --bg-color: #FDFBF7;
+            --text-color: #333;
+            --highlight-bg: #FFF3E0;
+            
+            /* 3 Pillars Colors */
+            --wisdom-color: #1565C0; /* Tuệ */
+            --ethics-color: #2E7D32; /* Giới */
+            --meditation-color: #6A1B9A; /* Định */
+        }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            line-height: 1.7;
+            margin: 0;
+            padding: 20px;
+        }
+        .container {
+            max-width: 850px;
+            margin: auto;
+            background: #fff;
+            padding: 40px;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+        }
+        .header {
+            text-align: center;
+            border-bottom: 3px solid var(--secondary-color);
+            margin-bottom: 30px;
+            padding-bottom: 20px;
+        }
+        h1 {
+            color: var(--primary-color);
+            font-size: 1.8em;
+            margin: 0;
+            text-transform: uppercase;
+        }
+        .question-box {
+            background-color: var(--highlight-bg);
+            padding: 20px;
+            border-left: 5px solid var(--secondary-color);
+            border-radius: 4px;
+            margin-bottom: 30px;
+        }
+        .question-text {
+            font-weight: bold;
+            font-size: 1.15em;
+            color: #D84315;
+            line-height: 1.5;
+        }
+
+        .intro-text {
+            font-size: 1.05em;
+            text-align: justify;
+            margin-bottom: 30px;
+            padding: 15px;
+            background-color: #f9f9f9;
+            border-left: 4px solid var(--primary-color);
+            border-radius: 4px;
+        }
+
+        .teacher-tip {
+            color: #C62828;
+            font-style: italic;
+            font-weight: bold;
+            display: block;
+            margin-bottom: 10px;
+        }
+
+        /* Bát Chánh Đạo Groups */
+        .path-group {
+            margin-bottom: 25px;
+            background: #fff;
+            border: 1px solid #eee;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.02);
+            transition: transform 0.2s ease;
+        }
+        .path-group:hover {
+            transform: translateX(5px);
+            box-shadow: 0 4px 10px rgba(0,0,0,0.06);
+        }
+
+        .group-header {
+            padding: 12px 20px;
+            font-size: 1.2em;
+            font-weight: bold;
+            color: white;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .header-wisdom { background-color: var(--wisdom-color); }
+        .header-ethics { background-color: var(--ethics-color); }
+        .header-meditation { background-color: var(--meditation-color); }
+
+        .group-content {
+            padding: 20px;
+            background-color: #fafafa;
+        }
+        
+        .path-item {
+            margin-bottom: 15px;
+            padding-bottom: 15px;
+            border-bottom: 1px dashed #ddd;
+        }
+        .path-item:last-child {
+            margin-bottom: 0;
+            padding-bottom: 0;
+            border-bottom: none;
+        }
+        .path-name {
+            font-weight: bold;
+            font-size: 1.05em;
+            display: inline-block;
+            margin-bottom: 5px;
+        }
+        .text-wisdom { color: var(--wisdom-color); }
+        .text-ethics { color: var(--ethics-color); }
+        .text-meditation { color: var(--meditation-color); }
+        
+        .path-desc {
+            margin: 0;
+            text-align: justify;
+            font-size: 0.98em;
+        }
+
+        /* Conclusion Box */
+        .conclusion-box {
+            background: linear-gradient(135deg, #FEF9E7 0%, #FFF3E0 100%);
+            border: 2px solid #FBC02D;
+            padding: 25px;
+            border-radius: 8px;
+            margin-top: 40px;
+            text-align: justify;
+        }
+        .conclusion-box h3 {
+            color: #F57F17;
+            margin-top: 0;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 1.25em;
+            text-transform: uppercase;
+        }
+        .conclusion-text {
+            margin: 0;
+            color: #4E342E;
+            font-size: 1.05em;
+            line-height: 1.6;
+        }
+        .highlight-quote {
+            font-weight: bold;
+            color: #D84315;
+        }
+
+        .footer-note {
+            margin-top: 40px;
+            padding-top: 20px;
+            border-top: 1px solid #eee;
+            font-style: italic;
+            font-size: 0.9em;
+            text-align: right;
+            color: #777;
+        }
+        .btn-print {
+            display: block;
+            width: fit-content;
+            margin: 0 auto 20px auto;
+            padding: 10px 25px;
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+            font-weight: bold;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            transition: background 0.3s;
+        }
+        .btn-print:hover {
+            background-color: #3E2723;
+        }
+        @media print {
+            .btn-print { display: none; }
+            body { background: white; padding: 0; }
+            .container { box-shadow: none; border-radius: 0; padding: 0; width: 100%; max-width: 100%; }
+            .path-group { break-inside: avoid; border: 1px solid #ccc; }
+        }
+    </style>
+</head>
+<body>
+
+    <button class="btn-print" onclick="window.print()">🖨️ In Bài Học (A4)</button>
+
+    <div class="container">
+        <div class="header">
+            <h1>Kinh Tăng Nhất A Hàm</h1>
+            <div style="color: var(--secondary-color); font-weight: bold; margin-top: 5px;">HƯỚNG DẪN ÔN THI TỰ LUẬN</div>
+        </div>
+
+        <div class="question-box">
+            <div class="question-text">
+                Câu 12 (Vận dụng nâng cao): Sự "gần Như Lai" thực chất là sự "gần với Chánh Pháp". Anh/chị hãy sử dụng con đường Bát Chánh Đạo để phân tích xem một người thực hành tri ân và báo ân trong đời sống hiện tại đang tương ưng với những chi pháp nào trong Bát Chánh Đạo?
+            </div>
+        </div>
+
+        <div class="intro-text">
+            <span class="teacher-tip">💡 Mẹo ăn điểm từ Giảng sư: Việc móc nối, liên hệ nội dung bài kinh với Bát Chánh Đạo sẽ thể hiện được sự thấu hiểu giáo pháp sâu sắc.</span>
+            Trong Kinh Báo đáp, Đức Phật khẳng định người biết nhớ ơn và đền ơn, dù ở xa ngàn dặm vẫn được xem là ở gần Như Lai. "Gần Như Lai tức là gần pháp của Như Lai, sống đúng với cái hạnh của Như Lai". Dưới đây là phân tích chi tiết cách một người thực hành tri ân đang tương ưng với 8 chi pháp:
+        </div>
+
+        <div class="path-group">
+            <div class="group-header header-wisdom">
+                🧠 1. Tương ưng về Nhận thức & Trí tuệ
+            </div>
+            <div class="group-content">
+                <div class="path-item">
+                    <span class="path-name text-wisdom">● Chánh kiến (Nhận thức đúng đắn):</span>
+                    <p class="path-desc">Người có lòng tri ân có cái nhìn thấu triệt về đạo lý nhân duyên. Họ nhận thức rằng sự tồn tại và khôn lớn của mình là nhờ sự trợ duyên của vô số ân nhân: cha mẹ, sư trưởng và vạn loài chúng sanh. Thấy rõ sự tương luân này chính là Chánh kiến.</p>
+                </div>
+                <div class="path-item">
+                    <span class="path-name text-wisdom">● Chánh tư duy (Suy nghĩ chân chánh):</span>
+                    <p class="path-desc">Từ nhận thức đúng, họ luôn hướng tâm suy nghĩ về lòng biết ơn. Họ loại bỏ tư duy ích kỷ, đòi hỏi, ngã mạn (cho rằng mình tài giỏi không cần ai) và khởi lên ý niệm thiện lành về việc đền đáp công ơn người khác.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="path-group">
+            <div class="group-header header-ethics">
+                🕊️ 2. Tương ưng về Hành vi & Đạo đức
+            </div>
+            <div class="group-content">
+                <div class="path-item">
+                    <span class="path-name text-ethics">● Chánh ngữ (Lời nói chân thật, hòa ái):</span>
+                    <p class="path-desc">Sự đền ơn thể hiện qua việc dùng lời ái ngữ, cung kính với bề trên và lời cảm ơn chân thành đến người giúp đỡ mình. Tuyệt đối không buông lời bất kính, vô ơn hay oán trách.</p>
+                </div>
+                <div class="path-item">
+                    <span class="path-name text-ethics">● Chánh nghiệp (Hành động lương thiện):</span>
+                    <p class="path-desc">Tri ân là một phẩm chất đạo đức bền vững dẫn đến hành động cụ thể. Việc phụng dưỡng cha mẹ, cúng dường sư trưởng, hay giúp đỡ người hoạn nạn chính là đang thực hành Chánh nghiệp.</p>
+                </div>
+                <div class="path-item">
+                    <span class="path-name text-ethics">● Chánh mạng (Lối sống chân chánh):</span>
+                    <p class="path-desc">Sống trong sạch, làm nghề lương thiện không gây hại vạn vật. Trở thành người có ích cho xã hội là cách báo ân thiết thực nhất để cha mẹ không buồn lòng, sư trưởng không thất vọng.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="path-group">
+            <div class="group-header header-meditation">
+                🧘 3. Tương ưng về Tỉnh thức & Định lực
+            </div>
+            <div class="group-content">
+                <div class="path-item">
+                    <span class="path-name text-meditation">● Chánh tinh tấn (Siêng năng hướng thiện):</span>
+                    <p class="path-desc">Báo ân đòi hỏi nỗ lực không mệt mỏi. Hành giả tinh tấn tu tập, làm việc phước lành, không để sự lười biếng, buông lung ngăn cản bổn phận làm con, làm trò.</p>
+                </div>
+                <div class="path-item">
+                    <span class="path-name text-meditation">● Chánh niệm (Tỉnh giác từng phút giây):</span>
+                    <p class="path-desc">Người biết báo ân không bao giờ quên lãng dù là ân huệ rất nhỏ. Chánh niệm giúp hành giả luôn tỉnh thức, khắc cốt ghi tâm ân tình thọ nhận để không vô tình rơi vào sự vô tâm, bội bạc.</p>
+                </div>
+                <div class="path-item">
+                    <span class="path-name text-meditation">● Chánh định (Tâm an trú vững vàng):</span>
+                    <p class="path-desc">Khi tâm an trú trong sự biết ơn, nội tâm trở nên tĩnh lặng, vững chãi, không bị dao động bởi đố kỵ, danh lợi hay những cám dỗ bất thiện của thế gian.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="conclusion-box">
+            <h3>🌟 Kết Luận Lấy Điểm Tuyệt Đối</h3>
+            <p class="conclusion-text">
+                Việc thực hành tri ân và báo ân không chỉ đơn thuần là phép tắc ứng xử của thế gian, mà thực chất là hành giả đang đi trên lộ trình tu tập của bậc Thánh — <strong>con đường Bát Chánh Đạo</strong>. 
+                <br><br>
+                Khi sống trọn vẹn với lòng biết ơn, tức là người đó đang tương ưng tuyệt đối với Chánh pháp. Nhờ sự tương ưng đó, dù Đức Phật đã nhập diệt hàng ngàn năm, người đệ tử ấy vẫn đang <span class="highlight-quote">"gần giáo pháp của Như Lai, gần cái hạnh của Như Lai, gần đời sống của Như Lai"</span>.
+            </p>
+        </div>
+
+        <div class="footer-note">
+            Tài liệu lưu hành nội bộ - Ôn thi cuối học kỳ Kinh Tăng Nhất A Hàm
+        </div>
+    </div>
+
+</body>
+</html>

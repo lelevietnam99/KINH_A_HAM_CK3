@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ôn thi Kinh Tăng Nhất A Hàm - Câu 8</title>
+    <style>
+        :root {
+            --primary-color: #5D4037; /* Nâu sòng */
+            --secondary-color: #E65100; /* Cam pháp phục */
+            --bg-color: #FDFBF7;
+            --text-color: #333;
+            --highlight-bg: #FFF3E0;
+            --card-border: #E0E0E0;
+        }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            line-height: 1.7;
+            margin: 0;
+            padding: 20px;
+        }
+        .container {
+            max-width: 850px;
+            margin: auto;
+            background: #fff;
+            padding: 40px;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+        }
+        .header {
+            text-align: center;
+            border-bottom: 3px solid var(--secondary-color);
+            margin-bottom: 30px;
+            padding-bottom: 20px;
+        }
+        h1 {
+            color: var(--primary-color);
+            font-size: 1.8em;
+            margin: 0;
+            text-transform: uppercase;
+        }
+        .question-box {
+            background-color: var(--highlight-bg);
+            padding: 20px;
+            border-left: 5px solid var(--secondary-color);
+            border-radius: 4px;
+            margin-bottom: 30px;
+        }
+        .question-text {
+            font-weight: bold;
+            font-size: 1.15em;
+            color: #D84315;
+            line-height: 1.5;
+        }
+
+        .intro-text {
+            font-size: 1.05em;
+            text-align: justify;
+            margin-bottom: 30px;
+            padding: 15px;
+            background-color: #f9f9f9;
+            border-left: 4px solid var(--primary-color);
+            border-radius: 4px;
+        }
+        .intro-text strong {
+            color: var(--primary-color);
+        }
+
+        h2 {
+            color: var(--primary-color);
+            font-size: 1.35em;
+            border-bottom: 1px dashed #ccc;
+            padding-bottom: 8px;
+            margin-top: 35px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        h2::before {
+            content: '☸';
+            color: var(--secondary-color);
+        }
+
+        /* Thẻ nội dung phân tích */
+        .analysis-card {
+            background: #fff;
+            border: 1px solid var(--card-border);
+            border-radius: 8px;
+            padding: 25px;
+            margin-bottom: 20px;
+            position: relative;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.02);
+            transition: transform 0.2s ease;
+        }
+        .analysis-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            border-color: #BCAAA4;
+        }
+        .card-number {
+            position: absolute;
+            top: -15px;
+            left: -15px;
+            background-color: var(--secondary-color);
+            color: white;
+            width: 35px;
+            height: 35px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 1.2em;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+        }
+        .analysis-card h3 {
+            margin-top: 0;
+            color: var(--primary-color);
+            font-size: 1.2em;
+            margin-bottom: 15px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid #eee;
+        }
+        .sub-point {
+            margin-bottom: 15px;
+        }
+        .sub-point:last-child {
+            margin-bottom: 0;
+        }
+        .sub-point-title {
+            font-weight: bold;
+            color: #4E342E;
+            display: block;
+            margin-bottom: 5px;
+        }
+        .sub-point-content {
+            text-align: justify;
+            margin: 0;
+        }
+
+        /* Hộp Kết luận chuyển hóa Y báo */
+        .conclusion-box {
+            background: linear-gradient(135deg, #F1F8E9 0%, #DCEDC8 100%);
+            border: 1px solid #C8E6C9;
+            padding: 25px;
+            border-radius: 8px;
+            margin-top: 40px;
+            text-align: justify;
+        }
+        .conclusion-box h3 {
+            color: #2E7D32;
+            margin-top: 0;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 1.2em;
+            text-transform: uppercase;
+        }
+        .conclusion-text {
+            margin: 0;
+            color: #1B5E20;
+            font-size: 1.05em;
+            line-height: 1.6;
+        }
+
+        .footer-note {
+            margin-top: 40px;
+            padding-top: 20px;
+            border-top: 1px solid #eee;
+            font-style: italic;
+            font-size: 0.9em;
+            text-align: right;
+            color: #777;
+        }
+        .btn-print {
+            display: block;
+            width: fit-content;
+            margin: 0 auto 20px auto;
+            padding: 10px 25px;
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+            font-weight: bold;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            transition: background 0.3s;
+        }
+        .btn-print:hover {
+            background-color: #3E2723;
+        }
+        @media print {
+            .btn-print { display: none; }
+            body { background: white; padding: 0; }
+            .container { box-shadow: none; border-radius: 0; padding: 0; width: 100%; max-width: 100%; }
+            .analysis-card { break-inside: avoid; }
+        }
+    </style>
+</head>
+<body>
+
+    <button class="btn-print" onclick="window.print()">🖨️ In Bài Học (A4)</button>
+
+    <div class="container">
+        <div class="header">
+            <h1>Kinh Tăng Nhất A Hàm</h1>
+            <div style="color: var(--secondary-color); font-weight: bold; margin-top: 5px;">HƯỚNG DẪN ÔN THI TỰ LUẬN</div>
+        </div>
+
+        <div class="question-box">
+            <div class="question-text">
+                Câu 8: Từ ý nghĩa của việc "tôn kính cha mẹ, sư trưởng" và hạnh "bố thí tài sản" trong bài kinh, anh/chị hãy lý giải vì sao đây được xem là cội nguồn để tích lũy phước báu và thay đổi hoàn cảnh sống (y báo) của một con người?
+            </div>
+        </div>
+
+        <div class="intro-text">
+            Trong giáo lý nhân quả của đạo Phật, hoàn cảnh sống của chúng ta <strong>(Y báo)</strong> gắn liền và phụ thuộc hoàn toàn vào chính bản thân người tạo tác <strong>(Chánh báo)</strong>. Chúng ta không thể tự nhiên yêu cầu thay đổi môi trường hay thay đổi người khác, mà chỉ có thể thay đổi chính mình, từ đó hoàn cảnh sống (y báo) mới thay đổi theo.
+        </div>
+
+        <!-- Khối 1 -->
+        <div class="analysis-card" style="margin-top: 40px;">
+            <div class="card-number">1</div>
+            <h3>Tôn kính Cha mẹ, Sư trưởng là nền tảng phước báu</h3>
+            
+            <div class="sub-point">
+                <span class="sub-point-title">🌱 Gieo trồng vào cội nguồn sự sống và trí tuệ:</span>
+                <p class="sub-point-content">Cha mẹ là hai đấng sinh thành và dưỡng dục, còn sư trưởng là những người thầy truyền trao kiến thức, bồi dưỡng nhân cách. Đối với đạo Phật, sự hiếu kính không chỉ là đạo lý thế gian mà chính là nền tảng đạo đức và cội nguồn của mọi phước báu. Việc hiếu dưỡng cha mẹ được Đức Phật xem là pháp mang lại phước báu tối thắng đối với phàm phu, công đức lớn lao sánh ngang với việc cúng dường bậc Bồ tát nhất sanh bổ xứ.</p>
+            </div>
+            
+            <div class="sub-point">
+                <span class="sub-point-title">🔨 Phá trừ sự kiêu mạn, nuôi dưỡng sự khiêm cung:</span>
+                <p class="sub-point-content">Khi biết tôn trọng, cung kính bậc ân nhân, người đó đang tự phá bỏ tâm kiêu mạn của chính mình. Những người sống trọn tình nghĩa không chỉ tạo ra cội nguồn phước báu vô lượng cho bản thân mà còn nuôi dưỡng môi trường đạo đức tốt đẹp cho cộng đồng. Ngược lại, kẻ bất hiếu vô ơn chính là đang tự đập phá nền tảng phước đức của mình.</p>
+            </div>
+        </div>
+
+        <!-- Khối 2 -->
+        <div class="analysis-card">
+            <div class="card-number">2</div>
+            <h3>Bố thí tài sản là phương tiện mở rộng Tâm từ</h3>
+            
+            <div class="sub-point">
+                <span class="sub-point-title">✂️ Triệt tiêu sự ích kỷ:</span>
+                <p class="sub-point-content">Bố thí là hạnh căn bản và là phương tiện trực tiếp nhất để tạo ra phước báu. Việc bố thí không chỉ là cho đi vật chất, mà ý nghĩa sâu xa là sự mở rộng tấm lòng nhằm phá trừ tâm ích kỷ và sự tham lam ẩn chứa bên trong nội tâm.</p>
+            </div>
+            
+            <div class="sub-point">
+                <span class="sub-point-title">🔄 Chuyển hóa nội tâm:</span>
+                <p class="sub-point-content">Khi một người thực hành san sẻ tài vật (dù ít hay nhiều), tâm của họ dần được mở rộng ra. Sự bám víu vào vật chất giảm đi, thay vào đó tình thương và lòng từ bi đối với muôn loài được phát triển mạnh mẽ.</p>
+            </div>
+        </div>
+
+        <!-- Kết luận -->
+        <div class="conclusion-box">
+            <h3>🌟 Kết luận về sự thay đổi Y báo (Hoàn cảnh sống)</h3>
+            <p class="conclusion-text">
+                Hoàn cảnh sống giàu sang hay nghèo khổ hoàn toàn không phải là sự ngẫu nhiên, mà là sự vận hành theo nguyên lý nhân quả. Việc cung kính cha mẹ, sư trưởng và siêng năng bố thí chính là quá trình hành giả đang tạo ra "nghiệp mới" thiện lành.
+                <br><br>
+                Khi nội tâm <strong>(Chánh báo)</strong> đã được chuyển hóa — trở nên khiêm hạ, hiếu đạo, vị tha và không còn tham lam ích kỷ — thì theo đúng luật nhân quả, môi trường sống và hoàn cảnh xung quanh <strong>(Y báo)</strong> tự động sẽ được xoay chuyển. Người thực hành trọn vẹn những đạo lý này chắc chắn sẽ gặt hái được quả báo giàu sang, quyền quý và có một đời sống an ổn trong tương lai.
+            </p>
+        </div>
+
+        <div class="footer-note">
+            Tài liệu lưu hành nội bộ - Ôn thi cuối học kỳ Kinh Tăng Nhất A Hàm
+        </div>
+    </div>
+
+</body>
+</html>

@@ -1,0 +1,1215 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Đề Ôn Tập Kinh Tăng Nhất A Hàm  - Trắc Nghiệm</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f4f7f6;
+        }
+        h1 {
+            text-align: center;
+            color: #2c3e50;
+            border-bottom: 2px solid #3498db;
+            padding-bottom: 10px;
+            margin-bottom: 30px;
+        }
+        .question-card {
+            background: #fff;
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 25px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+        }
+        .question-title {
+            font-weight: bold;
+            font-size: 1.1em;
+            margin-bottom: 15px;
+            color: #2c3e50;
+        }
+        .options {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            margin-bottom: 15px;
+        }
+        .option {
+            padding: 12px;
+            border: 1px solid #e0e0e0;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            background-color: #fafafa;
+        }
+        .option:hover {
+            background-color: #f0f0f0;
+            border-color: #ccc;
+        }
+        .option input {
+            margin-right: 10px;
+            transform: scale(1.2);
+            cursor: pointer;
+        }
+        .explanation {
+            margin-top: 15px;
+            padding: 15px;
+            border-radius: 5px;
+            display: none;
+            background: #e8f4f8;
+            border-left: 4px solid #3498db;
+        }
+        .correct {
+            background-color: #d4edda !important;
+            border-color: #c3e6cb !important;
+            color: #155724;
+            font-weight: bold;
+        }
+        .incorrect {
+            background-color: #f8d7da !important;
+            border-color: #f5c6cb !important;
+            color: #721c24;
+        }
+        button {
+            padding: 10px 20px;
+            background-color: #3498db;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1em;
+            font-weight: bold;
+            transition: background-color 0.2s;
+        }
+        button:hover {
+            background-color: #2980b9;
+        }
+        button:disabled {
+            background-color: #bdc3c7;
+            cursor: not-allowed;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>ĐỀ ÔN TẬP KINH TĂNG NHẤT A HÀM<br><small>(Trắc Nghiệm)</small></h1>
+
+    <div id="quiz-container"></div>
+
+    <script>
+        const quizData = [
+            {
+                id: 'q1',
+                question: 'Câu 1: Theo lời Phật dạy trong kinh, đệ tử chân chính của Như Lai phải kế thừa (thừa tự) điều gì?',
+                options: ['A. Thừa tự tài vật', 'B. Thừa tự danh vọng', 'C. Thừa tự chánh pháp', 'D. Thừa tự quyền lực'],
+                correct: 'C',
+                explanation: 'Đệ tử chân chính không phải là người thừa hưởng tài vật mà là người thừa hưởng chánh pháp.'
+            },
+            {
+                id: 'q2',
+                question: 'Câu 2: Hai nguyên nhân nào làm suy giảm và ngăn cản sự phát sinh trí tuệ?',
+                options: ['A. Thích tranh luận và không bố thí', 'B. Không thích học hỏi người hơn mình và ham ngủ nghỉ, lười biếng', 'C. Ăn uống phi thời và không ngồi thiền', 'D. Tham đắm lợi dưỡng và kiêu mạn'],
+                correct: 'B',
+                explanation: 'Hai nguyên nhân làm suy giảm trí tuệ là: Không thích học hỏi người hơn mình và ham ngủ nghỉ, lười biếng.'
+            },
+            {
+                id: 'q3',
+                question: 'Câu 3: Đâu là hai nguyên nhân dẫn đến quả báo sinh vào hoàn cảnh nghèo khổ, bần hàn?',
+                options: ['A. Bất hiếu với cha mẹ/sư trưởng và không kính trọng người hơn mình', 'B. Sát sanh và nói dối', 'C. Lười biếng và không giữ giới', 'D. Trộm cắp và tà dâm'],
+                correct: 'A',
+                explanation: 'Hai nguyên nhân đưa đến quả báo nghèo khổ là bất hiếu với cha mẹ/sư trưởng và không kính trọng người hơn mình.'
+            },
+            {
+                id: 'q4',
+                question: 'Câu 4: Theo kinh Báo đáp, người như thế nào dù ở xa ngàn dặm vẫn được xem là đang ở rất gần Đức Như Lai?',
+                options: ['A. Người tụng kinh mỗi ngày', 'B. Người xuất gia giữ hạnh đầu đà', 'C. Người biết nhớ ơn và đền ơn (dù là ân rất nhỏ)', 'D. Người xây nhiều chùa tháp cúng dường'],
+                correct: 'C',
+                explanation: 'Người biết báo ơn, dù ở cách xa ngàn dặm vẫn được xem là ở gần Như Lai. Kẻ vô ơn dù ở cạnh bên cũng là xa Như Lai.'
+            },
+            {
+                id: 'q5',
+                question: 'Câu 5: Trong phẩm 18, Đức Phật dạy hai pháp nào là hai pháp tốt đẹp có công năng "hộ trì thế gian"?',
+                options: ['A. Từ và Bi', 'B. Chỉ và Quán', 'C. Giới và Định', 'D. Tàm và Quý (Hổ thẹn và sợ hãi tội lỗi)'],
+                correct: 'D',
+                explanation: 'Tàm và Quý là hai pháp tốt đẹp có công năng hộ trì thế gian, giúp con người giữ được luân thường đạo lý.'
+            },
+            {
+                id: 'q6',
+                question: 'Câu 6: Theo Thầy giáo thọ, hai nhân duyên nào làm phát sinh chánh kiến?',
+                options: ['A. Bố thí tài sản và trì giới thanh tịnh', 'B. Nghe lời dạy đúng đắn (từ người khác) và tự mình suy tư (như lý tác ý)', 'C. Niệm Phật và ngồi thiền', 'D. Khất thực và sống độc cư'],
+                correct: 'B',
+                explanation: 'Hai nhân duyên sinh khởi chánh kiến là: nghe lời dạy đúng đắn (từ người khác) và tự mình suy nghĩ, quan sát (như lý tác ý).'
+            },
+            {
+                id: 'q7',
+                question: 'Câu 7: Đức Phật lấy hình ảnh "như lưỡi dao cắt sâu vào da thịt, xương tủy" hay "biển cả không chứa tử thi" để cảnh báo về sự nguy hiểm của điều gì?',
+                options: ['A. Sự lười biếng ham ngủ', 'B. Tà kiến ngoại đạo', 'C. Sự tham đắm lợi dưỡng, vật chất', 'D. Sự kiêu mạn vi tế'],
+                correct: 'C',
+                explanation: 'Đức Phật dùng hình ảnh "lưỡi dao cắt sâu vào xương tủy" hay "biển cả không chứa tử thi" để cảnh tỉnh về sự đắm nhiễm, tham đắm lợi dưỡng vật chất.'
+            },
+            {
+                id: 'q8',
+                question: 'Câu 8: Lợi ích cốt lõi của việc tu pháp "Chỉ" (trong Chỉ và Quán) là gì?',
+                options: ['A. Thấy rõ Tứ Thánh Đế', 'B. Dứt sạch dục lậu, hữu lậu, vô minh lậu', 'C. Tâm được định tĩnh, giới luật được thành tựu, oai nghi đầy đủ', 'D. Có được thần thông'],
+                correct: 'C',
+                explanation: 'Nhờ tu "Chỉ" mà tâm được định tĩnh, giới luật được thành tựu, oai nghi đầy đủ.'
+            },
+            {
+                id: 'q9',
+                question: 'Câu 9: Để đối trị và đoạn trừ "Tham dục", hành giả cần tu tập pháp nào?',
+                options: ['A. Quán bất tịnh', 'B. Quán hơi thở', 'C. Quán từ bi', 'D. Quán vô ngã'],
+                correct: 'A',
+                explanation: 'Để đối trị tâm tham dục, đắm nhiễm sắc thân, hành giả cần tu pháp Quán bất tịnh (quán chiếu sự không trong sạch của thân thể).'
+            },
+            {
+                id: 'q10',
+                question: 'Câu 10: Năm pháp chướng ngại đạo (Ngũ triền cái) bao gồm những gì?',
+                options: ['A. Sinh, lão, bệnh, tử, sầu', 'B. Tham dục, sân hận, hôn trầm/thụy miên, trạo cử/hối quá, nghi', 'C. Sát, đạo, dâm, vọng, tửu', 'D. Dục lậu, hữu lậu, vô minh lậu, kiến lậu, ngã lậu'],
+                correct: 'B',
+                explanation: 'Năm triền cái gồm Tham dục, sân hận, hôn trầm thụy miên, trạo cử, và nghi.'
+            },
+            {
+                id: 'q11',
+                question: 'Câu 11: Quan điểm của Đức Phật về phước báu trong bài kinh Tạo Phước là gì?',
+                options: ['A. Phước là nguồn gốc của sầu bi, người tu không cần phước.', 'B. Làm phước chỉ dành cho người cư sĩ tại gia, xuất gia chỉ cần thiền định.', 'C. Phước là nguồn gốc của an lạc, vô phước là gốc của vô số khổ não.', 'D. Không nên làm phước vì sẽ làm tăng trưởng ngã mạn.'],
+                correct: 'C',
+                explanation: 'Đức Phật dạy "không nên sợ phước mà phải sợ thiếu phước". Phước là nguồn gốc của an lạc, vô phước là gốc của vô số khổ não.'
+            },
+            {
+                id: 'q12',
+                question: 'Câu 12: Theo bài giảng về Ngũ giới, quả báo của việc "sát sanh" nếu được tái sanh làm người là gì?',
+                options: ['A. Thọ mạng ngắn ngủi (yểu mệnh)', 'B. Ngu si điên dại', 'C. Nghèo túng thiếu thốn trăm bề', 'D. Gia đình không hạnh phúc'],
+                correct: 'A',
+                explanation: 'Hành vi sát sanh dẫn thẳng đến ác đạo, nếu được sanh làm người thì thọ mạng ngắn ngủi, yểu mệnh.'
+            },
+            {
+                id: 'q13',
+                question: 'Câu 13: Tâm lậu hoặc rỉ chảy, ngấm ngầm trói buộc chúng sanh trong luân hồi (Dục lậu, hữu lậu, vô minh lậu) khác với "Lưu" (bốn dòng thác) ở điểm nào?',
+                options: ['A. Lậu là rỉ chảy ngấm ngầm, Lưu là dòng chảy cuốn trôi mạnh mẽ', 'B. Lưu là rỉ chảy ngấm ngầm, Lậu là dòng chảy cuốn trôi mạnh mẽ', 'C. Lậu dành cho cư sĩ, Lưu dành cho người xuất gia', 'D. Cả hai hoàn toàn giống nhau, không có sự phân biệt'],
+                correct: 'A',
+                explanation: '"Lưu" là dòng chảy cuốn trôi mạnh mẽ (như dòng thác), còn "Lậu" là sự rỉ chảy, rò rỉ ngấm ngầm làm ô nhiễm nội tâm.'
+            },
+            {
+                id: 'q14',
+                question: 'Câu 14: Ác Ma Ba Tuần thường rình rập ở đâu để dụ dỗ, mê loạn tâm ý người tu?',
+                options: ['A. Chỗ sơ hở nơi sáu căn (mắt, tai, mũi, lưỡi, thân, ý)', 'B. Tại các chùa chiền', 'C. Nơi rừng vắng A Lan Nhã', 'D. Trong những giấc mơ'],
+                correct: 'A',
+                explanation: 'Ma ba tuần luôn rình rập những sơ hở nơi sáu căn (mắt, tai, mũi, lưỡi, thân, ý) biến hiện sắc thanh hương vị xúc pháp cực kỳ hấp dẫn để mê loạn tâm ý.'
+            },
+            {
+                id: 'q15',
+                question: 'Câu 15: Trong bài kinh "Hai Tướng", người ngu có hai biểu hiện nào?',
+                options: ['A. Thích ngủ nghỉ và ăn nhiều', 'B. Làm điều không nên làm và bỏ dở việc đáng làm', 'C. Khoe khoang và chê bai người khác', 'D. Gian dối và tà kiến'],
+                correct: 'B',
+                explanation: 'Người ngu có hai biểu hiện là: làm điều không nên làm và bỏ dở việc đáng làm (người trí thì ngược lại).'
+            },
+            ,{
+                id: 'q16',
+                question: 'Câu 16: Trong giáo lý về "Bốn dòng thác" (Tứ lưu), dòng chảy của tham ái đối với sự tồn tại, mong muốn trở thành cái này cái kia (như tham cảnh giới cao, tham tái sanh) được gọi là gì?',
+                options: ['A. Dục lưu', 'B. Hữu lưu', 'C. Kiến lưu', 'D. Vô minh lưu'],
+                correct: 'B',
+                explanation: 'Hữu lưu là dòng chảy của ái đối với sự hiện hữu, sự tồn tại (muốn được có, muốn trở thành cái này cái kia, tham tái sanh...). Hữu lưu là nguyên nhân dẫn đến tái sanh trong ba cõi.'
+            },
+            {
+                id: 'q17',
+                question: 'Câu 17: Theo kinh Tăng Nhất A Hàm, "Nhất nhập đạo" (một lối duy nhất vào đạo) giúp thanh tịnh các hành, diệt trừ sầu lo, đoạn trừ phiền não và chứng Niết Bàn là gì?',
+                options: ['A. Tu khổ hạnh ép xác', 'B. Bố thí tài sản và trì giới', 'C. Diệt trừ năm triền cái và tu tập bốn niệm xứ (Tứ niệm xứ)', 'D. Tụng kinh và bái sám liên tục'],
+                correct: 'C',
+                explanation: '"Nhất nhập đạo" (lối vào đạo duy nhất) được khẳng định là việc diệt trừ 5 triền cái và tu tập Bốn niệm xứ (Quán Thân, Thọ, Tâm, Pháp).'
+            },
+            {
+                id: 'q18',
+                question: 'Câu 18: Theo bài kinh Dục Tưởng, nguyên nhân cốt lõi nào khiến cho năm triền cái (tham, sân, hôn trầm, trạo cử, nghi) "chưa sanh sẽ sanh, đã sanh thì tăng trưởng"?',
+                options: ['A. Thiếu lòng bố thí', 'B. Do loạn tưởng (tâm phóng dật, tạp niệm)', 'C. Ăn uống phi thời', 'D. Không tụng kinh hàng ngày'],
+                correct: 'B',
+                explanation: 'Chính loạn tưởng là nguyên nhân làm cho năm triền cái (dục, sân, hôn trầm, trạo cử, nghi) chưa sanh sẽ sanh, đã sanh thì tăng trưởng mạnh mẽ.'
+            },
+            {
+                id: 'q19',
+                question: 'Câu 19: Để ngăn ngừa các tưởng dục (năm triền cái) chưa sanh không sanh, và tiêu giảm các triền cái đã sanh, Đức Phật dạy hành giả phải chuyên tu pháp gì làm thiết yếu?',
+                options: ['A. Quán bất tịnh', 'B. Quán từ bi', 'C. Quán hơi thở', 'D. Niệm Phật'],
+                correct: 'A',
+                explanation: 'Để ngăn chặn gốc rễ của dục tưởng và 5 triền cái, Đức Phật dạy phải chuyên tu pháp Quán bất tịnh nơi thân.'
+            },
+            {
+                id: 'q20',
+                question: 'Câu 20: Trong hệ thống kinh Tăng Nhất A Hàm, thuật ngữ "Vô vi" (như trong câu: ngăn chướng con đường vô vi) được Đức Phật dùng để chỉ cho điều gì?',
+                options: ['A. Cõi trời', 'B. Pháp sanh tử luân hồi', 'C. Sự giải thoát, Niết bàn rốt ráo', 'D. Phép thần thông vô hạn'],
+                correct: 'C',
+                explanation: 'Trong Tăng Nhất A Hàm, "Hữu vi" là pháp sanh tử, còn "Vô vi" là pháp Niết bàn, là sự giải thoát rốt ráo.'
+            },
+            {
+                id: 'q21',
+                question: 'Câu 21: Vua A-tu-la muốn lấn át mặt trời, mặt trăng nhưng cuối cùng phải sợ hãi rút lui mà không làm gì được là vì lý do gì?',
+                options: ['A. Vì mặt trời, mặt trăng có vũ khí mạnh mẽ hơn', 'B. Vì mặt trời, mặt trăng có oai đức, thần lực, phước báu lớn và được phước đức chúng sanh trợ lực', 'C. Vì vua A-tu-la bị mất hết phép thuật', 'D. Vì bị các thiên binh thiên tướng đánh đuổi'],
+                correct: 'B',
+                explanation: 'Vua A-tu-la tuy to lớn hung dữ nhưng phải rút lui vì vua Mặt trời, Mặt trăng có oai đức, thần lực, thọ mạng dài và đặc biệt là nhờ phước đức của chúng sanh tại nơi đó trợ lực.'
+            },
+            {
+                id: 'q22',
+                question: 'Câu 22: Trong bài kinh hóa độ Tôn giả Nan Đà, Đức Phật ví sự nguy hiểm của dục lạc giống như điều gì?',
+                options: ['A. Mật ngọt dính trên lưỡi dao (liếm vào sẽ đứt lưỡi)', 'B. Rơi vào hầm lửa', 'C. Cây trĩu quả dễ bị gãy cành', 'D. Tất cả các ý trên đều đúng'],
+                correct: 'D',
+                explanation: 'Đức Phật ví dục lạc vô cùng nguy hiểm như hầm lửa, như liếm mật dính trên lưỡi dao (chắc chắn đứt lưỡi), như vay nợ phải trả, như cây trĩu quả dễ bị gãy cành.'
+            },
+            {
+                id: 'q23',
+                question: 'Câu 23: Theo Thầy giáo thọ phân tích, Phước báu đóng vai trò gì đối với người tu học trước sự quấy phá của ma Ba Tuần và những chướng duyên?',
+                options: ['A. Là nguyên nhân sinh ra phiền não', 'B. Là lá chắn bảo vệ vững chắc, làm cho ma oán tự lui mà không có cơ hội phá hoại', 'C. Giúp hành giả có thần thông để đánh đuổi ma', 'D. Không có tác dụng gì trong việc đối phó chướng duyên'],
+                correct: 'B',
+                explanation: 'Phước báu chính là "lá chắn" bảo vệ người tu. Có công đức và phước nghiệp đầy đủ thì ma Ba Tuần không thể có cơ hội quấy phá hay phá hoại, nghịch cảnh cũng được giảm thiểu.'
+            },
+            {
+                id: 'q24',
+                question: 'Câu 24: Đức Phật dùng hình ảnh "con lừa đi lạc vào đàn bò, tự xưng ta là bò" để cảnh tỉnh hạng người nào?',
+                options: ['A. Người cư sĩ hay đi chùa nhưng không tu tập', 'B. Người ngoại đạo trà trộn vào Tăng đoàn', 'C. Người xuất gia mang hình tướng Sa môn nhưng không phòng hộ các căn, chạy theo trần cảnh và mất oai nghi', 'D. Người xuất gia giữ nghiêm giới luật'],
+                correct: 'C',
+                explanation: 'Hình ảnh "con lừa trong đàn bò" ám chỉ những người tuy cạo tóc mặc y xuất gia nhưng không phòng hộ sáu căn, buông lung chạy theo trần cảnh, mất oai nghi chánh hạnh.'
+            },
+            {
+                id: 'q25',
+                question: 'Câu 25: Trạng thái tâm "thoát khỏi ái dục, ly ác bất thiện pháp, có tầm có tứ (có giác có quán), có hỷ có lạc do viễn ly sanh" là đặc điểm của tầng thiền nào trong Tứ thiền?',
+                options: ['A. Sơ thiền (Thiền thứ nhất)', 'B. Nhị thiền', 'C. Tam thiền', 'D. Tứ thiền'],
+                correct: 'A',
+                explanation: 'Đây là trạng thái của Sơ thiền (Thiền thứ nhất). Có tầm có tứ (giác, quán) và hỷ lạc sinh ra do sự viễn ly (ly dục, ly ác pháp).'
+            },
+            {
+                id: 'q26',
+                question: 'Câu 26: Theo bài kinh Thủ chuyển được Thầy giáo thọ nhắc đến, Thọ uẩn, Tưởng uẩn và Hành uẩn (trong Ngũ Uẩn) được sinh khởi do duyên gì?',
+                options: ['A. Do Vô minh', 'B. Do Nghiệp quả', 'C. Do Súc (sự gặp gỡ tiếp xúc giữa Căn, Trần và Thức)', 'D. Do Ái'],
+                correct: 'C',
+                explanation: 'Theo kinh Thủ chuyển, Súc (sự tiếp xúc giữa Căn, Trần và Thức) là duyên sinh ra Thọ, Tưởng và Hành.'
+            },
+            {
+                id: 'q27',
+                question: 'Câu 27: Bốn phẩm đệ tử (Tỳ kheo, Tỳ kheo ni, Nam cư sĩ, Nữ cư sĩ) khẳng định điều gì về khả năng chứng ngộ trong giáo pháp của Đức Phật?',
+                options: ['A. Cư sĩ tại gia không thể chứng thánh quả', 'B. Chỉ có Tỳ kheo mới có thể giải thoát', 'C. Nam giới tu tập nhanh đắc quả hơn nữ giới', 'D. Bình đẳng về cứu cánh giải thoát, bất kỳ ai (xuất gia hay tại gia, nam hay nữ) hành trì đúng pháp đều có thể chứng thánh quả'],
+                correct: 'D',
+                explanation: 'Bốn phẩm này khẳng định sự bình đẳng về cứu cánh giải thoát. Xuất gia hay tại gia, nam hay nữ không phải là giới hạn; chỉ cần có tín, giới, định, tuệ và đoạn trừ phiền não thì đều có thể chứng Thánh quả.'
+            },
+            {
+                id: 'q28',
+                question: 'Câu 28: Khái niệm "Hữu dư Niết bàn giới" được Đức Phật giải thích là trạng thái như thế nào?',
+                options: ['A. Người tu đã diệt năm hạ phần kiết sử (chứng A-na-hàm) nhưng vẫn còn dư y (còn mạng sống/thân ngũ uẩn)', 'B. Người đã dứt sạch hoàn toàn mọi lậu hoặc và chấm dứt thọ mạng', 'C. Người cư sĩ đang trên đường tu tập', 'D. Trạng thái tái sanh lên cõi trời'],
+                correct: 'A',
+                explanation: 'Hữu dư Niết bàn là khi hành giả (chứng A-na-hàm) đã diệt năm hạ phần kiết sử nhưng vẫn còn "dư y" (còn thân mạng sống ở thế gian). Còn Vô dư là dứt sạch lậu hoặc, chấm dứt thọ mạng sinh tử.'
+            },
+            {
+                id: 'q29',
+                question: 'Câu 29: Theo bài giảng, "Tâm cận tử" (tâm niệm trước khi lâm chung) có vai trò và ảnh hưởng như thế nào?',
+                options: ['A. Không có tác dụng gì đối với người đã chết', 'B. Nếu ôm tâm sân hận ác độc thì dễ đọa địa ngục, nếu khởi tâm thanh tịnh thiện lành thì sanh cõi an lành (cõi trời, người)', 'C. Nếu có tâm cận tử tốt sẽ giúp người chết sống lại', 'D. Chỉ ảnh hưởng đến việc chia gia tài'],
+                correct: 'B',
+                explanation: 'Tâm cận tử (tâm niệm lúc sắp chết) rất nhạy bén. Nếu ôm tâm sân hận ác độc sẽ rớt vào địa ngục; nếu khởi tâm thanh tịnh, thiện diệu sẽ được sanh lên cõi trời/cõi an lành.'
+            },
+            {
+                id: 'q30',
+                question: 'Câu 30: Đức Phật dạy cúng dường cho Tăng chúng/Thánh chúng mang lại phước đức không lường (như biển chứa trân bảo) là vì lý do cốt lõi nào?',
+                options: ['A. Vì Tăng chúng đông người nên cần nhiều thực phẩm', 'B. Vì Tăng chúng duy trì, hành trì và diễn pháp khai trí, giúp chánh pháp được cửu trụ ở thế gian', 'C. Vì Tăng chúng không có tài sản riêng', 'D. Vì Tăng chúng xây nhiều tự viện lớn'],
+                correct: 'B',
+                explanation: 'Ruộng phước cúng dường cho Tăng chúng vô lượng như biển vì Thánh chúng/Tăng chúng là những người duy trì, hành trì và diễn pháp khai trí, giúp chánh pháp được tồn tại lâu dài.'
+            },
+            ,{
+                id: 'q31',
+                question: 'Câu 31: Theo bài kinh "Cất giấu và bố thí", Đức Phật chỉ ra hai hạng người nào đều "không biết chán đủ", và khuyên người học đạo nên học theo hạng người nào?',
+                options: ['A. Hạng cất giấu tài vật không dám dùng và hạng đem cho hết không giữ lại gì (Khuyên theo hạng cho hết).', 'B. Hạng cất giấu tài vật không dám dùng và hạng có tài vật biết san sẻ bố thí (Khuyên theo hạng biết san sẻ).', 'C. Hạng buông lung và hạng giải đãi (Khuyên theo hạng buông lung).', 'D. Hạng trộm cắp và hạng lừa đảo (Khuyên tránh xa cả hai).'],
+                correct: 'B',
+                explanation: 'Đức Phật dạy có hai hạng người không biết chán đủ: một là hạng cất giấu tài vật không dám dùng (tham lam vô độ), hai là hạng có tài vật biết san sẻ bố thí (làm việc thiện không biết mệt mỏi). Người học đạo được khuyên nên học theo hạng thứ hai.'
+            },
+            {
+                id: 'q32',
+                question: 'Câu 32: Trong Phật giáo, một vị Sa-môn hay Bà-la-môn "chân thật" được Đức Phật định nghĩa dựa trên tiêu chuẩn nào?',
+                options: ['A. Dựa vào dòng dõi xuất thân cao quý (Bà-la-môn).', 'B. Dựa vào việc hành trì khổ hạnh ép xác đến cùng cực.', 'C. Dựa vào khả năng thực hiện các phép thần thông, chú thuật.', 'D. Dựa vào việc đã đoạn tận tham, sân, si và dứt sạch các kiết sử/lậu hoặc.'],
+                correct: 'D',
+                explanation: 'Theo chánh pháp, tiêu chuẩn cốt lõi của một bậc tu hành chân thật (Sa-môn/Bà-la-môn) không nằm ở dòng dõi hay thần thông, mà nằm ở sự chứng ngộ, dứt sạch hoàn toàn lậu hoặc và đoạn tận tham, sân, si.'
+            },
+            {
+                id: 'q33',
+                question: 'Câu 33: Khi Đề Bà Đạt Đa xúi giục thả voi say để hại Phật, Đức Thế Tôn đã dùng năng lực gì để cảm hóa con voi hung dữ đó?',
+                options: ['A. Dùng thần thông bay lên hư không để tránh né.', 'B. Dùng sức mạnh bạo lực để trấn áp con voi.', 'C. Dùng Đại bi tâm và oai đức để chuyển hóa ác tâm của voi.', 'D. Dùng lời chú thuật để thôi miên con voi.'],
+                correct: 'C',
+                explanation: 'Đức Phật không dùng bạo lực hay chú thuật, Ngài đã tỏa chiếu tâm từ bi bao la (Đại bi tâm) cùng oai đức nhiếp phục, khiến con voi say Nālāgiri lập tức tỉnh ngộ, quỳ mọp xuống đảnh lễ Ngài.'
+            },
+            {
+                id: 'q34',
+                question: 'Câu 34: Đức Phật chỉ ra hai hạng người nào đang "phỉ báng Như Lai"?',
+                options: ['A. Người không đi chùa và người không chịu tụng kinh.', 'B. Người xuất gia phá giới và người tại gia sát sanh.', 'C. Người cho phi pháp là pháp, và người cho chánh pháp là phi pháp.', 'D. Người lười biếng ham ngủ và người hay nói dối.'],
+                correct: 'C',
+                explanation: 'Sự phỉ báng nặng nề nhất đối với giáo pháp của Như Lai chính là sự xuyên tạc sự thật: giảng dạy sai lệch pháp của Phật thành phi pháp, hoặc đem những thứ phi pháp nhận vơ là giáo pháp.'
+            },
+            {
+                id: 'q35',
+                question: 'Câu 35: Trong bài kinh "Chánh kiến", Đức Thế Tôn khẳng định hai nhân duyên cốt lõi nào khiến cho Chánh tri kiến được sanh khởi?',
+                options: ['A. Bố thí tài sản và xây dựng chùa tháp.', 'B. Nghe lời dạy đúng đắn (nghe pháp từ người khác) và tự mình suy tư (như lý tác ý/quán sát chỉ quán).', 'C. Tụng kinh mỗi ngày và ăn chay trường.', 'D. Tu khổ hạnh và sống độc cư trong rừng vắng.'],
+                correct: 'B',
+                explanation: 'Chánh kiến phát sanh nhờ hai yếu tố: học hỏi từ bên ngoài (nghe chánh pháp) và sự thẩm thấu từ bên trong (tự mình như lý tác ý, tư duy đúng đắn).'
+            },
+            {
+                id: 'q36',
+                question: 'Câu 36: Trong Tứ lưu (Bốn dòng thác), dòng chảy nào được xem là cội rễ khiến cho ba dòng chảy kia (Dục lưu, Hữu lưu, Kiến lưu) có mặt và tồn tại?',
+                options: ['A. Dục lưu (tham ngũ dục).', 'B. Hữu lưu (tham sự tồn tại/tái sanh).', 'C. Kiến lưu (chấp thường, đoạn).', 'D. Vô minh lưu (si mê, không thấy Tứ đế).'],
+                correct: 'D',
+                explanation: 'Vô minh (sự thiếu hiểu biết về Tứ Diệu Đế, không thấy rõ bản chất vô thường, vô ngã) là gốc rễ sâu xa nhất. Có vô minh mới sinh ra tham ái dục, tham tái sinh và các tà kiến sai lầm.'
+            },
+            {
+                id: 'q37',
+                question: 'Câu 37: Đức Phật khẳng định hai sức mạnh (hai lực) cốt lõi nào đã giúp Ngài kham nhẫn khổ hạnh, hàng phục ma vương và thành tựu quả vị Vô thượng Chánh đẳng Chánh giác?',
+                options: ['A. Thần thông lực và Phước báu lực.', 'B. Từ bi lực và Hỷ xả lực.', 'C. Nhẫn lực (sự kham nhẫn) và Tư duy lực (tư duy chánh pháp).', 'D. Tín lực và Tấn lực.'],
+                correct: 'C',
+                explanation: 'Nhẫn lực giúp vượt qua mọi chướng ngại, nghịch cảnh từ bên ngoài; Tư duy lực (tư duy chánh pháp) giúp đoạn trừ tà niệm, phiền não từ bên trong. Hai lực này đưa đến sự giác ngộ.'
+            },
+            {
+                id: 'q38',
+                question: 'Câu 38: Tôn giả A Na Luật giải thích với Phạm chí rằng, "Thiên nhãn" dù thấy cả ngàn thế giới nhưng vẫn không bằng năng lực của điều gì?',
+                options: ['A. Con mắt âm dương.', 'B. Nhục nhãn (mắt thịt).', 'C. Con mắt thần thông.', 'D. Con mắt trí tuệ vô thượng (Tuệ nhãn) giúp thấy rõ ngã chấp và đoạn trừ kiết sử.'],
+                correct: 'D',
+                explanation: 'Thiên nhãn thông chỉ giúp nhìn thấy xa rộng nhưng không giải thoát được sinh tử. Chỉ có Tuệ nhãn (con mắt trí tuệ) thấu triệt bản chất vô ngã mới giúp đoạn trừ phiền não, kiết sử.'
+            },
+            {
+                id: 'q39',
+                question: 'Câu 39: Qua trường hợp Tôn giả La Vân giữ giới rất nghiêm mật nhưng vẫn chưa thoát khỏi hữu lậu, Đức Phật muốn nhấn mạnh bài học gì về lộ trình tu tập?',
+                options: ['A. Giữ giới là không cần thiết, chỉ cần ngồi thiền là đủ.', 'B. Giữ giới là nền tảng, nhưng cần phải tiếp tục tu tập làm cho tịch tĩnh các căn, đoạn trừ kiết sử thì mới dứt sạch lậu hoặc.', 'C. Chỉ cần học thuộc kinh điển là các lậu hoặc tự động dứt sạch.', 'D. Giữ giới nghiêm ngặt là đủ để chứng A La Hán, không cần tu định tuệ.'],
+                correct: 'B',
+                explanation: 'Giới luật là nền tảng quan trọng, nhưng để giác ngộ rốt ráo thì phải đi tiếp con đường Định và Tuệ (phòng hộ các căn, diệt trừ phiền não vi tế).'
+            },
+            {
+                id: 'q40',
+                question: 'Câu 40: Đức Phật ví "Tà kiến" giống như hình ảnh nào, để khẳng định rằng dù người có tà kiến gieo hành động ở đâu thì cũng chỉ mang lại kết quả bất thiện?',
+                options: ['A. Cây trĩu quả dễ gãy cành.', 'B. Biển cả không chứa tử thi.', 'C. Hạt giống đắng (dù gieo vào đất tốt vẫn sinh ra quả có vị đắng).', 'D. Mật ngọt dính trên lưỡi dao.'],
+                correct: 'C',
+                explanation: 'Tà kiến được ví như hạt giống của cây đắng (ví dụ hạt mướp đắng). Hạt đã đắng thì dù gieo vào mảnh đất tốt màu mỡ, được tưới tẩm đầy đủ nước, quả sinh ra vẫn mang vị đắng.'
+            },
+            {
+                id: 'q41',
+                question: 'Câu 41: Theo bài kinh "Thân bệnh, tâm không bệnh", nguyên nhân sâu xa khiến một người phàm phu khi thân có bệnh thì tâm cũng đau khổ, sầu não theo là do đâu?',
+                options: ['A. Do không có tiền mua thuốc chữa trị.', 'B. Do chấp vào ngũ uẩn là ngã (ta) và ngã sở (của ta).', 'C. Do không có người thân chăm sóc.', 'D. Do bị ma quỷ ám hại.'],
+                correct: 'B',
+                explanation: 'Vì phàm phu dính mắc, chấp chặt vào sắc thân (hay ngũ uẩn) này là của mình (Ngã sở) và là chính mình (Ngã), nên khi thân biến hoại, đau ốm, tâm liền sinh ra sợ hãi, bám víu và đau khổ.'
+            },
+            {
+                id: 'q42',
+                question: 'Câu 42: Hình ảnh "tấm vải dơ mục không thể nhuộm màu đẹp" được Đức Phật dùng để ví dụ cho điều gì?',
+                options: ['A. Thân thể cấu uế, bất tịnh của con người.', 'B. Tâm người tu bị nhiễm 21 món phiền não, trở nên dơ bẩn nên khó thọ nhận và thành tựu chánh pháp.', 'C. Chiếc áo cà sa cũ rách của vị Tỳ kheo tu hạnh đầu đà.', 'D. Người lười biếng không chịu giặt giũ y phục.'],
+                correct: 'B',
+                explanation: 'Một tâm trí đầy cấu uế, tham sân si (giống như tấm vải dơ bẩn) thì không thể thọ nhận và làm hiển lộ ánh sáng của giáo pháp (màu nhuộm đẹp). Cần phải gột rửa tâm trước mới có thể tu chứng.'
+            },
+            {
+                id: 'q43',
+                question: 'Câu 43: Quả vị A Na Hàm (Bất hoàn) gắn liền với việc đoạn trừ triệt để (nhổ tận gốc) những pháp nào để không còn tái sanh lại cõi dục?',
+                options: ['A. Sanh, lão, bệnh, tử.', 'B. Tham dục, sân hận, ngu si và sang tham (các hạ phần kiết sử).', 'C. Danh, lợi, tình, tiền.', 'D. Sát, đạo, dâm, vọng.'],
+                correct: 'B',
+                explanation: 'Một vị chứng Thánh quả A Na Hàm (Bất hoàn) là người đã đoạn trừ hoàn toàn 5 hạ phần kiết sử (Thân kiến, nghi, giới cấm thủ, tham dục, sân hận) nên vĩnh viễn không tái sanh lại cõi Dục.'
+            },
+            {
+                id: 'q44',
+                question: 'Câu 44: Đức Phật nhận định như thế nào về đặc tính của Tâm trong việc tu tập?',
+                options: ['A. Tâm là pháp khó hàng phục nhất, nhưng cũng là pháp dễ hàng phục và dễ chuyển hóa nhất nếu được đi đúng hướng thiện pháp.', 'B. Tâm là pháp không thể nào kiểm soát hay hàng phục được đối với phàm phu.', 'C. Tâm luôn luôn tĩnh lặng, không bao giờ thay đổi nếu ở một mình.', 'D. Tâm chỉ là ảo ảnh, mọi suy nghĩ đều không ảnh hưởng gì đến quả báo.'],
+                correct: 'A',
+                explanation: 'Tâm vượn ý ngựa tuy phóng dật và khó điều phục, nhưng Đức Phật khẳng định không có pháp nào dễ thay đổi và uốn nắn nhanh chóng như Tâm, miễn là hành giả khéo biết tu tập và phòng hộ.'
+            },
+            {
+                id: 'q45',
+                question: 'Câu 45: Vì sao Ma Ba Tuần hay Vua A Tu La dù có thế lực rất lớn mạnh nhưng vẫn thất bại, rút lui và không thể phá hoại được Phật, Tăng đoàn hay Vua Mặt Trời/Mặt Trăng?',
+                options: ['A. Vì bị chư thiên và thiên tướng trên trời dùng vũ khí đánh đuổi.', 'B. Vì Ma Ba Tuần đột nhiên bị mất hết phép thuật.', 'C. Vì Phật và Tăng đoàn đã bỏ trốn vào rừng sâu ẩn nấp.', 'D. Nhờ oai lực của Như Lai, oai đức thần lực, sự thanh tịnh và phước đức của chính chúng sanh tại nơi đó bảo hộ, trợ lực.'],
+                correct: 'D',
+                explanation: 'Các thế lực hắc ám phải lùi bước trước sức mạnh của oai đức, sự thanh tịnh vô lậu của Thế Tôn và Tăng đoàn, kết hợp cùng sức mạnh từ phước báu thiện lành của chúng sanh cúng dường, hộ trì.'
+            },
+            ,{
+                id: 'q46',
+                question: 'Câu 46: Trong kinh, Đức Phật dùng hình ảnh "con quạ" và "con heo" để ví dụ cho hai hạng người nào trong việc tu tập?',
+                options: ['A. Người siêng năng và kẻ lười biếng.', 'B. Người phạm lỗi nhưng biết hổ thẹn/hối lỗi (như quạ quẹt mỏ) và kẻ phạm lỗi nhưng không biết hổ thẹn, tự mãn (như heo nằm chỗ dơ).', 'C. Người xuất gia và người tại gia.', 'D. Người rộng lượng bố thí và kẻ xan tham, ích kỷ.'],
+                correct: 'B',
+                explanation: 'Đức Phật ví người phạm lỗi biết ăn năn sám hối như con quạ biết quẹt mỏ làm sạch, còn kẻ phạm lỗi mà trơ trẽn, tự mãn với lỗi lầm thì như con heo thích nằm chỗ bùn dơ bẩn.'
+            },
+            {
+                id: 'q47',
+                question: 'Câu 47: Trong bài kinh "Tạo Phước", Đức Phật khuyên người đệ tử nên có thái độ như thế nào đối với phước báu?',
+                options: ['A. Nên sợ phước vì phước sẽ cản trở con đường giải thoát.', 'B. Phước báu chỉ dành cho cư sĩ tại gia, người xuất gia không cần làm phước.', 'C. Không nên sợ phước mà phải sợ thiếu phước, vì phước là nguồn gốc an lạc, vô phước là gốc khổ não.', 'D. Cần phải chối bỏ mọi phước báu để mau chóng đắc đạo.'],
+                correct: 'C',
+                explanation: 'Trong kinh Tạo Phước, Thế Tôn dạy phước báu là cội nguồn của sự an lạc, vô phước là gốc rễ của vô số khổ đau. Do đó không nên sợ phước mà phải siêng năng tích lũy phước nghiệp.'
+            },
+            {
+                id: 'q48',
+                question: 'Câu 48: Khi dạy Tôn giả La Vân, Đức Phật hướng dẫn dùng pháp tu "Tâm từ" và "Tâm xả" để đối trị với những chướng ngại (phiền não) nào tương ứng?',
+                options: ['A. Tham dục và Não hại.', 'B. Sân hận và Kiêu mạn.', 'C. Lười biếng và Trạo cử.', 'D. Ganh ghét và Ngủ nghỉ (Hôn trầm).'],
+                correct: 'B',
+                explanation: 'Pháp tu Tâm từ (rải tình thương) giúp hóa giải sự Sân hận, bực tức; và pháp tu Tâm xả (buông xả, không dính mắc) giúp đối trị với tâm kiêu mạn, cố chấp.'
+            },
+            {
+                id: 'q49',
+                question: 'Câu 49: Trong phẩm Hữu Vô, Đức Phật cảnh tỉnh hành giả cần phải xả bỏ hai kiến chấp căn bản (cực đoan) nào để không bị rơi vào 62 tà kiến?',
+                options: ['A. Chấp ngã và Chấp pháp.', 'B. Chấp thiện và Chấp ác.', 'C. Chấp có (Hữu kiến/Thường kiến) và Chấp không (Vô kiến/Đoạn kiến).', 'D. Chấp sinh và Chấp tử.'],
+                correct: 'C',
+                explanation: 'Hai tà kiến căn bản trói buộc chúng sanh là Hữu kiến (chấp vạn pháp là có thật, thường hằng) và Vô kiến (chấp chết là hết, đoạn diệt). Hành giả cần xả bỏ để đi vào con đường Trung đạo.'
+            },
+            {
+                id: 'q50',
+                question: 'Câu 50: Theo lời Phật dạy về Ngũ giới, quả báo của người tạo nghiệp "tà dâm" nếu được tái sanh làm người sẽ như thế nào?',
+                options: ['A. Thọ mạng ngắn ngủi, yểu mệnh.', 'B. Nghèo túng, thiếu thốn trăm bề.', 'C. Ngu si, điên dại.', 'D. Sanh vào chốn dâm loạn, gia đình không thanh tịnh, bị người khinh chê.'],
+                correct: 'D',
+                explanation: 'Quả báo của hành vi tà dâm đưa đến ác đạo, nếu được sanh làm người thì sanh vào hoàn cảnh gia đình bất hòa, không đàng hoàng, luân thường đảo lộn và thường bị mọi người chê cười, khinh khi.'
+            },
+            {
+                id: 'q51',
+                question: 'Câu 51: Tương tự trong bài giảng về Ngũ giới, quả báo của việc thường xuyên "nói dối, nói lời chia rẽ, thêu dệt" nếu sanh làm người sẽ ra sao?',
+                options: ['A. Cơ thể mang nhiều bệnh tật khó chữa.', 'B. Lời nói mất giá trị, không ai tin tưởng, bị mọi người chán ghét.', 'C. Thường xuyên bị mất trộm tài sản.', 'D. Trí tuệ ám độn, học trước quên sau.'],
+                correct: 'B',
+                explanation: 'Hậu quả của việc nói dối, chia rẽ là khi sinh ra làm người, lời nói ra không có trọng lượng, không ai tin tưởng và dễ bị người đời chán ghét, xa lánh.'
+            },
+            {
+                id: 'q52',
+                question: 'Câu 52: Trong các loại Lậu hoặc, "Hữu lậu" được Đức Phật giải thích mang ý nghĩa vi tế nào?',
+                options: ['A. Là sự tham đắm vào 5 dục (sắc, thanh, hương, vị, xúc).', 'B. Là sự tham ái đối với sự hiện hữu (muốn tồn tại, muốn trở thành cái này cái kia, dính mắc quả vị, địa vị tái sanh).', 'C. Là sự si mê, không hiểu bản chất Tứ Thánh Đế.', 'D. Là sự kiêu mạn, tự cao tự đại.'],
+                correct: 'B',
+                explanation: 'Hữu lậu (Bhava-asava) là sự rỉ chảy ngấm ngầm của tâm trí vào sự tồn tại, mong muốn tái sanh, muốn duy trì bản ngã và trở thành một thứ gì đó trong các cõi giới.'
+            },
+            {
+                id: 'q53',
+                question: 'Câu 53: Ma Ba Tuần thường dùng sắc, thanh, hương, vị, xúc, pháp để mê loạn tâm ý người tu. Tuy nhiên, yếu tố nào là "lá chắn" bảo vệ vững chắc khiến ma Ba Tuần phải thất bại, tự rút lui?',
+                options: ['A. Có vũ khí chống trả và pháp thuật mạnh mẽ.', 'B. Trốn vào rừng sâu A Lan Nhã để không ai tìm thấy.', 'C. Lập đàn bái sám, cúng sao giải hạn.', 'D. Có oai đức, phước nghiệp đầy đủ kết hợp với việc phòng hộ sáu căn thanh tịnh.'],
+                correct: 'D',
+                explanation: 'Ma Ba Tuần không thể hãm hại được những bậc hành giả có oai đức, phước báu đầy đủ và luôn giữ chánh niệm, thu nhiếp, phòng hộ sáu căn (mắt, tai, mũi, lưỡi, thân, ý) thanh tịnh.'
+            },
+            {
+                id: 'q54',
+                question: 'Câu 54: Trạng thái thiền định "diệt tầm và tứ (xả giác, xả quán), nội tĩnh nhất tâm, có hỷ có lạc do định sanh" là đặc điểm của tầng thiền nào?',
+                options: ['A. Sơ thiền.', 'B. Nhị thiền (Thiền thứ hai).', 'C. Tam thiền.', 'D. Tứ thiền.'],
+                correct: 'B',
+                explanation: 'Khi hành giả tiến lên cao hơn, diệt trừ được Tầm và Tứ (sự tìm kiếm và áp đặt tư tưởng), tâm đạt đến trạng thái nội tĩnh nhất tâm, hỷ lạc lúc này sinh ra do Định. Đó là trạng thái của Nhị thiền.'
+            },
+            {
+                id: 'q55',
+                question: 'Câu 55: Trong bài kinh "Thân bệnh, tâm không bệnh", Đức Phật giải thích nguyên nhân cốt lõi nào khiến một người phàm phu khi thân mang bệnh thì tâm liền sinh sầu ưu, sợ hãi, khổ não?',
+                options: ['A. Do không có người thân chăm sóc.', 'B. Do thiếu tiền bạc để mua thuốc chữa trị.', 'C. Do nghiệp báo từ kiếp trước quá nặng nề.', 'D. Do chấp vào ngũ uẩn này là "ta" (ngã) và "của ta" (ngã sở).'],
+                correct: 'D',
+                explanation: 'Vì kẻ phàm phu vô minh luôn dính mắc, chấp chặt vào sắc thân (ngũ uẩn) này chính là "ta" và "của ta", nên khi sắc thân biến hoại, đau ốm, tâm liền sợ hãi mất mát và đau khổ sầu não.'
+            },
+            {
+                id: 'q56',
+                question: 'Câu 56: Tại sao Đức Phật khẳng định việc "Bố thí pháp" lại cao quý và thù thắng hơn "Bố thí vật (Tài thí)"?',
+                options: ['A. Vì pháp thí không tốn kém tiền bạc vật chất.', 'B. Vì tài thí chỉ giúp duy trì sự sống tạm thời, còn pháp thí giúp chuyển hóa nội tâm, đoạn trừ vô minh và hướng đến giải thoát luân hồi lâu dài.', 'C. Vì chỉ có bậc xuất gia mới có thể thực hành pháp thí.', 'D. Vì tài thí dễ làm tăng trưởng tâm kiêu mạn.'],
+                correct: 'B',
+                explanation: 'Tài thí rất đáng quý nhưng chỉ cứu giúp thân mạng tạm thời trong một hay vài đời. Trong khi đó, Pháp thí gieo mầm trí tuệ, giúp chúng sanh tự đoạn trừ vô minh phiền não và đạt giải thoát rốt ráo.'
+            },
+            {
+                id: 'q57',
+                question: 'Câu 57: Theo Tôn giả Ma Ha Ca Chiên Diên giải thích, tiêu chuẩn đích thực để đánh giá một người thuộc bậc "Lão niên" (bậc trưởng thượng đáng kính) trong Phật giáo là gì?',
+                options: ['A. Người sống thọ trên 80 tuổi.', 'B. Người xuất thân từ dòng dõi quý tộc, quyền thế.', 'C. Người tuy trẻ tuổi nhưng giữ gìn phạm hạnh thanh tịnh, không làm điều xấu ác.', 'D. Người xây dựng được nhiều chùa to, tượng lớn.'],
+                correct: 'C',
+                explanation: 'Trong giáo pháp, một bậc trưởng thượng đáng kính không đo lường bằng tuổi tác vật lý, mà được đánh giá qua sự thanh tịnh trong giới hạnh. Dù là người trẻ tuổi nhưng giữ phạm hạnh trong sạch thì vẫn được suy tôn là bậc Lão niên.'
+            },
+            {
+                id: 'q58',
+                question: 'Câu 58: Theo lời dạy của Đức Phật, đâu là dấu hiệu (biểu hiện) rõ nét nhất của người mang tâm "Ác tri thức" trong quá trình tu học?',
+                options: ['A. Thường xuyên nhập thất tu thiền.', 'B. Luôn sống khiêm cung, hòa kính với mọi người.', 'C. Sinh tâm ngã mạn, ỷ lại vào dòng tộc, sự trì giới, thiền định hay lợi dưỡng của bản thân rồi chê bai người khác.', 'D. Khuyên người khác giữ ngũ giới.'],
+                correct: 'C',
+                explanation: 'Một người được xem là Ác tri thức khi họ ỷ lại vào những thành tựu của bản thân (như giữ giới nghiêm, đắc thiền, xuất thân cao quý hay được cúng dường nhiều) để sinh tâm kiêu mạn và khinh chê người khác.'
+            },
+            {
+                id: 'q59',
+                question: 'Câu 59: Bốn phẩm đệ tử (Tỳ kheo, Tỳ kheo ni, Nam cư sĩ, Nữ cư sĩ) được Đức Phật liệt kê trong hệ thống kinh nhằm khẳng định thông điệp cốt lõi nào về sự tu chứng?',
+                options: ['A. Cư sĩ tại gia không được quyền hoằng truyền chánh pháp.', 'B. Chỉ có người xuất gia (Tỳ kheo) mới có thể thực hành Bát Chánh Đạo.', 'C. Nữ giới phải tu tập nhiều kiếp hơn nam giới mới có thể chứng Thánh quả.', 'D. Sự bình đẳng về cứu cánh giải thoát: Bất kỳ ai có đủ Tín, Giới, Định, Tuệ và đoạn trừ phiền não đều có thể chứng Thánh quả, không bị giới hạn bởi hình tướng hay giới tính.'],
+                correct: 'D',
+                explanation: 'Sự hiện diện của tứ chúng chứng minh sự bình đẳng tuyệt đối trong giáo pháp của Phật: Khả năng giác ngộ giải thoát không phân biệt xuất gia hay tại gia, nam hay nữ, miễn là hành trì đúng chánh pháp.'
+            },
+            {
+                id: 'q60',
+                question: 'Câu 60: Nhận định nào sau đây diễn đạt đúng nhất quan điểm của Đức Phật về bản chất của "Tâm" trong lộ trình tu tập?',
+                options: ['A. Tâm là một thực thể cố định, vĩnh hằng bất biến (thường kiến).', 'B. Phàm phu không có cách nào có thể kiểm soát được tâm.', 'C. Tâm là pháp khó điều phục nhất (do chạy nhảy cực nhanh, vô thường), nhưng cũng là pháp dễ điều phục nhất nếu hành giả biết đi đúng hướng (hướng về các gốc rễ thiện lành, chánh niệm).', 'D. Tâm tự nhiên vốn đã thanh tịnh, không cần phải tu tập hay hàng phục.'],
+                correct: 'C',
+                explanation: 'Đức Phật dạy tâm lăng xăng như vượn chuyền cành, rất khó nắm bắt và điều phục. Tuy nhiên, nếu biết hướng tâm vào chánh pháp, sử dụng chánh niệm tu tập đúng đường thì tâm lại là pháp dễ uốn nắn và chuyển hóa nhanh chóng nhất.'
+            },
+            ,{
+                id: 'q61',
+                question: 'Câu 61: Theo Thầy giáo thọ phân tích về "tâm cận tử" (cận tử nghiệp), trạng thái tâm niệm ngay trước lúc lâm chung có vai trò như thế nào đối với sự tái sanh?',
+                options: ['A. Không quan trọng vì mọi thứ đã được an bài từ trước.', 'B. Quyết định trực tiếp cảnh giới tái sanh tương ưng (tâm ác đọa địa ngục, tâm thiện sanh cõi lành).', 'C. Không ảnh hưởng gì nếu lúc sống đã làm nhiều phước.', 'D. Chỉ do người nhà tụng kinh quyết định, bản thân người chết không tự chủ được.'],
+                correct: 'B',
+                explanation: 'Tâm cận tử (ý niệm cuối cùng trước khi nhắm mắt) có sức mạnh rất lớn. Nếu cận tử nghiệp là sân hận, oán thù sẽ lập tức dẫn dắt thần thức đọa ác đạo; nếu là tâm thanh tịnh, niệm Phật, niệm Pháp sẽ được sanh về cõi an lành.'
+            },
+            {
+                id: 'q62',
+                question: 'Câu 62: Đức Phật dùng hình ảnh "con khỉ, con vượn truyền cành (buông cành này, chụp cành kia)" để ví dụ cho đặc tính nào của Tâm?',
+                options: ['A. Tính từ bi, hỷ xả.', 'B. Tính tinh tấn, không biết mệt mỏi.', 'C. Tính vô thường, biến chuyển cực kỳ mau lẹ, niệm trước và niệm sau thay đổi liên tục.', 'D. Tính an định, tĩnh lặng.'],
+                correct: 'C',
+                explanation: 'Tâm ý phàm phu vô thường, lăng xăng, liên tục sinh diệt không ngừng nghỉ. Vừa buông bỏ suy nghĩ này liền lập tức bám víu lấy suy nghĩ khác, giống hệt như con vượn buông cành này để chụp cành kia.'
+            },
+            {
+                id: 'q63',
+                question: 'Câu 63: Tại sao Vua A-tu-la có thân hình to lớn, hung dữ nhưng cuối cùng vẫn thất bại, rút lui mà không thể tấn công được vua Mặt Trời, vua Mặt Trăng?',
+                options: ['A. Do vũ khí của A-tu-la bị hỏng.', 'B. Do A-tu-la bị Phật cấm cản.', 'C. Do vua Mặt Trời, Mặt Trăng có oai đức, phước báu lớn và nhờ phước đức của chúng sanh tại đó trợ lực.', 'D. Do vua Mặt Trời, Mặt Trăng trốn đi nơi khác.'],
+                correct: 'C',
+                explanation: 'Sự hung dữ của A-tu-la không thể chiến thắng được oai đức, thần lực và thọ mạng dài lâu của vua Mặt Trời, Mặt Trăng, đặc biệt là khi có thêm phước báu thanh tịnh của chúng sanh trợ lực.'
+            },
+            {
+                id: 'q64',
+                question: 'Câu 64: Trong hạnh bố thí của Trưởng giả Cấp Cô Độc, yếu tố nào được xem là cốt lõi tạo nên phước báu vô lượng (hạnh Bồ Tát)?',
+                options: ['A. Chỉ cúng dường cho người xuất gia đắc đạo.', 'B. Bố thí với tâm bình đẳng, không phân biệt sang hèn, thân sơ, thậm chí bố thí cho cả súc vật.', 'C. Bố thí thật nhiều tiền bạc để được nổi tiếng.', 'D. Bố thí với mong cầu đời sau làm vua.'],
+                correct: 'B',
+                explanation: 'Phước báu vô lượng sinh ra từ "tâm bình đẳng rộng lớn". Ông Cấp Cô Độc không chỉ cúng dường Phật và Tăng đoàn mà còn chu cấp cho người nghèo khổ, neo đơn, không hề phân biệt đối xử.'
+            },
+            {
+                id: 'q65',
+                question: 'Câu 65: Theo bài giảng, mấu chốt quyết định việc một niệm sinh khởi sẽ làm lớn mạnh "năm triền cái" (đưa đến khổ đau) hay làm tăng trưởng "thất giác chi" (đưa đến giải thoát) là do đâu?',
+                options: ['A. Sự cúng dường nhiều hay ít.', 'B. Đi chùa nhiều hay ít.', 'C. Do Tác ý (như lý tác ý hay phi như lý tác ý).', 'D. Đọc thuộc nhiều kinh điển.'],
+                correct: 'C',
+                explanation: 'Tác ý là sự hướng tâm. "Như lý tác ý" (tư duy đúng đắn) sẽ làm phát sinh và tăng trưởng các thiện pháp (Thất giác chi). Ngược lại, "phi như lý tác ý" (suy nghĩ sai lệch) sẽ làm tăng trưởng phiền não (Ngũ triền cái).'
+            },
+            {
+                id: 'q66',
+                question: 'Câu 66: Theo Đức Phật, pháp nào là căn bản của sự "hộ tâm", đưa đến tịch tĩnh, chứng quả Sa-môn và Niết Bàn?',
+                options: ['A. Không buông lung (phòng hộ tâm).', 'B. Tu khổ hạnh ép xác.', 'C. Cất giấu tài sản cẩn thận.', 'D. Tranh luận thắng ngoại đạo.'],
+                correct: 'A',
+                explanation: 'Không buông lung (Bất phóng dật) là việc luôn giữ gìn chánh niệm, tỉnh giác, phòng hộ sáu căn. Đây là nền tảng cốt lõi của mọi thiện pháp, đưa hành giả đến sự tịch tĩnh và giải thoát.'
+            },
+            {
+                id: 'q67',
+                question: 'Câu 67: Việc Đức Phật hệ thống bốn phẩm: Tỳ kheo, Tỳ kheo ni, Nam cư sĩ, Nữ cư sĩ nhằm khẳng định thông điệp cốt lõi gì về lộ trình đạo quả?',
+                options: ['A. Cư sĩ tại gia không thể chứng đắc Thánh quả.', 'B. Nam giới đắc đạo nhanh hơn nữ giới.', 'C. Chỉ có Tỳ kheo mới có quyền hoằng pháp.', 'D. Sự bình đẳng về cứu cánh giải thoát (bất kỳ ai hành trì đúng giới-định-tuệ đều có thể chứng đắc, không phân biệt giới tính hay hình tướng).'],
+                correct: 'D',
+                explanation: 'Tứ chúng được thiết lập để chứng minh rằng khả năng giác ngộ là bình đẳng. Giới tính hay hình tướng (xuất gia/tại gia) không phải là rào cản, chỉ cần hành trì đúng chánh pháp là có thể chứng Thánh quả.'
+            },
+            {
+                id: 'q68',
+                question: 'Câu 68: Vì sao Đức Phật khẳng định "Bố thí pháp" cao quý và thù thắng hơn "Bố thí vật (Tài thí)"?',
+                options: ['A. Vì pháp thí giúp đoạn trừ vô minh, chuyển hóa nghiệp lực và đưa đến giải thoát sanh tử lâu dài.', 'B. Vì pháp thí không tốn kém tiền bạc.', 'C. Vì pháp thí dễ làm hơn.', 'D. Vì chỉ có bậc xuất gia mới làm được pháp thí.'],
+                correct: 'A',
+                explanation: 'Tài thí giúp duy trì mạng sống tạm thời trong một đời, nhưng Pháp thí giúp khai mở tuệ nhãn, cắt đứt gốc rễ vô minh và chấm dứt chuỗi luân hồi sinh tử trong vô lượng kiếp.'
+            },
+            {
+                id: 'q69',
+                question: 'Câu 69: Trong các loại Lậu hoặc, "Hữu lậu" được Đức Phật định nghĩa là trạng thái phiền não sinh ra do đâu?',
+                options: ['A. Tham ái đối với năm dục (sắc, thanh, hương, vị, xúc).', 'B. Sự không hiểu rõ về Tứ Thánh Đế.', 'C. Tham ái đối với sự tồn tại (chấp hữu, muốn được công nhận, dính mắc địa vị, quả vị tái sanh).', 'D. Lòng ganh ghét đố kỵ người khác.'],
+                correct: 'C',
+                explanation: 'Hữu lậu là sự ngấm ngầm bám víu vào sự sinh tồn, tham ái các trạng thái hiện hữu, mong muốn tái sanh làm trời, làm người hoặc bám dính vào danh xưng, quả vị.'
+            },
+            {
+                id: 'q70',
+                question: 'Câu 70: Hành vi Đề Bà Đạt Đa xúi giục chia rẽ Tăng chúng, làm thân Phật chảy máu, xúi Thái tử A Xà Thế giết cha... bị xếp vào loại tội gì khiến phải đọa địa ngục?',
+                options: ['A. Tội Ngũ nghịch.', 'B. Tội lười biếng.', 'C. Tội nói dối.', 'D. Tội trộm cắp.'],
+                correct: 'A',
+                explanation: 'Giết cha, giết mẹ, giết A La Hán, làm thân Phật chảy máu, phá sự hòa hợp của Tăng đoàn là 5 tội trọng lớn nhất (Ngũ nghịch/Ngũ vô gián tội), chắc chắn sẽ đọa vào địa ngục Vô Gián.'
+            },
+            {
+                id: 'q71',
+                question: 'Câu 71: Tôn giả Châu Lợi Bàn Đặc giải thích "mù" và "không có mắt" mang ý nghĩa gì trong Phật pháp?',
+                options: ['A. Mù là không thấy đường; Không có mắt là bị mù bẩm sinh.', 'B. Mù là không thấy nghiệp quả đời này đời sau; Không có mắt là không có con mắt trí tuệ vô thượng.', 'C. Cả hai đều chỉ người không biết đọc kinh sách.', 'D. Là hình phạt dành cho kẻ bất hiếu.'],
+                correct: 'B',
+                explanation: 'Trong lăng kính chánh pháp, "mù" là sự si mê không thấu hiểu nhân quả luân hồi; còn "không có mắt" là việc thiếu đi Tuệ nhãn (con mắt trí tuệ vô lậu) để thấu triệt chân lý giải thoát.'
+            },
+            {
+                id: 'q72',
+                question: 'Câu 72: Đức Thế Tôn khẳng định hai sức mạnh (hai lực) cốt lõi nào đã giúp Ngài vượt qua 6 năm khổ hạnh và hàng phục ma oán để thành đạo?',
+                options: ['A. Thần thông lực và Phước báu lực.', 'B. Nhẫn lực (sự kham nhẫn) và Tư duy lực (tư duy chánh pháp).', 'C. Định lực và Tuệ lực.', 'D. Tín lực và Tấn lực.'],
+                correct: 'B',
+                explanation: 'Nhẫn lực giúp Đức Phật kham nhẫn được tột cùng sự khắc nghiệt của khổ hạnh và ma vương quấy phá; Tư duy lực giúp Ngài quán chiếu sâu sắc, dứt sạch lậu hoặc để thành tựu Chánh giác.'
+            },
+            {
+                id: 'q73',
+                question: 'Câu 73: Trong kinh, Đức Phật khuyên các hành giả tu tập phải siêng năng tạo phước, không nên sợ phước vì lý do gì?',
+                options: ['A. Vì phước báu là "lá chắn" bảo vệ người tu trước mọi chướng duyên, nghịch cảnh và ma oán.', 'B. Vì phước báu giúp mau chóng giàu có, nổi tiếng.', 'C. Vì phước báu thay thế được việc giữ giới.', 'D. Phước báu giúp người tu có thần thông bay lượn.'],
+                correct: 'A',
+                explanation: 'Người tu có phước báo lớn thì chướng duyên sẽ giảm thiểu, ác ma không dám đến gần quấy phá. Phước báo chính là nền tảng, là lá chắn hộ trì vững chắc trên con đường tu tập.'
+            },
+            {
+                id: 'q74',
+                question: 'Câu 74: Thuật ngữ "Vô vi" (ví dụ: "ngăn chướng con đường vô vi") được Đức Phật dùng trong kinh Tăng Nhất A Hàm mang ý nghĩa tương đương với khái niệm nào?',
+                options: ['A. Pháp sanh tử luân hồi.', 'B. Cõi trời Đao Lợi.', 'C. Trạng thái giải thoát rốt ráo, Niết Bàn.', 'D. Cuộc sống buông thả, không làm gì cả.'],
+                correct: 'C',
+                explanation: '"Hữu vi" là các pháp có sinh có diệt, thuộc luân hồi. Còn "Vô vi" là trạng thái vắng lặng, không sinh không diệt, rốt ráo lậu hoặc, đồng nghĩa với sự giải thoát, Niết Bàn.'
+            },
+            {
+                id: 'q75',
+                question: 'Câu 75: Mối quan hệ nuôi dưỡng đạo giữa Thí chủ và Tỳ kheo (người thọ thí) được Đức Phật dạy như thế nào?',
+                options: ['A. Thí chủ chỉ cần cúng dường là xong, Tỳ kheo không cần quan tâm lại.', 'B. Người thọ thí phải trải tâm từ, giảng dạy chánh pháp (pháp thí) cho thí chủ để vật thí không uổng phí và thí chủ được quả báo lớn.', 'C. Tỳ kheo phải trả lại bằng tiền bạc hoặc vật chất tương đương.', 'D. Tỳ kheo chỉ cần tụng kinh cầu an, không cần giảng pháp.'],
+                correct: 'B',
+                explanation: 'Để đền đáp công ơn nuôi dưỡng sắc thân (tài thí) từ đàn na tín thí, vị Tỳ kheo phải có trách nhiệm dùng đời sống phạm hạnh và giảng dạy chánh pháp (pháp thí) để nuôi dưỡng lại tuệ mạng cho thí chủ.'
+            },
+            ,{
+                id: 'q76',
+                question: 'Câu 76: Theo Đức Phật, việc chăm sóc, thăm hỏi người bệnh (nhất là những người đồng phạm hạnh) mang lại phước lợi to lớn và được ví như việc gì?',
+                options: ['A. Giống như đang cúng dường xây dựng tự viện.', 'B. Giống như đang chăm sóc, hầu hạ chính Đức Như Lai.', 'C. Giống như đang thực hành pháp nhẫn nhục.', 'D. Giống như đang tu tập thiền định sâu sắc.'],
+                correct: 'B',
+                explanation: 'Trong kinh, Đức Thế Tôn khẳng định việc chăm sóc, thăm hỏi người bệnh (nhất là pháp hữu đồng phạm hạnh) thì không khác gì như đang chăm sóc chính Như Lai, đem lại phước lợi to lớn và lâu dài.'
+            },
+            {
+                id: 'q77',
+                question: 'Câu 77: Khi Tôn giả La Vân (La Hầu La) thực hành pháp "Quán niệm hơi thở" theo lời Phật dạy, vị ấy phải đặt (buộc) tâm ở vị trí nào để quan sát?',
+                options: ['A. Ở đan điền (dưới rốn).', 'B. Ở giữa trán (ấn đường).', 'C. Ở chóp mũi, để biết rõ hơi thở ra/vào, dài/ngắn, lạnh/ấm.', 'D. Ở vùng ngực (trái tim).'],
+                correct: 'C',
+                explanation: 'Để tâm không bị loạn động và tập trung tốt nhất, Phật dạy Tôn giả La Vân đặt/buộc tâm ở chóp mũi, từ đó biết rõ hơi thở ra vào, hơi thở dài ngắn, và cảm giác lạnh ấm khi hơi thở đi qua.'
+            },
+            {
+                id: 'q78',
+                question: 'Câu 78: Trong tiến trình tu tập Tứ thiền được mô tả trong kinh, trạng thái "xả giác, xả quán (không tầm, không tứ), tâm hoan hỷ chuyên nhất, có hỷ có lạc do định sanh" là đặc điểm của tầng thiền nào?',
+                options: ['A. Sơ thiền (Thiền thứ nhất).', 'B. Nhị thiền (Thiền thứ hai).', 'C. Tam thiền (Thiền thứ ba).', 'D. Tứ thiền (Thiền thứ tư).'],
+                correct: 'B',
+                explanation: 'Đây là trạng thái của Nhị thiền. (Sơ thiền: có tầm có tứ/giác quán; Nhị thiền: xả giác xả quán, định sanh hỷ lạc; Tam thiền: ly hỷ trú xả; Tứ thiền: xả niệm thanh tịnh).'
+            },
+            {
+                id: 'q79',
+                question: 'Câu 79: Khi thực hành quán thân, việc hành giả quán chiếu thân này chỉ là sự hợp thành của "đất, nước, lửa, gió" (quán tứ đại) nhằm mục đích cốt lõi gì?',
+                options: ['A. Để chữa trị các bệnh tật trên thân thể.', 'B. Để luyện tập thần thông bay lượn.', 'C. Để thấy rõ thân không có tự ngã (không có ta và của ta), từ đó phá bỏ ngã chấp.', 'D. Để có sức khỏe dẻo dai, trường thọ.'],
+                correct: 'C',
+                explanation: 'Quán thân là tứ đại (đất, nước, lửa, gió) để hành giả nhận rõ thân này không có thực thể độc lập, không có cái "Ta" (ngã) và "của Ta" (ngã sở), từ đó đoạn trừ sự chấp trước và bám víu vào thân.'
+            },
+            {
+                id: 'q80',
+                question: 'Câu 80: Đức Phật khẳng định bản chất của "Tâm" trong lộ trình tu tập là khó hay dễ hàng phục?',
+                options: ['A. Tâm hoàn toàn không thể hàng phục được vì nó vô thường.', 'B. Tâm luôn luôn an định, không cần phải điều phục.', 'C. Tâm chỉ có thể hàng phục nếu có thần thông.', 'D. Vừa là pháp khó điều phục nhất (nếu để loạn tưởng chạy nhảy), vừa là pháp dễ điều phục nhất (nếu biết hướng tâm về cội rễ thiện lành, đi đúng hướng Bát chánh đạo).'],
+                correct: 'D',
+                explanation: 'Tâm chạy nhảy rất nhanh, cực kỳ vô thường nên rất khó hàng phục. Nhưng Đức Phật cũng khẳng định tâm là pháp dễ điều phục nhất nếu hành giả đi đúng hướng (hướng tâm về cội rễ thiện lành, giữ chánh niệm tỉnh giác).'
+            },
+            {
+                id: 'q81',
+                question: 'Câu 81: Trong các lậu hoặc, "Vô minh lậu" được Thầy giáo thọ giải thích mang ý nghĩa vi tế nào?',
+                options: ['A. Là sự rỉ chảy phiền não do tham đắm 5 dục (sắc, thanh, hương, vị, xúc).', 'B. Là sự rỉ chảy phiền não do tham ái sự tồn tại (muốn trở thành cái này cái kia).', 'C. Là sự rỉ chảy phiền não do không thấy biết như thật (không hiểu đúng sự thật, tu mà không biết mình đang tu gì).', 'D. Là sự kiêu căng, ngã mạn khinh thường người khác.'],
+                correct: 'C',
+                explanation: 'Vô minh lậu là trạng thái rỉ chảy phiền não ngấm ngầm do sự si mê, không thấy biết như thật (không rõ Tứ đế, vô thường, vô ngã), thậm chí tu mà không biết mình đang tu pháp gì.'
+            },
+            {
+                id: 'q82',
+                question: 'Câu 82: Trong kinh Tăng Nhất A Hàm, một ưu bà di (nữ cư sĩ) đã dạy con trai mình nếu xuất gia thì nên noi gương tu học theo những bậc Thượng thủ Thanh văn nào?',
+                options: ['A. Tôn giả A Na Luật và Tôn giả Tu Bồ Đề.', 'B. Tôn giả Xá Lợi Phất và Tôn giả Mục Kiền Liên.', 'C. Tôn giả Đại Ca Diếp và Tôn giả A Nan.', 'D. Tôn giả La Vân và Tôn giả Châu Lợi Bàn Đặc.'],
+                correct: 'B',
+                explanation: 'Một ưu bà di dạy con trai nếu xuất gia thì nương theo Tôn giả Xá Lợi Phất và Mục Kiền Liên. Nếu là con gái xuất gia thì nương theo Tỳ kheo ni Sấm Ma và Ưu Bát Hoa Sắc.'
+            },
+            {
+                id: 'q83',
+                question: 'Câu 83: Để lôi kéo, khiến hành giả sập bẫy và mất chánh niệm, Ma Ba Tuần thường dùng cách thức vi tế nào?',
+                options: ['A. Dùng sức mạnh bạo lực để tấn công trực diện.', 'B. Rình rập sơ hở nơi sáu căn, nắm bắt ý niệm/sở thích của người tu để biến hiện sắc, thanh, hương, vị, xúc, pháp cực kỳ hấp dẫn để câu nhử.', 'C. Dùng quyền lực của các vị vua chúa thế gian để ép buộc.', 'D. Làm cho người tu bị mất hết trí nhớ.'],
+                correct: 'B',
+                explanation: 'Ma Ba Tuần rất tinh vi, thường rình rập sơ hở nơi sáu căn (mắt, tai, mũi, lưỡi, thân, ý). Nó nắm rõ ý niệm và sở thích của hành giả để biến hiện 6 trần (sắc, thanh, hương...) thành những mồi câu hấp dẫn nhằm mê loạn tâm ý.'
+            },
+            {
+                id: 'q84',
+                question: 'Câu 84: Theo định nghĩa cụ thể trong kinh, một người như thế nào mới chính thức được gọi là "Cư sĩ"?',
+                options: ['A. Là người ăn chay trường và tụng kinh mỗi ngày.', 'B. Là người xuất gia nhưng tu tại nhà.', 'C. Là người thọ Tam Quy (Quy y Tam Bảo) và thọ trì Ngũ Giới.', 'D. Là người thường xuyên đi chùa cúng dường tiền bạc.'],
+                correct: 'C',
+                explanation: 'Kinh Tăng Nhất A Hàm định nghĩa rất rõ: Cư sĩ (Ưu bà tắc/Ưu bà di) là người đã thọ Tam Quy (quy y Tam bảo) và thọ trì Ngũ giới.'
+            },
+            {
+                id: 'q85',
+                question: 'Câu 85: Sự tồn tại của bốn phẩm đệ tử (Tỳ kheo, Tỳ kheo ni, Nam cư sĩ, Nữ cư sĩ) khẳng định thông điệp cốt lõi gì của Phật giáo về lộ trình đạo quả?',
+                options: ['A. Người cư sĩ không có trách nhiệm hoằng pháp hay bảo vệ Tam bảo.', 'B. Có sự phân biệt đối xử giữa nam và nữ trong việc chứng đạo.', 'C. Sự bình đẳng tuyệt đối về cứu cánh giải thoát (ai hành trì trọn vẹn Tín-Giới-Định-Tuệ đều có thể chứng quả Thánh, không bị giới hạn bởi hình tướng hay giới tính).', 'D. Chỉ có người xuất gia mới được học Bát chánh đạo.'],
+                correct: 'C',
+                explanation: 'Sự hiện diện và chứng Thánh quả của cả Tứ chúng khẳng định tính bình đẳng về cứu cánh giải thoát trong đạo Phật. Bất cứ ai (xuất gia hay tại gia, nam hay nữ) nếu hành trì đúng pháp (Giới-Định-Tuệ) đều có thể đắc đạo.'
+            },
+            {
+                id: 'q86',
+                question: 'Câu 86: Thái độ đúng đắn của Đức Phật và Tăng đoàn khi chứng kiến một thành viên (Tỳ kheo/Tỳ kheo ni) bị sa đọa hoặc thối thất tín tâm là gì?',
+                options: ['A. Lập tức xua đuổi, miệt thị để làm trong sạch Tăng đoàn.', 'B. Phê phán công khai trước công chúng.', 'C. Nếu vị ấy còn chút tàm quý và muốn ở lại, phải yêu thương bảo vệ vị ấy giống như gia đình bảo vệ "con mắt còn lại" của người bị hỏng một mắt.', 'D. Làm ngơ, không quan tâm vì đó là nghiệp của họ.'],
+                correct: 'C',
+                explanation: 'Đức Phật dạy giáo dục bằng lòng từ bi. Nếu một Tỳ kheo phạm lỗi nhưng còn tàm quý và muốn ở lại Tăng đoàn, đại chúng phải bảo vệ vị ấy giống như người nhà phải xót thương và bảo vệ "con mắt còn lại" của người đã bị hỏng một mắt.'
+            },
+            {
+                id: 'q87',
+                question: 'Câu 87: Đức Phật dạy Tỳ kheo (người thọ thí) phải có trách nhiệm gì đối với Thí chủ cúng dường để vật thí không uổng phí và mang lại quả báo lớn?',
+                options: ['A. Tỳ kheo phải trải tâm từ, giảng dạy chánh pháp (pháp thí) và hướng dẫn các hạnh thanh tịnh cho thí chủ.', 'B. Tỳ kheo phải trả lại bằng tiền bạc.', 'C. Tỳ kheo chỉ cần im lặng thọ nhận, không cần làm gì thêm.', 'D. Tỳ kheo phải đến làm việc nhà giúp thí chủ.'],
+                correct: 'A',
+                explanation: 'Mối quan hệ "dưỡng đạo": Thí chủ cúng dường vật chất; đổi lại, người thọ thí (Tỳ kheo) phải trải tâm từ, giảng dạy chánh pháp và hướng dẫn các hạnh thanh tịnh để vật thí không uổng phí và thí chủ đạt quả báo lớn.'
+            },
+            {
+                id: 'q88',
+                question: 'Câu 88: Nếu một người tu chỉ biết giữ giới nghiêm ngặt (không phạm lỗi nhỏ) nhưng không tiếp tục tu Định và Tuệ (như trường hợp ban đầu của Tôn giả La Vân), thì hậu quả là gì?',
+                options: ['A. Vị ấy sẽ lập tức đắc quả A La Hán.', 'B. Vị ấy vẫn chưa thể dứt sạch hữu lậu và đoạn trừ các kiết sử trói buộc.', 'C. Vị ấy sẽ bị đọa vào địa ngục.', 'D. Vị ấy sẽ có thần thông bay lượn.'],
+                correct: 'B',
+                explanation: 'Giới là nền tảng, nhưng nếu chỉ giữ giới mà thiếu tu Định và Tuệ (phòng hộ các căn, diệt trừ loạn tưởng) thì hữu lậu vẫn còn, kiết sử chưa thể dứt sạch để chứng A La Hán.'
+            },
+            {
+                id: 'q89',
+                question: 'Câu 89: Theo Thầy giáo thọ, Tà kiến (chấp có, chấp không) nguy hiểm như thế nào?',
+                options: ['A. Như hầm lửa thiêu đốt thân thể.', 'B. Như lưỡi dao dính mật ngọt.', 'C. Như hạt giống đắng (dù gieo vào đất tốt màu mỡ, quả sinh ra vẫn mang vị đắng, kéo theo toàn bộ thân, khẩu, ý đi sai lệch).', 'D. Như biển cả không chứa tử thi.'],
+                correct: 'C',
+                explanation: 'Tà kiến bị Đức Phật ví như "hạt giống đắng". Dù hạt đắng đó có gieo vào vùng đất tốt, màu mỡ đến đâu thì quả sinh ra vẫn mang vị đắng. Tà kiến sẽ kéo theo toàn bộ thân, khẩu, ý đi sai lệch vào bất thiện.'
+            },
+            {
+                id: 'q90',
+                question: 'Câu 90: Khi hành giả tu tập và thành tựu Ngũ Giới (không sát sanh, không trộm cắp, không tà dâm, không vọng ngữ, không uống rượu), lợi ích lớn nhất hướng đến là gì?',
+                options: ['A. Chỉ để được người đời khen ngợi.', 'B. Chỉ để cầu sinh lên cõi trời hưởng dục lạc.', 'C. Đặt nền móng vững chắc cho con đường giải thoát, củng cố Định lực, phát sinh Trí tuệ và mở ra cánh cửa chứng nhập Niết bàn.', 'D. Để có được sức khỏe trường thọ mà không cần tu thêm pháp nào khác.'],
+                correct: 'C',
+                explanation: 'Ngũ giới không chỉ là chuẩn mực đạo đức xã hội. Giữ giới nghiêm minh giúp tâm thanh tịnh, định lực củng cố, trí tuệ phát sinh, từ đó mở ra cánh cửa chứng nhập Niết bàn.'
+            },
+            ,{
+                id: 'q91',
+                question: 'Câu 91: Khi thực hành quán Thọ (trong Tứ Niệm Xứ), hành giả cần nhận diện sự nguy hiểm của các cảm thọ. Theo đó, "lạc thọ", "khổ thọ" và "xả thọ" (phi khổ phi lạc) nếu không chánh niệm sẽ dễ làm sinh khởi những phiền não nào tương ứng?',
+                options: ['A. Lạc thọ sinh kiêu mạn; khổ thọ sinh tự ti; xả thọ sinh lười biếng.', 'B. Lạc thọ sinh tham dục; khổ thọ sinh sân hận; xả thọ sinh si mê (tùy miên).', 'C. Lạc thọ sinh trạo cử; khổ thọ sinh nghi ngờ; xả thọ sinh hôn trầm.', 'D. Lạc thọ sinh hào phóng; khổ thọ sinh ích kỷ; xả thọ sinh lãnh cảm.'],
+                correct: 'B',
+                explanation: 'Thầy phân tích tiến trình của cảm thọ rất rõ: Lạc thọ nếu không chánh niệm sẽ dễ sinh tham dục (ái nhiễm); Khổ thọ dễ sinh sân hận (bực bội, chống đối); và Xả thọ (trung tính) dễ đưa đến si mê (sự mơ hồ, không rõ ràng, tùy miên).'
+            },
+            {
+                id: 'q92',
+                question: 'Câu 92: Trong lộ trình tu tập Bát Chánh Đạo, Thầy giáo thọ giải thích "Sơ thiện", "Trung thiện" và "Hậu thiện" tương ứng với những trạng thái và chi pháp nào?',
+                options: ['A. Sơ thiện là Bố thí; Trung thiện là Trì giới; Hậu thiện là Thiền định.', 'B. Sơ thiện là Chánh kiến; Trung thiện là 7 chi pháp còn lại (chánh tư duy, chánh ngữ...); Hậu thiện là đoạn tận lậu hoặc, chứng đắc Niết Bàn (Chánh giải thoát).', 'C. Sơ thiện là xuất gia; Trung thiện là học kinh điển; Hậu thiện là xây dựng tự viện.', 'D. Sơ thiện là Tín; Trung thiện là Tấn; Hậu thiện là Niệm.'],
+                correct: 'B',
+                explanation: 'Sơ thiện là có Chánh kiến (bước đầu từ bỏ tà kiến); Trung thiện là quá trình hành trì 7 chi pháp còn lại (chánh tư duy, chánh ngữ, chánh mạng...); Hậu thiện là kết quả viên mãn, đoạn tận lậu hoặc và chứng đắc Niết Bàn (Chánh giải thoát).'
+            },
+            {
+                id: 'q93',
+                question: 'Câu 93: Theo bài kinh "Hai pháp gây phiền não", Đức Phật dạy hai nguyên nhân cốt lõi nào khiến cuộc sống con người nhiều khổ đau, phiền muộn?',
+                options: ['A. Sát sanh và Trộm cắp.', 'B. Lười biếng và Ham ngủ nghỉ.', 'C. Gieo mầm ác khởi oán thù và Không gieo hạnh lành (cội phước).', 'D. Không đi chùa và Không tụng kinh.'],
+                correct: 'C',
+                explanation: 'Đức Phật chỉ ra hai nguyên nhân khiến cuộc sống nhiều phiền não: một là gieo mầm ác khởi oán thù; hai là không gieo hạnh lành (cội phước). Cần phải đoạn trừ bất thiện và tu tập điều thiện để chuyển hóa đời sống.'
+            },
+            {
+                id: 'q94',
+                question: 'Câu 94: Đức Phật dùng hình ảnh "hạt giống ngọt gieo vào đất tốt sinh trái ngon ngọt" để ví dụ cho sức mạnh của pháp nào?',
+                options: ['A. Hạnh Bố thí.', 'B. Chánh kiến (sự nhận thức đúng đắn định hướng toàn bộ thân, khẩu, ý đi theo đường thiện lành).', 'C. Sự nhẫn nhục.', 'D. Thần thông.'],
+                correct: 'B',
+                explanation: 'Chánh kiến được ví như hạt giống ngọt. Người có chánh kiến sẽ định hướng toàn bộ thân, khẩu, ý hướng về điều thiện lành. Ngược lại, tà kiến bị ví như hạt đắng, dù gieo đất tốt quả vẫn đắng.'
+            },
+            {
+                id: 'q95',
+                question: 'Câu 95: Theo kinh Tăng Nhất A Hàm, bốn pháp nào nếu hành giả dứt trừ và nhổ tận gốc rễ thì sẽ được Đức Phật ấn chứng đạt quả vị A-na-hàm (Bất hoàn - không còn tái sanh cõi dục)?',
+                options: ['A. Sát, Đạo, Dâm, Vọng.', 'B. Sinh, Lão, Bệnh, Tử.', 'C. Tham dục, Sân hận, Ngu si và Sang tham (keo kiệt).', 'D. Dục lậu, Hữu lậu, Vô minh lậu và Kiến lậu.'],
+                correct: 'C',
+                explanation: 'Trong các bài kinh đầu của phẩm Bất Hoàn, Đức Phật nhấn mạnh nếu đoạn tận được Tham dục, Sân hận, Ngu si và Sang tham (keo kiệt) thì hành giả sẽ vượt khỏi dục giới, không còn trở lại cõi này (chứng quả A Na Hàm).'
+            },
+            {
+                id: 'q96',
+                question: 'Câu 96: Trong kinh dạy về Ngũ giới, nếu giữ trọn giới "Không sát sanh" và khởi tâm từ bi bảo vệ mạng sống muôn loài, hành giả sẽ nhận được quả báo gì lớn nhất nếu tái sanh làm người?',
+                options: ['A. Có quyền lực trị vì thiên hạ.', 'B. Trở thành người có nhan sắc xinh đẹp nhất.', 'C. Có thọ mạng lâu dài, khỏe mạnh và tạo nền tảng hướng đến Niết Bàn.', 'D. Sẽ có rất nhiều của cải vật chất.'],
+                correct: 'C',
+                explanation: 'Việc giữ giới không sát sanh và tôn trọng sự sống muôn loài không chỉ giúp sinh lên cõi trời/cõi người mà nếu làm người sẽ có thọ mạng lâu dài, khỏe mạnh, làm nền tảng vững chắc để tiến đến Niết Bàn.'
+            },
+            {
+                id: 'q97',
+                question: 'Câu 97: Khi Tôn giả Tu Bồ Đề bị bệnh nặng, ngài đã làm gì để khống chế cơn đau khiến Đế Thích phải xuống đảnh lễ và khen ngợi?',
+                options: ['A. Ngài nhờ các y sĩ giỏi nhất đến chữa trị.', 'B. Ngài tự nhiếp tâm thiền quán để trấn áp cơn đau và thuyết pháp về nguyên lý "pháp tự sinh tự diệt, dùng pháp trị pháp".', 'C. Ngài tụng thần chú để xua đuổi ma bệnh.', 'D. Ngài yêu cầu đại chúng cầu nguyện cho mình.'],
+                correct: 'B',
+                explanation: 'Tôn giả Tu Bồ Đề khi bị bệnh đã tự nhiếp tâm thiền quán để trấn áp cơn đau. Ngài dạy bài pháp trọng yếu: các pháp tự sinh tự diệt, có độc thì có thuốc giải (dùng pháp trị pháp, như dùng tâm từ trị sân hận).'
+            },
+            {
+                id: 'q98',
+                question: 'Câu 98: Đức Phật dạy rằng, thái độ khen ngợi hay chê bai các "hạnh đầu đà" (như sống A-lan-nhã, khất thực, mặc y phấn tảo) có ý nghĩa tương đương với việc gì?',
+                options: ['A. Tương đương với việc khen chê ngoại đạo.', 'B. Tương đương với việc khen chê chúng sanh phàm phu.', 'C. Là trực tiếp bày tỏ thái độ khen ngợi hay phỉ báng chính Đức Như Lai, vì Như Lai luôn đề cao đời sống viễn ly, giản dị.', 'D. Không có ý nghĩa gì đặc biệt.'],
+                correct: 'C',
+                explanation: 'Đức Phật tán thán hạnh đầu đà (sống A-lan-nhã, khất thực, trì y phấn tảo...). Ngài khẳng định khen hay chê những hạnh ấy chính là trực tiếp bày tỏ thái độ đối với Như Lai, vì Như Lai luôn đề cao nếp sống viễn ly, giản dị.'
+            },
+            {
+                id: 'q99',
+                question: 'Câu 99: Trong câu chuyện "Kẻ đi tìm con", vì sao Phu nhân Mạc Lợi được Đức Phật khen ngợi là người phụ nữ thông minh, tín tâm bậc nhất?',
+                options: ['A. Vì bà cúng dường rất nhiều tài sản cho Tăng đoàn.', 'B. Vì bà đã xây dựng nhiều tịnh xá nguy nga.', 'C. Vì bà không vội tin tin đồn sai lệch (rằng Phật nói "chia lìa là vui") mà khéo léo sai người đến thỉnh vấn để xác minh lại đúng chân lý "Thương yêu xa lìa là khổ".', 'D. Vì bà có thần thông dự đoán tương lai.'],
+                correct: 'C',
+                explanation: 'Trưởng giả mất con nghe lầm lời Phật thành "chia lìa là vui" rồi đồn đãi. Phu nhân Mạc Lợi (Mallika) có trí tuệ và tín tâm vững chắc, đã sai người đi xác minh lại và khẳng định đúng chân lý của Phật: "Thương yêu xa lìa là khổ".'
+            },
+            {
+                id: 'q100',
+                question: 'Câu 100: Đức Phật dạy hai pháp nào cần được chuyên tâm quán niệm, đáng được tôn kính giống như đang kỉnh lễ chính Đức Như Lai?',
+                options: ['A. Từ bi và Hỷ xả.', 'B. Tàm và Quý.', 'C. Trí tuệ (như thật tri kiến) và Diệt tận (Niết Bàn).', 'D. Bố thí và Trì giới.'],
+                correct: 'C',
+                explanation: 'Hai pháp cần được chuyên tâm quán niệm như đang lễ kính Như Lai chính là Trí tuệ (sự thấy biết như thật) và Diệt tận (Niết bàn, dứt sạch lậu hoặc).'
+            },
+            {
+                id: 'q101',
+                question: 'Câu 101: Trạng thái tâm lý vi tế luôn khao khát sự hiện hữu (mong muốn tồn tại, muốn trở thành cái này cái kia, dính mắc vào địa vị, danh xưng hay khao khát chứng đắc quả vị), được Đức Phật xếp vào loại lậu hoặc nào?',
+                options: ['A. Dục lậu.', 'B. Hữu lậu.', 'C. Vô minh lậu.', 'D. Kiến lậu.'],
+                correct: 'B',
+                explanation: 'Hữu lậu (lậu do chấp hữu) là sự tham ái đối với sự tồn tại. Vi tế hơn dục lậu, hữu lậu là việc muốn được trở thành cái này cái kia, dính mắc vào quả vị, địa vị tái sanh.'
+            },
+            {
+                id: 'q102',
+                question: 'Câu 102: Theo bài giảng về Ngũ giới, ngoài việc làm mất chánh niệm, quả báo của thói quen ham thích rượu chè (chất men say) nếu tái sanh làm người sẽ là gì?',
+                options: ['A. Bị người đời lừa gạt, trộm cắp tài sản.', 'B. Trí tuệ ám độn, ngu si điên dại, không phân biệt được đúng sai.', 'C. Gia đình ly tán, con cái bất hiếu.', 'D. Thân thể mang nhiều bệnh nan y.'],
+                correct: 'B',
+                explanation: 'Quả báo của việc ham thích uống rượu (chất men say) làm mất chánh niệm, nếu sanh làm người sẽ thường bị ngu si, điên dại, không phân biệt được đúng sai.'
+            },
+            {
+                id: 'q103',
+                question: 'Câu 103: Tại sao ma Ba Tuần và A-tu-la không thể tấn công được Tăng đoàn của Đức Phật? Thầy giáo thọ giải thích nguyên lý "Phước chúng như hải" nghĩa là gì?',
+                options: ['A. Vì Tăng đoàn có các vị hộ pháp được trang bị vũ khí sức mạnh.', 'B. Sức mạnh của Tăng đoàn nằm ở sự thanh tịnh, hòa hợp và cộng hưởng phước đức của cả một tập thể, tạo thành khối nội lực kiên cố khiến ác ma phải tự rút lui.', 'C. Vì Tăng đoàn sống ẩn nấp trong rừng sâu nên ma không tìm thấy.', 'D. Vì Tăng đoàn thường xuyên lập đàn cúng sao giải hạn.'],
+                correct: 'B',
+                explanation: 'Sức mạnh của Tăng đoàn không nằm ở vũ lực mà là "Phước chúng như hải". Chính sự thanh tịnh, hòa hợp và phước đức của cả một tập thể (Tứ chúng) đã tạo ra oai đức khổng lồ khiến A-tu-la và ma Ba Tuần phải nể sợ tự rút lui.'
+            },
+            {
+                id: 'q104',
+                question: 'Câu 104: Theo lời Thầy giáo thọ phân tích về vai trò của Tứ chúng, ngoài việc cúng dường tứ sự vật dụng, người cư sĩ tại gia còn có vai trò đặc biệt quan trọng nào để Phật pháp được trường tồn?',
+                options: ['A. Dành toàn bộ thời gian vào chùa để ngồi thiền.', 'B. Xuất gia tu hành ngay lập tức.', 'C. Chết sống để bảo vệ nơi tu tập (giữ chùa/tự viện), duy trì chánh pháp và tu hành trong chánh pháp.', 'D. Đi tranh luận thắng thua với các tôn giáo khác.'],
+                correct: 'C',
+                explanation: 'Thầy giáo thọ kể lại câu chuyện thực tế về những vị cư sĩ kiên cường bám trụ để giữ gìn ngôi chùa qua thời kỳ khó khăn. Vai trò của cư sĩ không chỉ là cúng dường mà còn là hộ đạo, bảo vệ nơi tu tập và duy trì chánh pháp.'
+            },
+            {
+                id: 'q105',
+                question: 'Câu 105: Theo lời Phật dạy, "Tâm" vừa là pháp khó điều phục nhất nhưng cũng là pháp dễ chuyển hóa nhất. Yếu tố nào quyết định tâm trở nên "dễ hàng phục"?',
+                options: ['A. Ép xác khổ hạnh đến cùng cực.', 'B. Đi đúng hướng Bát Chánh Đạo, hướng tâm về các cội rễ thiện lành và duy trì thường xuyên sự chánh niệm, tỉnh giác.', 'C. Thường xuyên ngủ nghỉ để tâm không suy nghĩ gì.', 'D. Để tâm phát triển một cách hoàn toàn tự nhiên, không cần can thiệp.'],
+                correct: 'B',
+                explanation: 'Tâm tuy chạy nhảy cực nhanh và khó điều phục nhất, nhưng Đức Phật khẳng định nó lại "dễ hàng phục nhất" nếu hành giả biết đi đúng hướng Bát Chánh Đạo, hướng về cội rễ thiện lành và giữ gìn chánh niệm.'
+            },
+            ,{
+                id: 'q106',
+                question: 'Câu 106: Hình ảnh ẩn dụ "biển cả không chứa tử thi" được Đức Phật dùng để cảnh tỉnh những người xuất gia tham đắm lợi dưỡng mang ý nghĩa cốt lõi gì?',
+                options: ['A. Người tu không nên đi tắm biển để tránh nguy hiểm.', 'B. Quy luật nhân quả và phước báu sẽ tự động đào thải những kẻ tu hành giả dối, không có phạm hạnh ra khỏi Tăng đoàn và chánh pháp.', 'C. Nước biển mặn nên sẽ tự động làm sạch mọi tội lỗi của người tu.', 'D. Biển cả là nơi thiêng liêng, không được xả rác hay đồ ô uế.'],
+                correct: 'B',
+                explanation: 'Giống như biển cả luôn đánh dạt các xác chết (tử thi) tấp vào bờ, biển chánh pháp và sự thanh tịnh của Tăng đoàn cũng sẽ tự động đào thải những kẻ tu hành giả dối, phá giới, đắm nhiễm lợi dưỡng ra khỏi tập thể.'
+            },
+            {
+                id: 'q107',
+                question: 'Câu 107: Theo sự phân tích của Thầy giáo thọ về bài kinh Thủ chuyển và kinh 66 (Trung Bộ), các uẩn như Thọ uẩn, Tưởng uẩn và Hành uẩn được sinh khởi dựa trên điều kiện (duyên) cốt lõi nào?',
+                options: ['A. Do ăn uống sai cách.', 'B. Do Vô minh từ kiếp trước.', 'C. Do Xúc (sự gặp gỡ của ba pháp: Căn, Trần và Thức).', 'D. Do sự xúi giục của ác ma.'],
+                correct: 'C',
+                explanation: 'Giáo lý duyên khởi chỉ rõ: Do có sự tiếp xúc (Xúc) giữa Căn (giác quan), Trần (đối tượng) và Thức (sự nhận biết) mà làm phát sinh cảm thọ (Thọ), sự nhận biết/nhớ nghĩ (Tưởng) và các phản ứng tâm lý (Hành).'
+            },
+            {
+                id: 'q108',
+                question: 'Câu 108: Trong tiến trình tu tập Tứ thiền, trạng thái "xả giác, xả quán (không tầm không tứ), tâm hoan hỷ ý niệm chuyên nhất, có hỷ có lạc do định sanh" là đặc điểm của tầng thiền nào?',
+                options: ['A. Sơ thiền (Thiền thứ nhất).', 'B. Nhị thiền (Thiền thứ hai).', 'C. Tam thiền (Thiền thứ ba).', 'D. Tứ thiền (Thiền thứ tư).'],
+                correct: 'B',
+                explanation: 'Sơ thiền vẫn còn Tầm (giác) và Tứ (quán). Khi hành giả diệt được Tầm và Tứ, tâm đạt đến sự nội tĩnh chuyên nhất, hỷ lạc tuôn trào do sức mạnh của Định, đó chính là trạng thái của Nhị thiền.'
+            },
+            {
+                id: 'q109',
+                question: 'Câu 109: Vì sao Vua A-tu-la có thân hình to lớn, uy lực hung dữ nhưng phải sợ hãi, buồn rầu rút lui trước Vua Mặt Trời và Vua Mặt Trăng?',
+                options: ['A. Vì Vua Mặt Trời, Mặt Trăng dùng thần thông đánh trả quyết liệt.', 'B. Vì A-tu-la bị mất hết phép thuật khi lên trời.', 'C. Nhờ oai đức, thần lực, thọ mạng dài của Vua Mặt Trời, Mặt Trăng cộng với phước đức của chúng sanh tại nơi đó trợ lực bảo hộ.', 'D. Vì Vua Mặt Trời, Mặt Trăng trốn vào hang động.'],
+                correct: 'C',
+                explanation: 'Sức mạnh của bạo lực (A-tu-la) không thể thắng được sức mạnh của phước đức. Vua Mặt Trời/Mặt Trăng an toàn là nhờ oai lực thanh tịnh của bản thân cộng hưởng với phước báu vô lượng của chúng sanh hướng về.'
+            },
+            {
+                id: 'q110',
+                question: 'Câu 110: Ác ma Ba Tuần thường sử dụng thủ đoạn vi tế nào để mê loạn tâm ý, lôi kéo người tu sập bẫy?',
+                options: ['A. Dùng sức mạnh bạo lực để đe dọa, ép buộc.', 'B. Rình rập sơ hở nơi sáu căn, nắm bắt ý niệm/sở thích của hành giả để biến hiện lục trần (sắc, thanh, hương, vị, xúc, pháp) cực kỳ hấp dẫn để câu nhử.', 'C. Gây ra các cơn bão lớn làm sập chùa chiền.', 'D. Làm cho người tu bị mất hoàn toàn trí nhớ.'],
+                correct: 'B',
+                explanation: 'Ma Ba Tuần rất xảo quyệt, không dùng bạo lực mà thường đánh vào điểm yếu tâm lý. Nó rình rập ở 6 giác quan, thấy hành giả thích gì liền biến hiện cảnh giới (trần) tương ứng để nhử mồi, làm mất chánh niệm.'
+            },
+            {
+                id: 'q111',
+                question: 'Câu 111: Hai sức mạnh (hai lực) cốt lõi nào đã giúp Đức Phật kham nhẫn 6 năm khổ hạnh và hàng phục ma oán để thành tựu Vô thượng Chánh đẳng Chánh giác?',
+                options: ['A. Thần thông lực và Phước báu lực.', 'B. Tín lực và Tấn lực.', 'C. Từ bi lực và Hỷ xả lực.', 'D. Nhẫn lực (sự kham nhẫn/chịu đựng) và Tư duy lực (tư duy chánh pháp).'],
+                correct: 'D',
+                explanation: 'Nhẫn lực giúp Thế Tôn chịu đựng tột cùng sự khắc nghiệt của thể xác và sự phá hoại của ác ma. Tư duy lực (quán chiếu duyên khởi, Tứ đế) giúp Ngài cắt đứt vô minh từ bên trong để chứng quả Chánh giác.'
+            },
+            {
+                id: 'q112',
+                question: 'Câu 112: Trong kinh, Đức Phật dùng hình ảnh "con quạ ăn đồ dơ rồi vội quẹt mỏ" để ví dụ cho hạng người nào trong quá trình tu tập?',
+                options: ['A. Người siêng năng thức khuya dậy sớm.', 'B. Kẻ phạm lỗi nhưng không biết hổ thẹn, tự mãn với lỗi lầm.', 'C. Người tạo lỗi nhưng biết hổ thẹn (có tàm quý), hối lỗi, sợ người khác chê trách nên quay về sửa mình.', 'D. Người xuất gia nhưng lén lút ăn phi thời.'],
+                correct: 'C',
+                explanation: 'Khác với con heo dầm mình trong bùn nhơ (kẻ trơ trẽn), con quạ lỡ ăn đồ dơ liền biết quẹt mỏ làm sạch. Đây là ví dụ cho người có tạo ác nghiệp nhưng biết tàm quý (hổ thẹn), lập tức sám hối và sửa sai.'
+            },
+            {
+                id: 'q113',
+                question: 'Câu 113: Hình ảnh "con lừa đi lạc vào đàn bò, tự xưng ta là bò (nhưng tai, sừng, tiếng kêu đều khác)" ám chỉ hạng người nào trong Tăng đoàn?',
+                options: ['A. Người ngoại đạo lén lút vào chùa trộm cắp.', 'B. Người xuất gia mang hình tướng Sa môn (cạo tóc, mặc y) nhưng không phòng hộ các căn, chạy theo trần cảnh, mất oai nghi và chánh hạnh.', 'C. Cư sĩ tại gia thích mặc áo của người xuất gia.', 'D. Người mới đi tu còn chậm chạp, chưa thuộc kinh điển.'],
+                correct: 'B',
+                explanation: 'Đó là hạng người "hình tướng Tỳ kheo nhưng tâm trí phàm phu". Tuy cạo tóc đắp y (như lừa đứng trong đàn bò) nhưng lối sống buông lung, không thu nhiếp lục căn, thiếu vắng oai nghi và giới đức của bậc tu hành.'
+            },
+            {
+                id: 'q114',
+                question: 'Câu 114: Nguyên nhân cốt lõi nào khiến Đề Bà Đạt Đa từ một người có thần thông lại khởi ác tâm, tạo tội ngũ nghịch (phá Tăng, làm Phật chảy máu...) và đọa địa ngục?',
+                options: ['A. Do bị người khác xúi giục, ép buộc.', 'B. Do tham đắm lợi dưỡng, sự cúng dường quá lớn sinh ra tâm ương ngạnh, kiêu mạn và tà kiến phủ nhận nhân quả.', 'C. Do không được Đức Phật truyền dạy thiền định.', 'D. Do lười biếng, ham ngủ nghỉ.'],
+                correct: 'B',
+                explanation: 'Khi được Thái tử A Xà Thế cúng dường quá hậu hĩnh, Đề Bà Đạt Đa bị lợi dưỡng làm mờ mắt, sinh ra ngã mạn muốn lãnh đạo Tăng đoàn thay Phật, từ đó nảy sinh tà kiến và gây ra tội tày trời.'
+            },
+            {
+                id: 'q115',
+                question: 'Câu 115: Trong bài kinh Tạo Phước, Đức Phật khuyên các hành giả phải có thái độ như thế nào đối với việc tạo phước báu?',
+                options: ['A. Không nên sợ phước mà phải sợ thiếu phước, vì phước là nguồn gốc an lạc và là "lá chắn" bảo vệ người tu trước mọi chướng duyên.', 'B. Người xuất gia không cần làm phước, chỉ cần ngồi thiền là đủ.', 'C. Nên sợ phước vì có phước sẽ dễ sinh kiêu mạn, cản trở giải thoát.', 'D. Làm phước chỉ cốt để kiếp sau được giàu có, nổi tiếng.'],
+                correct: 'A',
+                explanation: 'Đức Phật dạy "chớ sợ phước báu". Phước báu không chỉ đem lại an lạc mà còn là lá chắn hữu hiệu ngăn cản ma oán, giảm thiểu nghịch cảnh, hỗ trợ đắc lực cho hành giả trên lộ trình tu tập giải thoát.'
+            },
+            {
+                id: 'q116',
+                question: 'Câu 116: Theo phẩm Hữu Vô, 62 tà kiến của ngoại đạo thời bấy giờ đều bắt nguồn từ hai cực đoan kiến chấp căn bản nào mà hành giả cần xả bỏ?',
+                options: ['A. Chấp thiện và Chấp ác.', 'B. Chấp có (Hữu kiến/Thường kiến) và Chấp không (Vô kiến/Đoạn kiến).', 'C. Chấp sinh và Chấp tử.', 'D. Chấp nam và Chấp nữ.'],
+                correct: 'B',
+                explanation: 'Mọi tà kiến đều loanh quanh trong 2 thái cực: Hữu kiến (cho rằng vạn vật là có thật, thường hằng bất biến) và Vô kiến (cho rằng chết là hết, phủ nhận luân hồi nhân quả). Đạo Phật là con đường Trung đạo xả bỏ cả hai.'
+            },
+            {
+                id: 'q117',
+                question: 'Câu 117: Đặc tính nào của "Tâm" được Đức Phật ví như "con khỉ, con vượn truyền cành" (buông cành này, chụp cành kia)?',
+                options: ['A. Tâm luôn luôn tĩnh lặng, an định nếu ở một mình.', 'B. Tính vô thường, biến chuyển cực kỳ mau lẹ, niệm trước và niệm sau thay đổi liên tục khiến phàm phu khó quan sát.', 'C. Khả năng ghi nhớ kinh điển một cách dai dẳng.', 'D. Tính kiên trì, làm việc không biết mệt mỏi.'],
+                correct: 'B',
+                explanation: 'Ví dụ con vượn rất sinh động: nó vừa buông cành này ra là lập tức nắm bắt lấy cành khác. Tâm ý phàm phu cũng vậy, vô thường, lăng xăng, sinh diệt và bám víu trần cảnh không dừng nghỉ dù chỉ một sát na.'
+            },
+            {
+                id: 'q118',
+                question: 'Câu 118: Để sự cúng dường của thí chủ không bị uổng phí và người cúng đạt quả báo lớn, Đức Phật dạy vị Tỳ kheo (người thọ thí) phải có trách nhiệm gì?',
+                options: ['A. Chỉ cần nhận đồ cúng dường và im lặng bỏ đi.', 'B. Phải làm việc nhà giúp lại cho thí chủ để trả nợ.', 'C. Phải trải tâm từ, giảng dạy chánh pháp (pháp thí) và hướng dẫn các hạnh thanh tịnh cho người thí chủ.', 'D. Phải trả lại bằng một số tiền tương ứng.'],
+                correct: 'C',
+                explanation: 'Đây là sự tương giao tuyệt đẹp trong Phật giáo: Thí chủ nuôi dưỡng sắc thân vị Tỳ kheo bằng tài thí (cơm ăn, áo mặc); ngược lại, vị Tỳ kheo phải nuôi dưỡng tuệ mạng của thí chủ bằng pháp thí.'
+            },
+            {
+                id: 'q119',
+                question: 'Câu 119: Theo lời Thầy giáo thọ nhấn mạnh trong bài giảng, vai trò của người cư sĩ (Ưu bà tắc, Ưu bà di) đối với Phật giáo không chỉ đơn thuần là cúng dường vật chất mà còn là gì?',
+                options: ['A. Chỉ đến chùa để cầu xin tài lộc, bình an.', 'B. Cạnh tranh quyền lực với người xuất gia.', 'C. Hộ đạo, bảo vệ nơi tu tập, chết sống để duy trì chánh pháp và tu hành ngay trong chánh pháp.', 'D. Đi phê phán, chỉ trích lỗi lầm của các Tôn giáo khác.'],
+                correct: 'C',
+                explanation: 'Người cư sĩ là những hộ pháp đắc lực. Vai trò của họ vô cùng quan trọng: không chỉ hộ trì Tăng bảo tu học mà còn bảo vệ tự viện trong những giai đoạn khó khăn, đồng thời tự mình thọ trì và thực hành chánh pháp.'
+            },
+            {
+                id: 'q120',
+                question: 'Câu 120: Việc Đức Phật thiết lập và vinh danh các bậc đệ tử xuất sắc trong cả bốn chúng (Tỳ kheo, Tỳ kheo ni, Nam cư sĩ, Nữ cư sĩ) nhằm khẳng định nguyên lý căn bản nào của Phật pháp?',
+                options: ['A. Người cư sĩ tại gia luôn thấp kém và không thể chứng Thánh quả.', 'B. Nữ giới tu hành sẽ chậm đắc đạo hơn nam giới.', 'C. Sự bình đẳng về cứu cánh giải thoát: Bất kỳ ai (tại gia hay xuất gia, nam hay nữ) hành trì trọn vẹn Tín - Giới - Định - Tuệ đều có thể chứng đắc Thánh quả.', 'D. Chỉ những người tu khổ hạnh ép xác mới được Phật vinh danh.'],
+                correct: 'C',
+                explanation: 'Tứ chúng là minh chứng hùng hồn nhất cho sự bình đẳng trong đạo Phật. Quả vị giác ngộ không phân biệt giai cấp, giới tính hay hình tướng, miễn là người đó đi trọn vẹn lộ trình Bát Chánh Đạo.'
+            },
+            ,{
+                id: 'q121',
+                question: 'Câu 121: Đức Phật dùng hình ảnh "con khỉ, con vượn truyền cành" (buông cành này liền chụp cành kia) để miêu tả đặc tính nào của Tâm?',
+                options: ['A. Tâm luôn luôn tĩnh lặng và an định nếu ở một mình.', 'B. Tính vô thường, biến chuyển cực kỳ mau lẹ, niệm trước và niệm sau thay đổi liên tục khiến phàm phu khó quan sát.', 'C. Tính kiên trì, theo đuổi mục tiêu không biết mệt mỏi.', 'D. Khả năng ghi nhớ kinh điển một cách dai dẳng.'],
+                correct: 'B',
+                explanation: 'Tâm được Thầy giáo thọ phân tích như khỉ, vượn vừa buông cành này liền chụp cành kia, thể hiện đặc tính vô thường, biến chuyển cực kỳ mau lẹ, niệm trước và niệm sau thay đổi liên tục khiến phàm phu khó mà nắm bắt, quan sát. '
+            },
+            {
+                id: 'q122',
+                question: 'Câu 122: Theo phân tích của Thầy giáo thọ, vì sao "cận tử nghiệp" (tâm niệm lúc sắp lâm chung) lại có vai trò vô cùng quan trọng đối với một chúng sanh?',
+                options: ['A. Vì sát na tâm cuối cùng đó rất nhạy bén, nó sẽ bám víu (vinh vào) những niệm thiện hoặc ác nổi trội nhất, từ đó quyết định trực tiếp cảnh giới tái sanh tương ưng.', 'B. Vì tâm cận tử giúp người chết có thể mang theo toàn bộ tài sản lúc còn sống.', 'C. Vì tâm cận tử không bị ảnh hưởng bởi những việc làm lúc sinh thời.', 'D. Vì tâm cận tử chỉ xuất hiện ở những bậc Thánh, phàm phu không có.'],
+                correct: 'A',
+                explanation: 'Sát na tâm cuối cùng (cận tử nghiệp) rất nhạy bén. Nó sẽ bắt cảnh và bám víu vào những gì nổi trội nhất trong đời sống hàng ngày. Nếu ôm tâm ác sẽ sinh thú vào ác đạo; nếu khởi niệm thanh tịnh, thiện lành sẽ được sanh về cảnh giới an lành.'
+            },
+            {
+                id: 'q123',
+                question: 'Câu 123: Nguyên nhân trực tiếp nào làm cho năm triền cái (dục, sân, hôn trầm, trạo cử, nghi) "chưa sanh sẽ sanh, đã sanh sẽ tăng trưởng mạnh mẽ"?',
+                options: ['A. Do không thường xuyên bố thí tài sản.', 'B. Do ăn uống phi thời (không đúng giờ).', 'C. Do loạn tưởng (tâm phóng dật, thiếu chánh niệm).', 'D. Do không sống ở nơi rừng vắng (A Lan Nhã).'],
+                correct: 'C',
+                explanation: 'Trong kinh chỉ rõ, chính "loạn tưởng" (tâm phóng dật, không chánh niệm) là nguyên nhân cốt lõi làm cho năm triền cái chưa sanh sẽ sanh, đã sanh thì sẽ tăng trưởng mạnh mẽ, ngăn cản đạo nghiệp.'
+            },
+            {
+                id: 'q124',
+                question: 'Câu 124: Trong phẩm Hộ Tâm, pháp duy nhất được Đức Phật khẳng định là "căn bản của sự hộ tâm", có thể đưa đến chứng quả Sa-môn và Niết Bàn là pháp nào?',
+                options: ['A. Ép xác khổ hạnh đến cùng cực.', 'B. Không buông lung (khéo hộ trì tâm ý, thận trọng tỉnh giác trước dục lậu, hữu lậu, vô minh lậu).', 'C. Thường xuyên tranh luận để bảo vệ giáo pháp.', 'D. Xây dựng thật nhiều tự viện to lớn.'],
+                correct: 'B',
+                explanation: '"Không buông lung" chính là sự khéo hộ trì tâm ý, thận trọng tỉnh giác trước các lậu hoặc (dục lậu, hữu lậu, vô minh lậu). Đây là căn bản của sự hộ tâm, là con đường trực tiếp đưa đến thần thông, chứng quả Sa-môn và Niết Bàn.'
+            },
+            {
+                id: 'q125',
+                question: 'Câu 125: Để sự cúng dường của người cư sĩ (thí chủ) không bị uổng phí và mang lại quả báo lớn nhất, vị Tỳ kheo (người thọ thí) có trách nhiệm gì?',
+                options: ['A. Phải làm việc nhà giúp lại cho thí chủ để trả nợ.', 'B. Chỉ cần nhận đồ cúng dường và im lặng rời đi.', 'C. Phải trả lại cho thí chủ bằng một số tiền tương ứng.', 'D. Phải trải tâm từ, giảng dạy chánh pháp (pháp thí) và hướng dẫn các hạnh thanh tịnh cho thí chủ.'],
+                correct: 'D',
+                explanation: 'Mối quan hệ "dưỡng đạo": Thí chủ cúng dường tứ sự; ngược lại, vị Tỳ kheo thọ thí phải trải tâm từ, giảng dạy chánh pháp (pháp thí) và hướng dẫn hạnh thanh tịnh để vật thí không uổng phí và thí chủ đạt quả báo lớn nhất.'
+            },
+            {
+                id: 'q126',
+                question: 'Câu 126: Trong ba loại lậu hoặc (Dục lậu, Hữu lậu, Vô minh lậu), "Vô minh lậu" được Thầy giáo thọ giải thích mang ý nghĩa vi tế nào?',
+                options: ['A. Là sự rỉ chảy phiền não do tham đắm sắc, thanh, hương, vị, xúc.', 'B. Là sự rỉ chảy phiền não do khao khát địa vị, muốn tồn tại và tái sanh.', 'C. Là sự rỉ chảy phiền não do không thấy biết như thật (hiểu sai pháp, không rõ Tứ Đế, thậm chí tu mà không biết mình đang tu gì).', 'D. Là sự rỉ chảy phiền não do tính kiêu căng, ngã mạn khinh thường người khác.'],
+                correct: 'C',
+                explanation: 'Vô minh lậu là phiền não ngấm ngầm rỉ chảy do sự si mê, không thấy biết như thật (không rõ Tứ đế, vô thường, vô ngã), hiểu sai pháp, thậm chí tu mà không biết mình đang tu pháp gì.'
+            },
+            {
+                id: 'q127',
+                question: 'Câu 127: Trưởng giả Cấp Cô Độc được Đức Phật khen ngợi trong hạnh bố thí vì ông đã thực hành với tâm thái như thế nào (đúng với tâm Bồ Tát)?',
+                options: ['A. Bố thí với tâm bình đẳng, không phân biệt sang hèn, thân sơ, thậm chí xót thương bố thí cho cả súc vật.', 'B. Chỉ cúng dường cho những vị Tỳ kheo đã chứng A La Hán.', 'C. Bố thí thật nhiều tiền bạc cốt để được người đời tung hô, nổi tiếng.', 'D. Bố thí với mong cầu đời sau được làm Vua cõi trời.'],
+                correct: 'A',
+                explanation: 'Trưởng giả Cấp Cô Độc bố thí với tâm Bồ tát, tức là bố thí bình đẳng, không phân biệt sang hèn, thân sơ, thậm chí bố thí cho cả súc vật vì thấy rõ chúng sanh đều nhờ thức ăn mà tồn tại.'
+            },
+            {
+                id: 'q128',
+                question: 'Câu 128: Trong bài kinh "Tạo phước", Đức Phật đưa ra lời khuyên cốt lõi nào đối với người tu hành về việc tạo phước báu?',
+                options: ['A. Nên sợ phước vì có phước sẽ dễ sinh kiêu mạn, cản trở sự giải thoát.', 'B. Không nên sợ phước mà phải sợ thiếu phước, vì phước là nguồn gốc an lạc và là "lá chắn" bảo vệ hành giả trước mọi chướng duyên.', 'C. Người xuất gia không cần làm phước, chỉ cần ngồi thiền là đủ.', 'D. Cần chối bỏ mọi phước báu để mau chóng chứng đắc quả vị.'],
+                correct: 'B',
+                explanation: 'Đức Phật dạy "không nên sợ phước mà phải sợ thiếu phước". Phước báu không chỉ là nguồn gốc an lạc mà còn là "lá chắn" vững chắc bảo vệ người tu trước mọi chướng duyên, ma oán trong quá trình hành đạo.'
+            },
+            {
+                id: 'q129',
+                question: 'Câu 129: Trong bài kinh "Hai Tướng", người thiếu trí (người ngu) thường có hai biểu hiện đặc trưng nào trong đời sống và tu học?',
+                options: ['A. Khoe khoang và chê bai người khác.', 'B. Thích ngủ nghỉ và ăn nhiều.', 'C. Gian dối và mang tâm tà kiến.', 'D. Làm điều không nên làm (việc không được phép làm) và bỏ dở việc đáng làm (không kiên trì).'],
+                correct: 'D',
+                explanation: 'Người ngu (thiếu trí) có 2 tướng: Làm điều không nên làm (phi pháp) và bỏ dở việc đáng làm (không kiên trì). Ngược lại, người trí không làm điều sai trái và luôn kiên trì đến cùng những việc thiện cần làm.'
+            },
+            {
+                id: 'q130',
+                question: 'Câu 130: Vì sao Đức Phật khẳng định "Bố thí pháp" (Pháp thí) cao quý và thù thắng hơn "Bố thí vật" (Tài thí)?',
+                options: ['A. Vì pháp thí hoàn toàn không tốn kém tiền bạc.', 'B. Vì tài thí dễ làm tăng trưởng tâm kiêu mạn, còn pháp thí thì không.', 'C. Vì tài thí chỉ giúp duy trì đời sống tạm thời hiện tại, còn pháp thí giúp chuyển hóa nội tâm, đoạn trừ vô minh và hướng đến giải thoát lâu dài.', 'D. Vì chỉ có bậc xuất gia mới có thể thực hành được pháp thí.'],
+                correct: 'C',
+                explanation: 'Tài thí chỉ giải quyết được đời sống hiện tại (đói, khát). Pháp thí mới trao cho chúng sanh phương pháp tự chuyển hóa phiền não, đoạn trừ vô minh và hướng đến giải thoát sanh tử luân hồi lâu dài.'
+            },
+            {
+                id: 'q131',
+                question: 'Câu 131: Khái niệm "Nhất nhập đạo" (một lối duy nhất vào đạo) trong kinh Tăng Nhất A Hàm được Đức Phật chỉ cho phương pháp tu tập trọng yếu nào?',
+                options: ['A. Tụng kinh và bái sám liên tục ngày đêm.', 'B. Diệt trừ 5 triền cái và chuyên tâm tu tập Bốn niệm xứ (Tứ niệm xứ).', 'C. Bố thí toàn bộ tài sản cho người nghèo.', 'D. Tu tập các phép thần thông biến hóa.'],
+                correct: 'B',
+                explanation: '"Nhất nhập đạo" (Lối vào đạo duy nhất) được khẳng định là việc diệt trừ 5 triền cái và tu tập Bốn niệm xứ (Tứ niệm xứ: Quán Thân, Thọ, Tâm, Pháp) để thanh tịnh các hành, chứng ngộ Niết Bàn. '
+            },
+            {
+                id: 'q132',
+                question: 'Câu 132: Khi dạy Tôn giả La Vân tu tập Tứ Vô Lượng Tâm, Đức Phật hướng dẫn dùng "Tâm Xả" để đối trị trực tiếp với chướng ngại phiền não nào?',
+                options: ['A. Sân hận.', 'B. Não hại.', 'C. Ganh ghét.', 'D. Kiêu mạn.'],
+                correct: 'D',
+                explanation: 'Để đối trị phiền não, Phật dạy Tôn giả La Vân: Tu Từ trừ sân hận; tu Bi trừ não hại; tu Hỷ trừ ganh ghét; và tu Xả để trừ kiêu mạn.'
+            },
+            {
+                id: 'q133',
+                question: 'Câu 133: Theo định nghĩa chuẩn mực trong kinh Tăng Nhất A Hàm, một người như thế nào mới chính thức được gọi là "Cư sĩ" (Ưu bà tắc/Ưu bà di)?',
+                options: ['A. Là người thường xuyên đi chùa cúng dường tiền bạc.', 'B. Là người đã thọ Tam Quy (Quy y Tam Bảo) và thọ trì Ngũ Giới.', 'C. Là người ăn chay trường và tụng kinh mỗi ngày.', 'D. Là người xuất gia nhưng tu tại nhà.'],
+                correct: 'B',
+                explanation: 'Kinh Tăng Nhất A Hàm định nghĩa rất rõ ràng: Cư sĩ (Ưu bà tắc/Ưu bà di) là người đã thọ Tam Quy (Quy y Tam bảo) và thọ trì Ngũ giới.'
+            },
+            {
+                id: 'q134',
+                question: 'Câu 134: Tôn giả Ma Ha Ca Chiên Diên giải thích tiêu chuẩn đích thực của bậc "Lão niên" (bậc trưởng thượng đáng kính) trong đạo Phật là gì?',
+                options: ['A. Là người xuất thân từ dòng dõi quý tộc, quyền thế.', 'B. Là người sống thọ trên 80 tuổi.', 'C. Là người tuy tuổi còn trẻ nhưng giữ gìn phạm hạnh thanh tịnh, chững chạc trong giới luật, không hành điều xấu ác.', 'D. Là người xây dựng được nhiều chùa to, tượng Phật lớn.'],
+                correct: 'C',
+                explanation: 'Lão niên hay tráng niên không nằm ở tuổi tác cao. Già mà buông lung làm ác thì vẫn chỉ là "tráng niên". Trẻ tuổi mà giữ trọn phạm hạnh thanh tịnh, chững chạc giới luật thì xứng đáng được suy tôn là "lão niên" (bậc trưởng thượng).'
+            },
+            {
+                id: 'q135',
+                question: 'Câu 135: Đức Phật dùng hình ảnh "hạt giống đắng gieo vào đất tốt, quả sinh ra vẫn mang vị đắng" để ví dụ cho sự nguy hiểm của pháp nào?',
+                options: ['A. Sự lười biếng ham ngủ.', 'B. Tà kiến (vì nó kéo theo toàn bộ thân, khẩu, ý hướng về điều xấu, sai lệch).', 'C. Lời nói dối (Vọng ngữ).', 'D. Tâm ganh ghét đố kỵ.'],
+                correct: 'B',
+                explanation: 'Tà kiến bị ví như "hạt giống đắng". Dù hạt đắng đó có gieo vào vùng đất tốt, màu mỡ đến đâu thì quả sinh ra vẫn mang vị đắng. Tà kiến sẽ kéo theo toàn bộ thân, khẩu, ý đi sai lệch vào điều bất thiện.'
+            },
+            ,{
+                id: 'q136',
+                question: 'Câu 136: Trong Kinh Tăng Nhất A Hàm, một nữ cư sĩ (ưu bà di) đã dạy con trai và con gái mình nếu phát tâm xuất gia thì nên noi gương tu học theo những bậc Thượng thủ nào trong Tăng đoàn và Ni đoàn?',
+                options: ['A. Nam noi gương ngài Ca Diếp, nữ noi gương ngài Liên Hoa Sắc.', 'B. Nam noi gương Tôn giả Xá Lợi Phất và Mục Kiền Liên; Nữ noi gương Tỳ kheo ni Sấm Ma và Ưu Bát Hoa Sắc.', 'C. Nam noi gương ngài A Nan; Nữ noi gương ngài Đại Ái Đạo Cù Đàm Di.', 'D. Cả nam và nữ đều chỉ noi gương Đức Phật Thích Ca.'],
+                correct: 'B',
+                explanation: 'Nữ cư sĩ phát nguyện cho con trai noi gương Tôn giả Xá Lợi Phất và Mục Kiền Liên (hai vị Thượng thủ thanh văn trọn vẹn trí tuệ và thần thông); con gái noi gương Tỳ kheo ni Sấm Ma và Ưu Bát Hoa Sắc (hai vị Thượng thủ ni xuất sắc nhất).'
+            },
+            {
+                id: 'q137',
+                question: 'Câu 137: Thầy giáo thọ phân tích, trong định chế của Phật giáo, khái niệm "Tăng đoàn" để biểu trưng cho sự hòa hợp và thanh tịnh yêu cầu số lượng tối thiểu là bao nhiêu vị?',
+                options: ['A. 2 vị trở lên.', 'B. 3 vị trở lên.', 'C. 4 vị trở lên.', 'D. 10 vị trở lên.'],
+                correct: 'C',
+                explanation: 'Trong giới luật Phật giáo, một tổ chức được gọi là Tăng đoàn (Sangha) có khả năng thực hiện các Tăng sự biểu trưng cho sự hòa hợp và thanh tịnh phải có số lượng tối thiểu từ 4 vị Tỳ kheo (đã thọ Cụ túc giới) trở lên.'
+            },
+            {
+                id: 'q138',
+                question: 'Câu 138: Khi giải thích với Phạm chí về "Ngô" và "Ngã" (Nguồn gốc sinh ra kiết sử kiêu mạn), Tôn giả A Na Luật đã định nghĩa hai khái niệm này như thế nào?',
+                options: ['A. Ngô là sự ích kỷ, Ngã là lòng tham lam.', 'B. Ngô là thần thức (tâm), Ngã là toàn bộ hình thể (thân).', 'C. Ngô là người khác, Ngã là bản thân mình.', 'D. Cả Ngô và Ngã đều chỉ chung cho cái bóng của con người.'],
+                correct: 'B',
+                explanation: 'Tôn giả giải thích rất rõ: "Ngô" chỉ cho thần thức (phần Tâm), còn "Ngã" chỉ cho toàn bộ hình thể (phần Thân). Sự bám víu, chấp chặt vào thân tâm này là gốc rễ sinh ra kiết sử kiêu mạn.'
+            },
+            {
+                id: 'q139',
+                question: 'Câu 139: Theo bài giảng của Thầy giáo thọ, khái niệm "Nghiệp cũ" (Quả) và "Nghiệp mới" (Nhân) được phân định như thế nào trong đời sống hiện tại?',
+                options: ['A. Nghiệp cũ là kiếp trước; Nghiệp mới là kiếp sau.', 'B. Nghiệp cũ là những cảm thọ, hoàn cảnh đang phải đón nhận hiện tại; Nghiệp mới là những suy nghĩ, lời nói và hành động đang tạo tác ngay bây giờ.', 'C. Nghiệp cũ là lỗi lầm của cha mẹ để lại; Nghiệp mới là lỗi lầm của con cái.', 'D. Nghiệp cũ và Nghiệp mới là hoàn toàn giống nhau, không thể phân biệt.'],
+                correct: 'B',
+                explanation: 'Nghiệp cũ chính là những quả báo, hoàn cảnh, cảm thọ mà ta đang phải nhận lãnh ngay trong giây phút hiện tại. Nghiệp mới là thái độ, suy nghĩ, lời nói và hành động phản ứng lại hoàn cảnh đó ngay bây giờ.'
+            },
+            {
+                id: 'q140',
+                question: 'Câu 140: Quả vị Tư Đà Hàm (Nhị quả) trong lộ trình Tứ quả Thanh văn được đánh dấu bằng sự đoạn trừ và chuyển hóa những kiết sử nào?',
+                options: ['A. Đoạn tận hoàn toàn 5 hạ phần kiết sử.', 'B. Dứt sạch hoàn toàn mọi lậu hoặc (Vô minh, trạo cử, mạng...).', 'C. Đoạn trừ 3 kiết sử đầu (Thân kiến, Giới cấm thủ, Nghi) và làm muội lược (làm mỏng/yếu đi) Tham dục và Sân hận.', 'D. Chỉ đoạn trừ duy nhất Tham dục.'],
+                correct: 'C',
+                explanation: 'Quả vị Tư Đà Hàm (Nhị quả) đạt được khi hành giả đã dứt trừ 3 kiết sử đầu (Thân kiến, Giới cấm thủ, Nghi) đồng thời làm muội lược (mỏng nhẹ/yếu đi) gốc rễ của Tham dục và Sân hận. '
+            },
+            {
+                id: 'q141',
+                question: 'Câu 141: Khi hành trì Tứ Niệm Xứ, khái niệm quán "Nội thân" và "Ngoại thân" được Thầy giáo thọ giải thích chính xác là gì?',
+                options: ['A. Nội thân là bên trong cơ thể (lục phủ ngũ tạng); Ngoại thân là bên ngoài da.', 'B. Nội thân là thân thể của chính mình; Ngoại thân là thân thể của tha nhân (người khác).', 'C. Nội thân là suy nghĩ trong đầu; Ngoại thân là hành động bên ngoài.', 'D. Nội thân là người xuất gia; Ngoại thân là người tại gia.'],
+                correct: 'B',
+                explanation: 'Trong Tứ Niệm Xứ, quán "Nội thân" là quán sát sự sinh diệt trên chính thân thể của mình; quán "Ngoại thân" là quán sát sự sinh diệt trên thân thể của tha nhân (người khác) để phá vỡ ngã chấp một cách triệt để.'
+            },
+            {
+                id: 'q142',
+                question: 'Câu 142: Trong bài kinh "Đường dữ", Đức Phật chỉ ra nguyên nhân cốt lõi nào khiến một người dù có tu tập nhưng vẫn không thể thoát được đường dữ (đọa lạc)?',
+                options: ['A. Do không có nhiều tiền để bố thí.', 'B. Do không có sự thông minh, lanh lẹ.', 'C. Do không có niềm tin tha thiết với chánh pháp.', 'D. Do không được xây chùa to, tháp lớn.'],
+                correct: 'C',
+                explanation: 'Đức Phật dạy, người tu mà thiếu đi đức Tín (niềm tin tha thiết, kiên cố vào Tam Bảo và lý nhân quả) thì mọi pháp tu đều không có nền tảng rễ sâu, rất dễ thối thất và rốt cuộc không thể thoát khỏi các đường dữ (ác đạo).'
+            },
+            {
+                id: 'q143',
+                question: 'Câu 143: Trong bài kinh "Tạo phước", Đức Phật kể lại tiền thân của Ngài nhờ tu tập Tâm Từ và siêng năng tạo phước đã từng trải qua nhiều kiếp tái sinh làm vị gì?',
+                options: ['A. Làm vị Tỳ kheo tu khổ hạnh.', 'B. Làm Vua Chuyển Luân Thánh Vương.', 'C. Làm Ngọc Hoàng Thượng Đế.', 'D. Làm một người nông dân nghèo khổ nhưng lương thiện.'],
+                correct: 'B',
+                explanation: 'Đức Phật kể lại nhờ tu tập Tâm Từ bao la và tạo phước rộng lớn, trong quá khứ tiền thân của Ngài đã nhiều kiếp tái sanh làm Phạm Thiên và Vua Chuyển Luân Thánh Vương (bậc minh quân cai trị thiên hạ bằng chánh pháp).'
+            },
+            {
+                id: 'q144',
+                question: 'Câu 144: Theo bài kinh "Hai hạng người", Đức Phật khẳng định hai hạng người nào được xem là "rất khó gặp ở đời" (hy hữu)?',
+                options: ['A. Người giàu có và người quyền lực.', 'B. Người sống thọ 100 tuổi và người không bao giờ ốm đau.', 'C. Người khéo thuyết giảng chánh pháp và người khéo nghe pháp rồi thọ trì phụng hành.', 'D. Người xây nhiều tự viện và người cúng dường nhiều tài sản.'],
+                correct: 'C',
+                explanation: 'Đức Phật nhấn mạnh hai hạng người vô cùng hy hữu (khó gặp): Một là người khéo léo thuyết giảng chánh pháp đúng như thật; Hai là người khéo nghe hiểu pháp và chân thành y giáo phụng hành.'
+            },
+            {
+                id: 'q145',
+                question: 'Câu 145: Thầy giáo thọ nhấn mạnh rằng, giáo pháp Phật giáo Nguyên thủy không có các "Tông phái" cố định, mà mọi người tu tập dù theo hình thức nào cũng tuyệt đối không được rời xa nền tảng cốt lõi nào?',
+                options: ['A. Chú thuật và Thần thông.', 'B. Bát Chánh Đạo và Tam vô lậu học (Giới - Định - Tuệ).', 'C. Các nghi lễ cúng bái cầu an, cầu siêu.', 'D. Việc xây dựng cơ sở vật chất khang trang.'],
+                correct: 'B',
+                explanation: 'Dù Phật giáo sau này phát triển nhiều hình thức, nhưng nền tảng tuyệt đối không thể rời xa chính là Bát Chánh Đạo và Tam vô lậu học (Giới - Định - Tuệ). Nếu xa rời nền tảng này thì không còn là đạo giải thoát. '
+            },
+            {
+                id: 'q146',
+                question: 'Câu 146: Khi Tôn giả Nan Đà bị Thiên Ma biến hiện sắc đẹp và ngũ dục để dụ dỗ, ngài đã đáp lại bằng bài kệ khẳng định điều gì để Thiên Ma phải buồn bã rút lui?',
+                options: ['A. Khẳng định ngài sẽ dùng thần thông để tiêu diệt Ma vương.', 'B. Khẳng định ngài đã vượt qua hố dục, đoạn tận tham sân si, chỉ vui trong pháp chân như.', 'C. Khẳng định ngài sẽ gọi các vị Phạm Thiên đến giúp đỡ.', 'D. Khẳng định ngài đã quên hết quá khứ.'],
+                correct: 'B',
+                explanation: 'Trước sự cám dỗ của Thiên Ma, ngài Nan Đà (lúc này đã tu tập dứt sạch lậu hoặc) dõng dạc đọc bài kệ khẳng định bản thân đã vượt qua hố sâu dục vọng, đoạn tận gốc rễ tham sân si và chỉ còn tìm thấy niềm vui tuyệt đối trong chân lý.'
+            },
+            {
+                id: 'q147',
+                question: 'Câu 147: Trong bài kinh Tàm Quý, Đức Phật khẳng định nếu thế gian thiếu đi hai pháp "Hổ thẹn và Sợ hãi tội lỗi" (Tàm và Quý) thì hậu quả nghiêm trọng nào sẽ xảy ra?',
+                options: ['A. Thế giới sẽ bị động đất và lũ lụt.', 'B. Con người sẽ không còn phân biệt được luân thường đạo lý, không biết kính trên nhường dưới, anh em cha mẹ.', 'C. Mọi người sẽ trở nên nghèo đói.', 'D. Con người sẽ không thể làm giàu được nữa.'],
+                correct: 'B',
+                explanation: 'Tàm (Hổ thẹn) và Quý (Sợ hãi tội lỗi) là hai pháp hộ trì thế gian. Nếu thiếu nó, con người sẽ hành xử bản năng như loài vật, luân thường đạo lý đảo lộn, không còn biết kính trên nhường dưới, không phân biệt cha mẹ, anh em.'
+            },
+            {
+                id: 'q148',
+                question: 'Câu 148: Trong bài kinh "Sư tử và Dê", hình ảnh "người như Sư tử" khi nhận được sự cúng dường lợi dưỡng sẽ có thái độ ứng xử như thế nào?',
+                options: ['A. Khước từ mọi sự cúng dường, bỏ vào rừng sâu.', 'B. Được cúng dường thì thọ dụng mà không tham đắm (không loạn tưởng); không được cúng dường cũng không sinh phiền não, bực dọc.', 'C. Rất tự cao, khoe khoang với mọi người vì mình có phước.', 'D. Chỉ nhận cúng dường của những người giàu có.'],
+                correct: 'B',
+                explanation: 'Người tu hành vững chãi như Sư tử chúa: khi được cúng dường thì thọ dụng với tâm thanh tịnh, không tham đắm dính mắc; khi không được cúng dường cũng bình thản, không hề nảy sinh tâm bực tức hay phiền não.'
+            },
+            {
+                id: 'q149',
+                question: 'Câu 149: Quá trình tu tập trong đạo Phật được Thầy giáo thọ ví von qua các khái niệm: "Sở trường", "Tam học" và "Thánh quả". Lộ trình này được giải thích như thế nào?',
+                options: ['A. Sở trường là Cửa vào đạo; Tam học (Giới-Định-Tuệ) là Đường đi; Thánh quả là Đích đến.', 'B. Sở trường là Đích đến; Tam học là Cửa vào; Thánh quả là Đường đi.', 'C. Sở trường là Giới; Tam học là Định; Thánh quả là Tuệ.', 'D. Cả ba đều giống nhau, không có thứ tự.'],
+                correct: 'A',
+                explanation: 'Thầy giáo thọ đúc kết lộ trình rất dễ hiểu: "Sở trường" (những pháp môn phù hợp với từng căn cơ) chính là Cửa vào đạo; "Tam học" (Giới - Định - Tuệ) là Con đường bắt buộc phải đi; và "Thánh quả" (Niết Bàn) là Đích đến cuối cùng.'
+            },
+            {
+                id: 'q150',
+                question: 'Câu 150: Theo sự chỉ dạy của Đức Phật, khi một niệm "Thọ" (Cảm thọ) sinh khởi, nếu hành giả không có Chánh niệm tham dự vào để chặn lại, nó sẽ lập tức trôi dạt và sinh ra chi pháp nào tiếp theo, kéo theo sự luân hồi sinh tử?',
+                options: ['A. Sinh ra Lão, Tử.', 'B. Sinh ra Ái (Tham ái/ Luyến ái).', 'C. Sinh ra Danh Sắc.', 'D. Sinh ra Lục nhập.'],
+                correct: 'B',
+                explanation: 'Theo thuyết 12 nhân duyên, ngay khi "Thọ" (cảm giác vui, buồn, trơ trơ) sinh khởi, nếu thiếu chánh niệm chặn lại, nó sẽ tự động trượt dài và sinh ra "Ái" (sự dính mắc, khao khát, luyến ái), từ đó kéo theo chuỗi luân hồi đau khổ. '
+            }
+        ];
+
+        const container = document.getElementById('quiz-container');
+
+        quizData.forEach((item) => {
+            const card = document.createElement('div');
+            card.className = 'question-card';
+            card.id = item.id;
+
+            let optionsHtml = '';
+            item.options.forEach(opt => {
+                const value = opt.charAt(0);
+                optionsHtml += `
+                    <label class="option">
+                        <input type="radio" name="${item.id}" value="${value}"> ${opt}
+                    </label>
+                `;
+            });
+
+            card.innerHTML = `
+                <div class="question-title">${item.question}</div>
+                <div class="options">${optionsHtml}</div>
+                <button onclick="checkAnswer('${item.id}', '${item.correct}')">Kiểm tra đáp án</button>
+                <div class="explanation">
+                    <strong>Đáp án đúng: ${item.correct}</strong><br>${item.explanation}
+                </div>
+            `;
+            container.appendChild(card);
+        });
+
+        function checkAnswer(qId, correctValue) {
+            const selected = document.querySelector(`input[name="${qId}"]:checked`);
+            const explanation = document.querySelector(`#${qId} .explanation`);
+            const labels = document.querySelectorAll(`#${qId} .option`);
+
+            if (!selected) {
+                alert("Bạn vui lòng chọn một đáp án trước khi kiểm tra nhé!");
+                return;
+            }
+
+            // Vô hiệu hóa lựa chọn và nút bấm sau khi đã kiểm tra
+            document.querySelectorAll(`#${qId} input`).forEach(input => input.disabled = true);
+            document.querySelector(`#${qId} button`).disabled = true;
+
+            labels.forEach(label => {
+                const input = label.querySelector('input');
+                if (input.value === correctValue) {
+                    label.classList.add('correct'); // Bôi xanh đáp án đúng
+                } else if (input.checked && input.value !== correctValue) {
+                    label.classList.add('incorrect'); // Bôi đỏ nếu chọn sai
+                }
+            });
+
+            // Hiện giải thích
+            explanation.style.display = 'block';
+        }
+    </script>
+</body>
+</html>

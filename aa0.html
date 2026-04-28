@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hướng Dẫn Ôn Thi - Kinh Tăng Nhất A Hàm</title>
+    <style>
+        :root {
+            --primary-color: #5D4037; /* Brown */
+            --secondary-color: #D84315; /* Saffron/Orange */
+            --accent-color: #FFB300; /* Gold */
+            --bg-color: #FDFBF7; /* Warm off-white */
+            --text-color: #333333;
+            --card-bg: #FFFFFF;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            line-height: 1.6;
+            margin: 0;
+            padding: 40px 20px; /* Thêm padding top/bottom để nhìn thoáng hơn trên web */
+            display: flex;
+            justify-content: center;
+        }
+
+        .container {
+            max-width: 850px;
+            width: 100%;
+            background: var(--card-bg);
+            padding: 40px;
+            border-radius: 12px;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.06);
+            position: relative; /* Để nút in định vị theo container nếu cần, nhưng đặt ngoài sẽ dễ chỉnh hơn */
+        }
+
+        /* Styling cho nút In */
+        .print-btn-container {
+            text-align: right; /* Căn phải */
+            margin-bottom: 20px;
+        }
+
+        .btn-print {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 8px 16px;
+            background-color: #f5f5f5;
+            color: #555;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            font-size: 14px;
+            cursor: pointer;
+            font-weight: 500;
+            transition: all 0.2s ease;
+        }
+
+        .btn-print:hover {
+            background-color: #e0e0e0;
+            color: #333;
+            border-color: #ccc;
+        }
+        
+        .btn-print svg {
+            width: 18px;
+            height: 18px;
+        }
+
+        .header-section {
+            text-align: center;
+            margin-bottom: 40px;
+            border-bottom: 3px solid var(--secondary-color);
+            padding-bottom: 20px;
+        }
+
+        h1 {
+            color: var(--primary-color);
+            font-size: 2.2em;
+            margin: 0 0 10px 0;
+            text-transform: uppercase;
+        }
+
+        .subtitle {
+            color: #795548;
+            font-size: 1.2em;
+            font-weight: bold;
+        }
+
+        .score-badge {
+            display: inline-block;
+            background-color: #FFF3E0;
+            color: var(--secondary-color);
+            padding: 8px 15px;
+            border-radius: 20px;
+            font-weight: bold;
+            font-size: 1.1em;
+            margin-top: 15px;
+            border: 1px solid #FFCC80;
+        }
+
+        .section-box {
+            background-color: #fafafa;
+            border: 1px solid #eee;
+            border-left: 5px solid var(--primary-color);
+            padding: 25px;
+            border-radius: 8px;
+            margin-bottom: 30px;
+        }
+
+        .section-box.mcq {
+            border-left-color: #1976D2;
+        }
+
+        .section-box.essay {
+            border-left-color: #388E3C;
+        }
+
+        .section-title {
+            font-size: 1.4em;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 15px;
+            padding-bottom: 10px;
+            border-bottom: 1px dashed #ccc;
+        }
+
+        .mcq .section-title { color: #1976D2; }
+        .essay .section-title { color: #388E3C; }
+
+        ul {
+            margin: 0;
+            padding-left: 20px;
+        }
+
+        li {
+            margin-bottom: 10px;
+            text-align: justify;
+        }
+
+        .highlight-bold {
+            font-weight: bold;
+            color: var(--text-color);
+        }
+
+        .sutra-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .sutra-card {
+            background-color: #fff;
+            border: 1px solid #E0E0E0;
+            padding: 15px;
+            border-radius: 6px;
+            text-align: center;
+            font-weight: bold;
+            color: var(--primary-color);
+            box-shadow: 0 2px 4px rgba(0,0,0,0.02);
+            transition: transform 0.2s;
+        }
+        
+        .sutra-card:hover {
+            transform: translateY(-3px);
+            border-color: var(--secondary-color);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.05);
+        }
+
+        .advice-box {
+            background-color: #FFF9C4;
+            border: 2px dashed #FBC02D;
+            padding: 25px;
+            border-radius: 8px;
+            margin-top: 40px;
+        }
+
+        .advice-title {
+            color: #F57F17;
+            font-size: 1.3em;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 15px;
+        }
+
+        .timeline-notice {
+            background-color: #E8F5E9;
+            color: #2E7D32;
+            padding: 15px;
+            border-radius: 6px;
+            margin-top: 20px;
+            text-align: center;
+            font-weight: bold;
+            border: 1px solid #A5D6A7;
+        }
+
+        @media print {
+            .print-btn-container { display: none; }
+            body { background-color: white; padding: 0; }
+            .container { box-shadow: none; border-radius: 0; padding: 0; max-width: 100%; margin: 0; }
+            .sutra-card { break-inside: avoid; border: 1px solid #ccc; }
+            .section-box { border: 1px solid #ccc; }
+            .advice-box { border: 2px solid #ccc; background-color: #fff; }
+            @page {
+                size: A4;
+                margin: 20mm;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <div class="print-btn-container">
+            <button class="btn-print" onclick="window.print()">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 17h2a2 2 0 002-2v-4a2 2 0 00-2-2H5a2 2 0 00-2 2v4a2 2 0 002 2h2m2 4h6a2 2 0 002-2v-4a2 2 0 00-2-2H9a2 2 0 00-2 2v4a2 2 0 002 2zm8-12V5a2 2 0 00-2-2H9a2 2 0 00-2 2v4h10z" />
+                </svg>
+                In Tài Liệu
+            </button>
+        </div>
+
+        <div class="header-section">
+            <h1>Hướng Dẫn Ôn Thi Cuối Kỳ</h1>
+            <div class="subtitle">Môn: Kinh Tăng Nhất A Hàm</div>
+            <div class="score-badge">🎯 Tổng điểm: 50 Điểm (Chiếm 50% trọng số)</div>
+        </div>
+
+        <!-- PHẦN 1: TRẮC NGHIỆM -->
+        <div class="section-box mcq">
+            <div class="section-title">📝 1. Phần Trắc Nghiệm (30 Điểm)</div>
+            <ul>
+                <li><span class="highlight-bold">Cấu trúc:</span> Gồm 30 câu hỏi trắc nghiệm, mỗi câu 1 điểm.</li>
+                <li><span class="highlight-bold">Phạm vi ôn tập:</span> Nội dung xoay quanh các khái niệm và chi pháp căn bản đã học như: <em>Bát chánh đạo, 5 triền cái, điều kiện sinh khởi chánh kiến...</em></li>
+                <li><span class="highlight-bold">Cách thức ra đề:</span> Thầy sẽ soạn một <strong>đề cương gồm 30 câu hỏi kèm sẵn đáp án chính xác</strong>. Đề thi chính thức sẽ bám sát 100% vào bộ 30 câu hỏi này. Thầy chỉ đảo vị trí câu hỏi và đảo lộn các đáp án A, B, C, D để gây nhiễu.</li>
+                <li>👉 <em>Bạn chỉ cần học thật kỹ bộ đáp án Thầy đã cho là nắm chắc phần này.</em></li>
+            </ul>
+        </div>
+
+        <!-- PHẦN 2: TỰ LUẬN -->
+        <div class="section-box essay">
+            <div class="section-title">✍️ 2. Phần Tự Luận (20 Điểm)</div>
+            <ul>
+                <li><span class="highlight-bold">Cấu trúc:</span> Gồm 1 câu hỏi tự luận duy nhất trị giá 20 điểm.</li>
+                <li><span class="highlight-bold">Cách thức ra đề:</span> Thầy sẽ cho trước <strong>3 đề tự luận</strong> để lớp nghiên cứu ở nhà. Khi thi, Thầy sẽ bốc <strong>ngẫu nhiên 1 trong 3 đề</strong> (Bắt buộc làm đề được phát, không được chọn đề).</li>
+            </ul>
+            
+            <p style="margin-top: 15px; font-weight: bold; color: var(--text-color);">📚 4 BÀI KINH TRỌNG TÂM CẦN ÔN KỸ:</p>
+            <div class="sutra-grid">
+                <div class="sutra-card">📖 Thừa tự pháp<br><span style="font-size:0.85em; color:#757575;">(Phẩm 18)</span></div>
+                <div class="sutra-card">📖 Điều kiện có trí tuệ<br><span style="font-size:0.85em; color:#757575;">(Phẩm 19)</span></div>
+                <div class="sutra-card">📖 Nghèo khổ & hào tộc<br><span style="font-size:0.85em; color:#757575;">(Phẩm 19)</span></div>
+                <div class="sutra-card">📖 Kinh Báo đáp<br><span style="font-size:0.85em; color:#757575;">(Phẩm 20)</span></div>
+            </div>
+        </div>
+
+        <!-- LỜI KHUYÊN TỪ THẦY -->
+        <div class="advice-box">
+            <div class="advice-title">💡 MẸO & LỜI KHUYÊN TỪ THẦY GIÁO</div>
+            <ul>
+                <li><strong>Không viết lan man:</strong> Khi làm bài tự luận, không cần viết những thứ bên ngoài. Hãy bám sát vào đúng ý pháp của bài kinh đó.</li>
+                <li><strong>Điểm cộng chiều sâu:</strong> Thầy đặc biệt khuyến khích sinh viên nên liên hệ, vận dụng nội dung bài kinh với con đường <strong>Bát Chánh Đạo</strong> để bài viết có chiều sâu giáo pháp.</li>
+            </ul>
+
+            <div class="timeline-notice">
+                📢 LƯU Ý VỀ ĐỀ CƯƠNG:<br>
+                Toàn bộ đề cương chi tiết (30 câu trắc nghiệm có đáp án + 3 đề tự luận) sẽ được Thầy gửi qua văn phòng để chuyển đến lớp <strong>trong dịp nghỉ Tết</strong>. Mọi người tranh thủ thời gian này để ôn luyện nhé!
+            </div>
+        </div>
+
+    </div>
+
+</body>
+</html>

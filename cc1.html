@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ôn thi Kinh Tăng Nhất A Hàm - Câu 7</title>
+    <style>
+        :root {
+            --primary-color: #5D4037; /* Nâu sòng */
+            --secondary-color: #E65100; /* Cam pháp phục */
+            --bg-color: #FDFBF7;
+            --text-color: #333;
+            --highlight-bg: #FFF3E0;
+            --poor-color: #D32F2F; /* Đỏ sậm cho tiêu cực */
+            --rich-color: #388E3C; /* Xanh lá cho tích cực */
+        }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            line-height: 1.7;
+            margin: 0;
+            padding: 20px;
+        }
+        .container {
+            max-width: 850px;
+            margin: auto;
+            background: #fff;
+            padding: 40px;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+        }
+        .header {
+            text-align: center;
+            border-bottom: 3px solid var(--secondary-color);
+            margin-bottom: 30px;
+            padding-bottom: 20px;
+        }
+        h1 {
+            color: var(--primary-color);
+            font-size: 1.8em;
+            margin: 0;
+            text-transform: uppercase;
+        }
+        .question-box {
+            background-color: var(--highlight-bg);
+            padding: 20px;
+            border-left: 5px solid var(--secondary-color);
+            border-radius: 4px;
+            margin-bottom: 30px;
+        }
+        .question-text {
+            font-weight: bold;
+            font-size: 1.15em;
+            color: #D84315;
+            line-height: 1.5;
+        }
+        
+        .intro-text {
+            font-size: 1.05em;
+            text-align: justify;
+            margin-bottom: 30px;
+        }
+
+        h2 {
+            color: var(--primary-color);
+            font-size: 1.35em;
+            border-bottom: 1px dashed #ccc;
+            padding-bottom: 8px;
+            margin-top: 35px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        h2::before {
+            content: '☸';
+            color: var(--secondary-color);
+        }
+
+        /* Lưới 2 cột cho các nguyên nhân */
+        .cause-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin-top: 20px;
+        }
+        .card {
+            background: #fff;
+            border: 1px solid #eee;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.02);
+            transition: transform 0.2s ease;
+        }
+        .card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+        }
+        
+        /* Style cho Nghèo khổ */
+        .card-poor {
+            border-top: 4px solid var(--poor-color);
+            background-color: #FFEBEE;
+        }
+        .card-poor h3 {
+            color: var(--poor-color);
+            margin-top: 0;
+            font-size: 1.1em;
+            border-bottom: 1px dashed #EF9A9A;
+            padding-bottom: 8px;
+            margin-bottom: 12px;
+        }
+
+        /* Style cho Giàu sang */
+        .card-rich {
+            border-top: 4px solid var(--rich-color);
+            background-color: #E8F5E9;
+        }
+        .card-rich h3 {
+            color: var(--rich-color);
+            margin-top: 0;
+            font-size: 1.1em;
+            border-bottom: 1px dashed #A5D6A7;
+            padding-bottom: 8px;
+            margin-bottom: 12px;
+        }
+
+        .analysis-text {
+            text-align: justify;
+            font-size: 0.95em;
+            margin: 0;
+        }
+        .analysis-label {
+            font-weight: bold;
+            color: var(--text-color);
+            display: inline-block;
+            margin-bottom: 5px;
+        }
+
+        /* Hộp bài học Bát Chánh Đạo */
+        .lesson-box {
+            background-color: #E3F2FD;
+            border: 2px solid #90CAF9;
+            padding: 25px;
+            border-radius: 8px;
+            margin-top: 35px;
+        }
+        .lesson-box h3 {
+            color: #1565C0;
+            margin-top: 0;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 1.2em;
+        }
+        .lesson-content {
+            text-align: justify;
+            margin: 0;
+            font-size: 0.98em;
+        }
+        .warning-text {
+            display: block;
+            background-color: #FFF9C4;
+            color: #F57F17;
+            padding: 10px;
+            border-radius: 4px;
+            font-weight: bold;
+            font-style: italic;
+            margin-bottom: 15px;
+            border-left: 4px solid #FBC02D;
+        }
+
+        .footer-note {
+            margin-top: 40px;
+            padding-top: 20px;
+            border-top: 1px solid #eee;
+            font-style: italic;
+            font-size: 0.9em;
+            text-align: right;
+            color: #777;
+        }
+        .btn-print {
+            display: block;
+            width: fit-content;
+            margin: 0 auto 20px auto;
+            padding: 10px 25px;
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+            font-weight: bold;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            transition: background 0.3s;
+        }
+        .btn-print:hover {
+            background-color: #3E2723;
+        }
+        @media print {
+            .btn-print { display: none; }
+            body { background: white; padding: 0; }
+            .container { box-shadow: none; border-radius: 0; padding: 0; width: 100%; max-width: 100%; }
+            .card { break-inside: avoid; }
+        }
+    </style>
+</head>
+<body>
+
+    <button class="btn-print" onclick="window.print()">🖨️ In Bài Học (A4)</button>
+
+    <div class="container">
+        <div class="header">
+            <h1>Kinh Tăng Nhất A Hàm</h1>
+            <div style="color: var(--secondary-color); font-weight: bold; margin-top: 5px;">HƯỚNG DẪN ÔN THI TỰ LUẬN</div>
+        </div>
+
+        <div class="question-box">
+            <div class="question-text">
+                Câu 7: Trình bày và phân tích hai nguyên nhân đưa đến quả báo sinh vào hoàn cảnh nghèo khổ, và hai nguyên nhân đưa đến quả báo sinh vào gia đình quyền quý (hào tộc) theo lời dạy của Đức Phật.
+            </div>
+        </div>
+
+        <div class="intro-text">
+            Theo kinh Tăng Nhất A Hàm (Phẩm 19), Đức Phật dạy rằng sự khác biệt về hoàn cảnh sướng khổ, giàu nghèo trong cuộc đời không phải là sự ngẫu nhiên, mà hoàn toàn vận hành theo <strong>nguyên lý nhân quả</strong> từ những hành vi đạo đức hoặc phi đạo đức của mỗi cá nhân.
+        </div>
+
+        <h2>1. Quả báo sinh vào hoàn cảnh nghèo khổ</h2>
+        <div class="cause-grid">
+            <div class="card card-poor">
+                <h3>📉 1. Bất hiếu với cha mẹ và sư trưởng</h3>
+                <p class="analysis-text">
+                    <span class="analysis-label">Phân tích:</span> Cha mẹ là đấng sinh thành dưỡng dục, sư trưởng là những người thầy truyền trao kiến thức và bồi dưỡng nhân cách, đạo đức. Sự hiếu kính không chỉ là đạo lý nhân gian mà còn là nền tảng đạo đức và cội nguồn của phước báu. Việc bất hiếu, vô ơn với hai bậc ân nhân này chính là <strong>tự phá hủy đi nền tảng phước đức</strong> của chính mình, dẫn đến quả báo bần hàn, khổ cực.
+                </p>
+            </div>
+            <div class="card card-poor">
+                <h3>📉 2. Không kính trọng người hơn mình</h3>
+                <p class="analysis-text">
+                    <span class="analysis-label">Phân tích:</span> Đây là biểu hiện của tâm kiêu mạn, tự cao và thiếu sự khiêm cung. Khi không biết tôn trọng những người có đức hạnh hay trí tuệ hơn mình, họ tự khép lại cánh cửa học hỏi và phát triển bản thân. Tâm thái kiêu căng này làm <strong>suy giảm nghiêm trọng phước báu</strong> đã tích lũy, dẫn đến kết quả phải sinh vào môi trường thấp kém, nhiều khó khăn.
+                </p>
+            </div>
+        </div>
+
+        <h2>2. Quả báo sinh vào gia đình quyền quý (hào tộc)</h2>
+        <div class="cause-grid">
+            <div class="card card-rich">
+                <h3>📈 1. Cung kính cha mẹ, anh em, dòng họ</h3>
+                <p class="analysis-text">
+                    <span class="analysis-label">Phân tích:</span> Những người sống có đạo lý, trọn tình nghĩa và biết gắn kết, tôn trọng người thân trong gia đình không chỉ tạo ra cội nguồn phước báu vô lượng cho bản thân, mà còn giúp nuôi dưỡng môi trường đạo đức tốt đẹp cho cộng đồng. Đây là <strong>nhân lành vững chắc</strong> để chiêu cảm quả báo được sinh vào nơi quyền quý, có điều kiện sống tốt đẹp.
+                </p>
+            </div>
+            <div class="card card-rich">
+                <h3>📈 2. Biết sẻ chia, bố thí tài sản</h3>
+                <p class="analysis-text">
+                    <span class="analysis-label">Phân tích:</span> Bố thí là hạnh căn bản của người đệ tử Phật và là phương tiện trực tiếp nhất để tạo ra phước báu. Bố thí không chỉ là cho đi vật chất, mà sâu xa hơn là sự mở rộng của lòng từ bi, nhằm <strong>phá bỏ sự ích kỷ, tham lam</strong> ẩn chứa bên trong nội tâm. Người biết rộng lòng chia sẻ chắc chắn sẽ gặt hái được quả báo giàu sang, phú quý.
+                </p>
+            </div>
+        </div>
+
+        <h2>3. Bài học tu tập & Vận dụng Bát Chánh Đạo</h2>
+        <div class="lesson-box">
+            <h3>🛡️ Bài học và Ứng dụng</h3>
+            <span class="warning-text">
+                ⚠️ Mục đích của Phật dạy nhân quả giàu nghèo là để soi rọi lại chính mình, lấy đó làm nền tảng tu tập nuôi dưỡng đạo đức, CHỨ KHÔNG PHẢI dùng để phê bình, chê bai hay quy tội những người đang ở trong hoàn cảnh khó khăn.
+            </span>
+            <p class="lesson-content">
+                Khi đứng trước sự chênh lệch giàu - nghèo, người đệ tử Phật cần vận dụng <strong>Chánh kiến</strong> để thấu hiểu rõ nguyên lý duyên khởi và nhân quả, nhận thức được rằng y báo (môi trường sống) phụ thuộc hoàn toàn vào chánh báo (nghiệp lực của tự thân). 
+                <br><br>
+                Thay vì oán trách hoàn cảnh, hành giả thực hành <strong>Chánh ngữ</strong> và <strong>Chánh nghiệp</strong> thông qua việc giữ gìn lòng hiếu đạo, cung kính mọi người và hoan hỷ tu hạnh bố thí. Sự thực hành này chính là quá trình tích lũy phước lành, giúp chuyển hóa nội tâm và thay đổi hoàn cảnh sống một cách tốt đẹp, đúng với tinh thần trung đạo của bậc Thánh.
+            </p>
+        </div>
+
+        <div class="footer-note">
+            Tài liệu lưu hành nội bộ - Ôn thi cuối học kỳ Kinh Tăng Nhất A Hàm
+        </div>
+    </div>
+
+</body>
+</html>

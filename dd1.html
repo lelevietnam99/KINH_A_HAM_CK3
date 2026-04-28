@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ôn thi Kinh Tăng Nhất A Hàm - Câu 10</title>
+    <style>
+        :root {
+            --primary-color: #5D4037; /* Nâu sòng */
+            --secondary-color: #E65100; /* Cam pháp phục */
+            --bg-color: #FDFBF7;
+            --text-color: #333;
+            --highlight-bg: #FFF3E0;
+            --close-color: #2E7D32; /* Xanh lá - Gần Phật */
+            --far-color: #C62828; /* Đỏ - Xa Phật */
+        }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            line-height: 1.7;
+            margin: 0;
+            padding: 20px;
+        }
+        .container {
+            max-width: 850px;
+            margin: auto;
+            background: #fff;
+            padding: 40px;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+        }
+        .header {
+            text-align: center;
+            border-bottom: 3px solid var(--secondary-color);
+            margin-bottom: 30px;
+            padding-bottom: 20px;
+        }
+        h1 {
+            color: var(--primary-color);
+            font-size: 1.8em;
+            margin: 0;
+            text-transform: uppercase;
+        }
+        .question-box {
+            background-color: var(--highlight-bg);
+            padding: 20px;
+            border-left: 5px solid var(--secondary-color);
+            border-radius: 4px;
+            margin-bottom: 35px;
+        }
+        .question-text {
+            font-weight: bold;
+            font-size: 1.15em;
+            color: #D84315;
+            line-height: 1.5;
+        }
+
+        h2 {
+            color: var(--primary-color);
+            font-size: 1.35em;
+            border-bottom: 1px dashed #ccc;
+            padding-bottom: 8px;
+            margin-top: 35px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        h2::before {
+            content: '☸';
+            color: var(--secondary-color);
+        }
+
+        /* Distance comparison */
+        .distance-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin-top: 20px;
+        }
+        .distance-card {
+            background: #fff;
+            border: 1px solid #eee;
+            padding: 25px;
+            border-radius: 8px;
+            text-align: center;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.02);
+        }
+        .card-close {
+            border-top: 5px solid var(--close-color);
+            background-color: #F1F8E9;
+        }
+        .card-far {
+            border-top: 5px solid var(--far-color);
+            background-color: #FFEBEE;
+        }
+        .icon {
+            font-size: 2.5em;
+            margin-bottom: 15px;
+            display: block;
+        }
+        .distance-card h3 {
+            margin-top: 0;
+            font-size: 1.2em;
+            margin-bottom: 15px;
+        }
+        .card-close h3 { color: var(--close-color); }
+        .card-far h3 { color: var(--far-color); }
+        
+        .distance-desc {
+            text-align: justify;
+            margin: 0;
+            font-size: 0.95em;
+            color: #444;
+        }
+
+        /* Reasons List */
+        .reason-list {
+            margin-top: 25px;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+        .reason-item {
+            background: #fafafa;
+            border: 1px solid var(--card-border);
+            border-left: 4px solid var(--primary-color);
+            padding: 20px;
+            border-radius: 6px;
+        }
+        .reason-title {
+            font-weight: bold;
+            color: var(--secondary-color);
+            font-size: 1.1em;
+            display: block;
+            margin-bottom: 8px;
+        }
+        .reason-content {
+            margin: 0;
+            text-align: justify;
+        }
+
+        .highlight-quote {
+            background-color: #E3F2FD;
+            color: #1565C0;
+            padding: 15px;
+            border-radius: 6px;
+            margin-top: 20px;
+            font-weight: 500;
+            font-style: italic;
+            border-left: 4px solid #1976D2;
+        }
+
+        .footer-note {
+            margin-top: 40px;
+            padding-top: 20px;
+            border-top: 1px solid #eee;
+            font-style: italic;
+            font-size: 0.9em;
+            text-align: right;
+            color: #777;
+        }
+        .btn-print {
+            display: block;
+            width: fit-content;
+            margin: 0 auto 20px auto;
+            padding: 10px 25px;
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+            font-weight: bold;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            transition: background 0.3s;
+        }
+        .btn-print:hover {
+            background-color: #3E2723;
+        }
+        @media print {
+            .btn-print { display: none; }
+            body { background: white; padding: 0; }
+            .container { box-shadow: none; border-radius: 0; padding: 0; width: 100%; max-width: 100%; }
+            .distance-grid { grid-template-columns: 1fr; }
+            .reason-item { break-inside: avoid; border: 1px solid #ccc; }
+        }
+    </style>
+</head>
+<body>
+
+    <button class="btn-print" onclick="window.print()">🖨️ In Bài Học (A4)</button>
+
+    <div class="container">
+        <div class="header">
+            <h1>Kinh Tăng Nhất A Hàm</h1>
+            <div style="color: var(--secondary-color); font-weight: bold; margin-top: 5px;">HƯỚNG DẪN ÔN THI TỰ LUẬN</div>
+        </div>
+
+        <div class="question-box">
+            <div class="question-text">
+                Câu 10: Trong kinh Báo đáp, Đức Phật đánh giá như thế nào về người biết nhớ ơn, đền ơn dù là một ân huệ rất nhỏ? Tại sao tâm tri ân và báo ân lại được xem là thước đo phẩm chất đạo đức của người học đạo?
+            </div>
+        </div>
+
+        <h2>1. Lời đánh giá của Đức Phật (Kinh Báo đáp - Phẩm 20)</h2>
+        <p style="text-align: justify; margin-bottom: 20px;">
+            Đức Phật đánh giá rất cao và hết lời tán thán những người có tâm tri ân, không quên lãng dù đó là một ân huệ thọ nhận rất nhỏ. Ngài khẳng định người biết báo ân là người <strong>đáng kính, đáng tôn trọng và đáng cung kính</strong>.
+        </p>
+
+        <div class="distance-grid">
+            <div class="distance-card card-close">
+                <span class="icon">🙏</span>
+                <h3>Người Biết Ơn = Ở Rất Gần</h3>
+                <p class="distance-desc">
+                    Người biết nhớ ơn và đền ơn, dù có ở cách xa ngàn dặm (về mặt không gian hay thời gian), thì vẫn được Đức Phật xem là <strong>đang ở rất gần Đức Như Lai</strong>.
+                </p>
+            </div>
+            
+            <div class="distance-card card-far">
+                <span class="icon">🏃</span>
+                <h3>Kẻ Vô Ơn = Ở Rất Xa</h3>
+                <p class="distance-desc">
+                    Ngược lại, kẻ không biết báo đáp, quên mất ân nghĩa thì dẫu có sống ngay bên cạnh, ngày ngày học giáo pháp của Phật thì vẫn bị xem là <strong>đang ở rất xa Như Lai</strong>.
+                </p>
+            </div>
+        </div>
+
+        <h2>2. Tại sao Tri Ân là thước đo phẩm chất đạo đức?</h2>
+        <div class="reason-list">
+            <div class="reason-item">
+                <span class="reason-title">● Thể hiện sự tinh tế và ý thức trách nhiệm</span>
+                <p class="reason-content">Việc ghi nhớ không chỉ ân lớn mà cả những ân huệ nhỏ nhặt chứng tỏ người đó có một tâm hồn tinh tế, sống có ý thức và có trách nhiệm sâu sắc đối với những gì mình đã thọ nhận từ người khác.</p>
+            </div>
+
+            <div class="reason-item">
+                <span class="reason-title">● Là nền tảng đạo đức vững chắc</span>
+                <p class="reason-content">Trong đạo Phật, sự tri ân không đơn thuần là một thứ cảm xúc mang tính nhất thời, mà nó là một <strong>phẩm chất đạo đức bền vững</strong>, làm nền tảng dẫn dắt con người đi đến những hành động báo ân cụ thể.</p>
+            </div>
+
+            <div class="reason-item">
+                <span class="reason-title">● Sự tương ưng tuyệt đối với Chánh Pháp</span>
+                <p class="reason-content">Thước đo "gần" hay "xa" Phật không nằm ở khoảng cách vật lý, mà nằm ở sự <strong>tương ưng với Chánh pháp</strong>.</p>
+                <div class="highlight-quote">
+                    "Việc thực hành tâm tri ân chính là đang gần giáo pháp của Như Lai, gần cái hạnh của Như Lai, gần đời sống của Như Lai."
+                </div>
+                <p class="reason-content" style="margin-top: 10px;">
+                    Do đó, người vô ơn thì không thể tương ưng với Chánh pháp, đồng nghĩa với việc đánh mất đi tư cách và phẩm chất của một người tu học chân chính.
+                </p>
+            </div>
+        </div>
+
+        <div class="footer-note">
+            Tài liệu lưu hành nội bộ - Ôn thi cuối học kỳ Kinh Tăng Nhất A Hàm
+        </div>
+    </div>
+
+</body>
+</html>

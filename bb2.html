@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ôn thi Kinh Tăng Nhất A Hàm - Câu 5</title>
+    <style>
+        :root {
+            --primary-color: #5D4037; /* Màu Nâu Sòng */
+            --secondary-color: #E65100; /* Màu Cam Pháp phục */
+            --bg-color: #FDFBF7;
+            --text-color: #333;
+            --highlight-bg: #FFF3E0;
+            --danger-red: #C62828;
+            --success-green: #2E7D32;
+        }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            line-height: 1.7;
+            margin: 0;
+            padding: 20px;
+        }
+        .container {
+            max-width: 850px;
+            margin: auto;
+            background: #fff;
+            padding: 40px;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+        }
+        .header {
+            text-align: center;
+            border-bottom: 3px solid var(--secondary-color);
+            margin-bottom: 30px;
+            padding-bottom: 20px;
+        }
+        h1 {
+            color: var(--primary-color);
+            font-size: 1.8em;
+            margin: 0;
+            text-transform: uppercase;
+        }
+        .question-box {
+            background-color: var(--highlight-bg);
+            padding: 20px;
+            border-left: 5px solid var(--secondary-color);
+            border-radius: 4px;
+            margin-bottom: 35px;
+        }
+        .question-text {
+            font-weight: bold;
+            font-size: 1.15em;
+            color: #D84315;
+            line-height: 1.5;
+        }
+
+        h2 {
+            color: var(--primary-color);
+            font-size: 1.35em;
+            border-bottom: 1px dashed #ccc;
+            padding-bottom: 8px;
+            margin-top: 35px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        h2::before {
+            content: '☸';
+            color: var(--secondary-color);
+        }
+
+        /* Obstacles Section */
+        .obstacle-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin-top: 20px;
+        }
+        .obstacle-card {
+            background: #FFEBEE;
+            border: 1px solid #EF9A9A;
+            border-top: 4px solid var(--danger-red);
+            padding: 20px;
+            border-radius: 8px;
+        }
+        .obstacle-card h3 {
+            margin-top: 0;
+            color: var(--danger-red);
+            font-size: 1.1em;
+            margin-bottom: 10px;
+            border-bottom: 1px dashed #EF9A9A;
+            padding-bottom: 8px;
+        }
+        .obstacle-card p {
+            margin: 0;
+            text-align: justify;
+            font-size: 0.95em;
+        }
+
+        /* Tan Can Section */
+        .tan-can-box {
+            background-color: #E8F5E9;
+            border-left: 5px solid var(--success-green);
+            padding: 20px;
+            border-radius: 4px;
+            margin-top: 20px;
+            text-align: justify;
+        }
+        .tan-can-box strong {
+            color: var(--success-green);
+        }
+
+        /* Methods Section */
+        .methods-list {
+            list-style: none;
+            padding: 0;
+        }
+        .method-item {
+            background: #fafafa;
+            border: 1px solid #eee;
+            margin-bottom: 15px;
+            padding: 20px 25px;
+            border-radius: 8px;
+            position: relative;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.02);
+        }
+        .method-title {
+            font-weight: bold;
+            color: var(--primary-color);
+            font-size: 1.1em;
+            margin-bottom: 8px;
+            display: block;
+        }
+        .method-desc {
+            text-align: justify;
+            margin: 0;
+        }
+        .fire-metaphor {
+            color: #E65100;
+            font-style: italic;
+            display: block;
+            margin-top: 10px;
+            padding: 10px;
+            background: #FFF3E0;
+            border-radius: 4px;
+        }
+
+        .footer-note {
+            margin-top: 40px;
+            padding-top: 20px;
+            border-top: 1px solid #eee;
+            font-style: italic;
+            font-size: 0.9em;
+            text-align: right;
+            color: #777;
+        }
+        .btn-print {
+            display: block;
+            width: fit-content;
+            margin: 0 auto 20px auto;
+            padding: 10px 25px;
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+            font-weight: bold;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            transition: background 0.3s;
+        }
+        .btn-print:hover {
+            background-color: #3E2723;
+        }
+        @media print {
+            .btn-print { display: none; }
+            body { background: white; padding: 0; }
+            .container { box-shadow: none; border-radius: 0; padding: 0; width: 100%; max-width: 100%; }
+            .obstacle-card, .method-item { break-inside: avoid; }
+        }
+    </style>
+</head>
+<body>
+
+    <button class="btn-print" onclick="window.print()">🖨️ In Bài Học (A4)</button>
+
+    <div class="container">
+        <div class="header">
+            <h1>Kinh Tăng Nhất A Hàm</h1>
+            <div style="color: var(--secondary-color); font-weight: bold; margin-top: 5px;">HƯỚNG DẪN ÔN THI TỰ LUẬN</div>
+        </div>
+
+        <div class="question-box">
+            <div class="question-text">
+                Câu 5: Tại sao "lười biếng và ham ngủ nghỉ" lại được xem là chướng ngại lớn nhất ngăn cản sự phát sinh trí tuệ? Hãy liên hệ với "Tấn căn" (sự tinh tấn) trong Phật giáo để đưa ra phương pháp đối trị chướng ngại này.
+            </div>
+        </div>
+
+        <h2>1. Tại sao "lười biếng, ham ngủ nghỉ" là chướng ngại lớn nhất?</h2>
+        <p style="text-align: justify; margin-bottom: 15px;">Theo kinh Tăng Nhất A Hàm, đây là một trong hai nguyên nhân chính làm suy giảm trí tuệ. Lý do bao gồm:</p>
+        
+        <div class="obstacle-grid">
+            <div class="obstacle-card">
+                <h3>🔻 Làm suy yếu ý chí và mất tỉnh thức</h3>
+                <p>Ham ngủ nghỉ là biểu hiện rõ nét của sự giải đãi, buông lung. Sự giải đãi này làm suy yếu ý chí, làm mất đi sự tỉnh thức và khiến tâm trí trở nên trì trệ, mờ mịt.</p>
+            </div>
+            <div class="obstacle-card">
+                <h3>🔻 Triệt tiêu cơ hội học hỏi</h3>
+                <p>Trí tuệ không tự nhiên mà có, phải thông qua học hỏi và nỗ lực hành trì. Dù có cơ hội tiếp xúc với giáo pháp hay bậc thiện tri thức, nhưng nếu thiếu sự siêng năng thì trí tuệ không thể sinh khởi.</p>
+            </div>
+            <div class="obstacle-card">
+                <h3>🔻 Đưa đến Vô minh</h3>
+                <p>Một người chỉ thích ăn rồi ngủ, sống ì ạch, lười biếng thì tâm trí sẽ không được thắp sáng. Chắc chắn họ sẽ rơi vào trạng thái mơ hồ và trôi dạt về thuộc tính của vô minh.</p>
+            </div>
+        </div>
+
+        <h2>2. Liên hệ "Tấn Căn" và Phương pháp đối trị</h2>
+        
+        <div class="tan-can-box">
+            <strong>🌱 Hiểu về Tấn Căn:</strong> Trong hệ thống Ngũ căn (Tín, Tấn, Niệm, Định, Tuệ), "Tấn căn" chính là cội gốc của sự siêng năng, tinh cần. Khi gốc rễ này được nuôi dưỡng lớn mạnh, nó sẽ trở thành "Tấn lực" (sức mạnh tinh tấn) và hiện hành thành "Chánh tinh tấn" trong Bát Chánh Đạo để đánh bại rào cản lười biếng.
+        </div>
+
+        <p style="margin-top: 25px; font-weight: bold; color: var(--primary-color);">Dựa vào bài giảng, phương pháp đối trị được thực hiện qua 3 nguyên tắc sau:</p>
+
+        <ul class="methods-list">
+            <li class="method-item">
+                <span class="method-title">❶ Tinh tấn là sự kiên trì, liên tục</span>
+                <p class="method-desc">Sự tinh tấn không mang tính chất gượng ép nhất thời mà phải bền bỉ. Việc tu học phát sinh trí tuệ đòi hỏi nỗ lực liên tục không ngừng nghỉ.</p>
+                <span class="fire-metaphor">🔥 <strong>Ví dụ cọ xát thanh tre lấy lửa:</strong> Nếu muốn có lửa, hành giả phải cọ xát liên tục cho đến khi đủ độ nóng. Nếu mỏi tay mà dừng lại nghỉ ngơi thì hơi nóng sẽ mất đi và không bao giờ tạo ra lửa được.</span>
+            </li>
+            <li class="method-item">
+                <span class="method-title">❷ Thực hành theo tinh thần Trung Đạo</span>
+                <p class="method-desc">Tinh tấn phải đi kèm với sự chừng mực, không rơi vào hai thái cực cực đoan. Hành giả không được lười biếng, ham ngủ nghỉ (bất cập), nhưng cũng tuyệt đối không được gượng ép bản thân thức thâu đêm suốt sáng đến mức căng thẳng, tổn hại thần kinh và sinh bệnh (thái quá).</p>
+            </li>
+            <li class="method-item">
+                <span class="method-title">❸ Duy trì sự đều đặn mỗi ngày</span>
+                <p class="method-desc">Cách đối trị lười biếng hiệu quả nhất là giữ nhịp độ thực hành đều đặn mỗi ngày. Mỗi ngày đều siêng năng thưa hỏi thiện tri thức, học giáo pháp và tu tập. Cứ năm này qua tháng nọ giữ nhịp độ như vậy, hành giả sẽ an trú vững chắc, khiến trí tuệ ngày càng thuần thục và bừng sáng.</p>
+            </li>
+        </ul>
+
+        <div class="footer-note">
+            Tài liệu lưu hành nội bộ - Ôn thi cuối học kỳ Kinh Tăng Nhất A Hàm
+        </div>
+    </div>
+
+</body>
+</html>

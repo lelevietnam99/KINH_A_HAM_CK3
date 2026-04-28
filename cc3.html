@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ôn thi Kinh Tăng Nhất A Hàm - Câu 9</title>
+    <style>
+        :root {
+            --primary-color: #5D4037; /* Nâu sòng */
+            --secondary-color: #E65100; /* Cam pháp phục */
+            --bg-color: #FDFBF7;
+            --text-color: #333;
+            --highlight-bg: #FFF3E0;
+            --card-border: #E0E0E0;
+            --path-blue: #1565C0;
+            --path-green: #2E7D32;
+            --path-purple: #6A1B9A;
+        }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            line-height: 1.7;
+            margin: 0;
+            padding: 20px;
+        }
+        .container {
+            max-width: 850px;
+            margin: auto;
+            background: #fff;
+            padding: 40px;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+        }
+        .header {
+            text-align: center;
+            border-bottom: 3px solid var(--secondary-color);
+            margin-bottom: 30px;
+            padding-bottom: 20px;
+        }
+        h1 {
+            color: var(--primary-color);
+            font-size: 1.8em;
+            margin: 0;
+            text-transform: uppercase;
+        }
+        .question-box {
+            background-color: var(--highlight-bg);
+            padding: 20px;
+            border-left: 5px solid var(--secondary-color);
+            border-radius: 4px;
+            margin-bottom: 30px;
+        }
+        .question-text {
+            font-weight: bold;
+            font-size: 1.15em;
+            color: #D84315;
+            line-height: 1.5;
+        }
+        .intro-text {
+            font-size: 1.05em;
+            text-align: justify;
+            margin-bottom: 35px;
+            padding-bottom: 15px;
+            border-bottom: 1px dashed #ccc;
+        }
+
+        /* Attitude Cards */
+        .attitude-card {
+            background: #fff;
+            border: 1px solid var(--card-border);
+            border-radius: 8px;
+            padding: 25px;
+            margin-bottom: 25px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.02);
+            transition: transform 0.2s ease;
+        }
+        .attitude-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.06);
+            border-color: #BCAAA4;
+        }
+        .card-header {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 15px;
+            border-bottom: 1px solid #f0f0f0;
+            padding-bottom: 10px;
+        }
+        .card-icon {
+            font-size: 1.8em;
+        }
+        .attitude-card h3 {
+            margin: 0;
+            color: var(--primary-color);
+            font-size: 1.25em;
+        }
+        .attitude-card p {
+            margin: 0;
+            text-align: justify;
+            font-size: 0.98em;
+        }
+        
+        .teacher-quote {
+            background-color: #FFEBEE;
+            color: #C62828;
+            padding: 12px;
+            border-left: 4px solid #D32F2F;
+            border-radius: 4px;
+            font-style: italic;
+            margin: 15px 0;
+            font-weight: 500;
+        }
+
+        /* Bát Chánh Đạo Box */
+        .noble-path-box {
+            background: linear-gradient(to bottom, #f9fbfc, #f1f8fc);
+            border: 1px solid #BBDEFB;
+            border-top: 5px solid var(--path-blue);
+            border-radius: 8px;
+            padding: 25px;
+            margin-top: 35px;
+        }
+        .noble-path-box h3 {
+            color: var(--path-blue);
+            margin-top: 0;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 1.25em;
+        }
+        .path-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 15px;
+            margin-top: 15px;
+        }
+        .path-item {
+            background: #fff;
+            padding: 15px;
+            border-radius: 6px;
+            border: 1px solid #E3F2FD;
+        }
+        .path-title {
+            font-weight: bold;
+            display: block;
+            margin-bottom: 8px;
+        }
+        .path-blue { color: var(--path-blue); }
+        .path-green { color: var(--path-green); }
+        .path-purple { color: var(--path-purple); }
+        .path-desc {
+            margin: 0;
+            text-align: justify;
+            font-size: 0.95em;
+            color: #444;
+        }
+
+        .footer-note {
+            margin-top: 40px;
+            padding-top: 20px;
+            border-top: 1px solid #eee;
+            font-style: italic;
+            font-size: 0.9em;
+            text-align: right;
+            color: #777;
+        }
+        .btn-print {
+            display: block;
+            width: fit-content;
+            margin: 0 auto 20px auto;
+            padding: 12px 30px;
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            border-radius: 6px;
+            font-size: 16px;
+            cursor: pointer;
+            font-weight: bold;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            transition: background 0.3s;
+        }
+        .btn-print:hover {
+            background-color: #3E2723;
+        }
+        @media print {
+            .btn-print { display: none; }
+            body { background: white; padding: 0; }
+            .container { box-shadow: none; border-radius: 0; padding: 0; width: 100%; max-width: 100%; }
+            .attitude-card, .path-item { break-inside: avoid; }
+        }
+    </style>
+</head>
+<body>
+
+    <button class="btn-print" onclick="window.print()">🖨️ In Bài Học (A4)</button>
+
+    <div class="container">
+        <div class="header">
+            <h1>Kinh Tăng Nhất A Hàm</h1>
+            <div style="color: var(--secondary-color); font-weight: bold; margin-top: 5px;">HƯỚNG DẪN ÔN THI TỰ LUẬN</div>
+        </div>
+
+        <div class="question-box">
+            <div class="question-text">
+                Câu 9 (Vận dụng nâng cao): Thầy giáo thọ lưu ý đạo lý nhân quả dùng để "soi lại chính mình để an yên tu tập chứ không phải để đi phê bình, quy tội người khác". Dựa vào lời nhắc nhở này, hãy trình bày thái độ tu tập đúng đắn của người học Phật khi chứng kiến sự chênh lệch giàu - nghèo trong xã hội.
+            </div>
+        </div>
+
+        <div class="intro-text">
+            Theo lời dạy của Thầy giáo thọ, giáo lý nhân quả được Đức Phật thuyết giảng là để mỗi người tự soi rọi lại bản thân, lấy đó làm nền tảng nuôi dưỡng đạo đức và an yên tu tập, <strong>tuyệt đối không phải là "khung pháp luật" để đi phán xét hay quy tội người khác</strong>. Từ lời nhắc nhở sâu sắc này, người học Phật cần trang bị 4 thái độ tu tập đúng đắn sau:
+        </div>
+
+        <div class="attitude-card">
+            <div class="card-header">
+                <span class="card-icon">❤️</span>
+                <h3>1. Tuyệt đối không phán xét, hãy trải lòng từ bi</h3>
+            </div>
+            <p>
+                Khi thấy một người bần hàn, ta hiểu họ đang thiếu thốn phước báu, nhưng tuyệt đối không được mỉa mai hay quy tội "đáng đời vì kiếp trước bất hiếu". 
+            </p>
+            <div class="teacher-quote">
+                "Việc vô tình lái kinh ra để soi và chê bai người ta sẽ làm cho tâm địa của mình trở nên hẹp hòi, đóng kín, khiến bản thân bị mất phước báu và tương lai cũng không thể sanh vào những hoàn cảnh tốt lành." (Lời Thầy dạy)
+            </div>
+            <p>
+                Thái độ đúng đắn nhất là phải biết <strong>trải lòng từ bi, cảm thông và giúp đỡ</strong> họ vượt qua khó khăn để trả dứt nghiệp cũ.
+            </p>
+        </div>
+
+        <div class="attitude-card">
+            <div class="card-header">
+                <span class="card-icon">🧘</span>
+                <h3>2. Khéo léo quay về hộ trì sáu căn và thân, khẩu, ý</h3>
+            </div>
+            <p>
+                Trong trường hợp chưa đủ lòng từ bi để xót thương hay chưa đủ điều kiện giúp đỡ, thái độ chuẩn mực tiếp theo là phải biết quay lại <strong>hộ trì nội tâm, giữ gìn sáu căn cùng thân, khẩu, ý cho an ổn</strong>. Mỗi người mang một nghiệp lực riêng; ta không thể kiểm soát, thay đổi nghiệp của người khác hay bắt môi trường vận hành theo ý mình, mà ta chỉ có thể tự thay đổi và quản lý chính bản thân mình.
+            </p>
+        </div>
+
+        <div class="attitude-card">
+            <div class="card-header">
+                <span class="card-icon">🪞</span>
+                <h3>3. Lấy nhân quả làm tấm gương tự soi mình</h3>
+            </div>
+            <p>
+                Nhìn thấy hoàn cảnh bần hàn, ta <strong>tự răn đe bản thân</strong> phải tránh xa sự kiêu mạn, bất hiếu với cha mẹ hay vô ơn với sư trưởng. Ngược lại, khi thấy những gia đình quyền quý (hào tộc), ta hiểu rõ đó là kết quả của hạnh cung kính và rộng lượng bố thí. Từ đó, ta tự an yên tu tập, nỗ lực hành thiện, gieo trồng phước báu cho chính mình thay vì ngồi so bì, đố kỵ.
+            </p>
+        </div>
+
+        <div class="noble-path-box">
+            <h3>☸ 4. Vận dụng Bát Chánh Đạo vào nhận thức xã hội</h3>
+            <p style="margin-bottom: 10px;">Để thái độ tu tập có chiều sâu và rốt ráo, hành giả cần áp dụng con đường Bát Chánh Đạo khi đối diện với sự chênh lệch giàu nghèo:</p>
+            
+            <div class="path-grid">
+                <div class="path-item">
+                    <span class="path-title path-blue">🔹 Chánh kiến & Chánh tư duy:</span>
+                    <p class="path-desc">Thấu hiểu sự khác biệt về hoàn cảnh (y báo) hoàn toàn phụ thuộc vào nghiệp lực tự thân (chánh báo). Hiểu đúng luật nhân quả để <strong>không oán trời trách đất khi mình nghèo</strong>, và <strong>không tự cao tự đại khi mình giàu</strong>.</p>
+                </div>
+                
+                <div class="path-item">
+                    <span class="path-title path-green">🔹 Chánh ngữ & Chánh nghiệp:</span>
+                    <p class="path-desc">Giữ gìn lời nói và hành động đạo đức. Không buông lời mỉa mai, cay nghiệt sự khốn khó của người khác. Thay vào đó, hoan hỷ thực hành hạnh bố thí, sẻ chia và luôn giữ lòng hiếu đạo, cung kính với mọi người.</p>
+                </div>
+                
+                <div class="path-item">
+                    <span class="path-title path-purple">🔹 Chánh niệm:</span>
+                    <p class="path-desc">Luôn tỉnh thức giám sát tâm ý của mình. Không để sự phân biệt giàu - nghèo làm xao động nội tâm, không để tâm ngã mạn hay tâm sân hận sinh khởi khi tương tác với các tầng lớp khác nhau trong xã hội.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="footer-note">
+            Tài liệu lưu hành nội bộ - Ôn thi cuối học kỳ Kinh Tăng Nhất A Hàm
+        </div>
+    </div>
+
+</body>
+</html>

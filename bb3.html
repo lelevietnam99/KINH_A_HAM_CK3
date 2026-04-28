@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ôn thi Kinh Tăng Nhất A Hàm - Câu 6</title>
+    <style>
+        :root {
+            --primary-color: #5D4037; /* Màu Nâu Sòng */
+            --secondary-color: #E65100; /* Màu Cam Pháp phục */
+            --bg-color: #FDFBF7;
+            --text-color: #333;
+            --highlight-bg: #FFF3E0;
+            --van-color: #1976D2;
+            --tu-color: #FBC02D;
+            --tu-practice-color: #388E3C;
+        }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            line-height: 1.7;
+            margin: 0;
+            padding: 20px;
+        }
+        .container {
+            max-width: 850px;
+            margin: auto;
+            background: #fff;
+            padding: 40px;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+        }
+        .header {
+            text-align: center;
+            border-bottom: 3px solid var(--secondary-color);
+            margin-bottom: 30px;
+            padding-bottom: 20px;
+        }
+        h1 {
+            color: var(--primary-color);
+            font-size: 1.8em;
+            margin: 0;
+            text-transform: uppercase;
+        }
+        .question-box {
+            background-color: var(--highlight-bg);
+            padding: 20px;
+            border-left: 5px solid var(--secondary-color);
+            border-radius: 4px;
+            margin-bottom: 35px;
+        }
+        .question-text {
+            font-weight: bold;
+            font-size: 1.1em;
+            color: #D84315;
+            line-height: 1.5;
+        }
+        
+        h2 {
+            color: var(--primary-color);
+            font-size: 1.4em;
+            border-bottom: 1px dashed #ccc;
+            padding-bottom: 8px;
+            margin-top: 35px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        h2::before {
+            content: '☸';
+            color: var(--secondary-color);
+        }
+
+        /* So sánh Kiến thức & Trí tuệ */
+        .comparison-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        .comparison-table th {
+            background-color: var(--primary-color);
+            color: white;
+            padding: 12px;
+            text-align: center;
+        }
+        .comparison-table td {
+            padding: 15px;
+            border: 1px solid #eee;
+            vertical-align: top;
+            text-align: justify;
+        }
+        .knowledge-col { background-color: #f9f9f9; }
+        .wisdom-col { background-color: #fffdf9; }
+
+        /* Lộ trình Văn Tư Tu */
+        .process-flow {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            margin-top: 30px;
+        }
+        .step {
+            display: flex;
+            align-items: flex-start;
+            gap: 20px;
+            padding: 20px;
+            border-radius: 10px;
+            border: 1px solid #eee;
+            position: relative;
+        }
+        .step-number {
+            font-size: 2em;
+            font-weight: bold;
+            min-width: 50px;
+            opacity: 0.2;
+        }
+        .step-content h3 {
+            margin: 0 0 10px 0;
+            font-size: 1.2em;
+        }
+        .step-van { border-left: 6px solid var(--van-color); }
+        .step-van h3 { color: var(--van-color); }
+        .step-tu { border-left: 6px solid var(--tu-color); }
+        .step-tu h3 { color: #F57F17; }
+        .step-practice { border-left: 6px solid var(--tu-practice-color); }
+        .step-practice h3 { color: var(--tu-practice-color); }
+
+        .example-box {
+            background-color: #f1f8e9;
+            border-radius: 6px;
+            padding: 15px;
+            margin-top: 10px;
+            font-style: italic;
+            font-size: 0.95em;
+            color: #33691e;
+        }
+
+        /* Kết luận */
+        .conclusion-panel {
+            background: linear-gradient(135deg, #5D4037 0%, #8D6E63 100%);
+            color: white;
+            padding: 25px;
+            border-radius: 8px;
+            margin-top: 40px;
+            text-align: justify;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+        }
+        .conclusion-panel h3 {
+            margin-top: 0;
+            color: var(--accent-color);
+            text-align: center;
+            text-transform: uppercase;
+        }
+
+        .btn-print {
+            display: block;
+            width: fit-content;
+            margin: 0 auto 20px auto;
+            padding: 10px 25px;
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+            font-weight: bold;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        @media print {
+            .btn-print { display: none; }
+            body { background: white; padding: 0; }
+            .container { box-shadow: none; border-radius: 0; padding: 0; width: 100%; max-width: 100%; }
+            .step { break-inside: avoid; }
+        }
+    </style>
+</head>
+<body>
+
+    <button class="btn-print" onclick="window.print()">🖨️ In Bài Học (A4)</button>
+
+    <div class="container">
+        <div class="header">
+            <h1>Kinh Tăng Nhất A Hàm</h1>
+            <div style="color: var(--secondary-color); font-weight: bold; margin-top: 5px;">CÂU HỎI VẬN DỤNG NÂNG CAO</div>
+        </div>
+
+        <div class="question-box">
+            <div class="question-text">
+                Câu 6: Thầy giáo thọ nhấn mạnh: "Trí tuệ không phải là kiến thức mà là sự biết đúng như thật dẫn đến chuyển hóa nội tâm". Dựa vào lộ trình Văn - Tư - Tu, anh/chị hãy làm sáng tỏ quan điểm này.
+            </div>
+        </div>
+
+        <h2>1. Phân định giữa Kiến thức và Trí tuệ</h2>
+        <table class="comparison-table">
+            <thead>
+                <tr>
+                    <th style="width: 50%;">KIẾN THỨC (Trí thức thế gian)</th>
+                    <th style="width: 50%;">TRÍ TUỆ (Như thật tri kiến)</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td class="knowledge-col">
+                        Là những thông tin, giáo lý tích lũy qua việc học, nghe giảng hay đọc kinh. Hành giả có thể nói rất hay về vô thường, vô ngã nhưng tâm vẫn bị phiền não chi phối khi đối diện nghịch cảnh.
+                    </td>
+                    <td class="wisdom-col">
+                        Là sự thấu triệt bản chất sự vật "đúng như thật nó đang là". Trí tuệ không nằm ở con chữ mà nằm ở khả năng chuyển hóa tận gốc các lậu hoặc và phiền não.
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+
+        <div class="example-box">
+            <strong>Ví dụ từ Thầy giáo thọ:</strong> Trước khi chứng đạo, Đức Phật vẫn "thấy" sự nguy hiểm của dục (kiến thức). Nhưng sau khi chứng đạo, cái "thấy" đó trở thành Trí tuệ - giúp Ngài chuyển hóa hoàn toàn, tự động viễn ly mà không còn bị lôi kéo.
+        </div>
+
+        <h2>2. Lộ trình chuyển hóa: VĂN - TƯ - TU</h2>
+        <p style="text-align: justify;">Để biến kiến thức vay mượn thành trí tuệ nội tâm rốt ráo, hành giả bắt buộc phải đi trọn vẹn 3 bước sau:</p>
+
+        
+
+        <div class="process-flow">
+            <div class="step step-van">
+                <div class="step-number">01</div>
+                <div class="step-content">
+                    <h3>VĂN TUỆ (Tiếp nhận giáo pháp)</h3>
+                    <p style="text-align: justify;">Là giai đoạn nghe lời dạy đúng đắn từ thiện tri thức. Hành giả cần siêng năng thưa hỏi nghĩa lý để mở mang nhận thức. Bước này cung cấp "cái khung giáo pháp", giúp hành giả <strong>Trạch pháp</strong> (phân biệt chánh/tà) để không rơi vào tà kiến.</p>
+                </div>
+            </div>
+
+            <div class="step step-tu">
+                <div class="step-number">02</div>
+                <div class="step-content">
+                    <h3>TƯ TUỆ (Như lý tác ý)</h3>
+                    <p style="text-align: justify;">Hành giả không nghe rồi để đó, mà phải thường xuyên suy nghiệm sâu sắc về giáo pháp trong mọi hoàn cảnh. Quá trình "nghiền ngẫm" này giúp biến các khái niệm xa lạ thành sự thấu hiểu cá nhân, chuẩn bị cho sự chuyển hóa thực sự.</p>
+                </div>
+            </div>
+
+            <div class="step step-practice">
+                <div class="step-number">03</div>
+                <div class="step-content">
+                    <h3>TU TUỆ (Thực hành Chỉ - Quán)</h3>
+                    <p style="text-align: justify;">Đây là bước quyết định. Hành giả vận dụng giáo pháp thông qua việc quán sát thực tế (Chánh niệm tỉnh giác, hộ trì sáu căn). Bằng sự chứng nghiệm thực tế, hành giả tự mình "thấy" chân lý, làm bùng sáng tuệ giác thực thụ.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="conclusion-panel">
+            <h3>🎯 Đích đến của sự Chuyển hóa</h3>
+            <p>
+                Kiến thức chỉ đóng vai trò là "ngọn đèn" chỉ đường. Chỉ khi nào hành giả đi trọn vẹn lộ trình <strong>Văn - Tư - Tu</strong>, tâm trí mới thực sự được thắp sáng. Lúc đó, các lậu hoặc (dục lậu, hữu lậu, vô minh lậu) bị đoạn trừ tận gốc. Kiến thức chính thức chuyển hóa thành <strong>Trí tuệ giải thoát (Chánh trí)</strong>, đưa hành giả đến trạng thái an ổn, Niết bàn rốt ráo.
+            </p>
+        </div>
+
+        <div class="footer-note">
+            Tài liệu lưu hành nội bộ - Ôn thi tự luận Kinh Tăng Nhất A Hàm
+        </div>
+    </div>
+
+</body>
+</html>

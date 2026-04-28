@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ôn thi Kinh Tăng Nhất A Hàm - Câu 1</title>
+    <style>
+        :root {
+            --primary-color: #5D4037; /* Màu Nâu Sòng */
+            --secondary-color: #E65100; /* Màu Cam Pháp phục */
+            --bg-color: #FDFBF7;
+            --text-color: #333;
+            --highlight-bg: #FFF3E0;
+        }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            line-height: 1.7;
+            margin: 0;
+            padding: 20px;
+        }
+        .container {
+            max-width: 850px;
+            margin: auto;
+            background: #fff;
+            padding: 40px;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+        }
+        .header {
+            text-align: center;
+            border-bottom: 3px solid var(--secondary-color);
+            margin-bottom: 30px;
+            padding-bottom: 20px;
+        }
+        h1 {
+            color: var(--primary-color);
+            font-size: 1.8em;
+            margin: 0;
+            text-transform: uppercase;
+        }
+        .question-box {
+            background-color: var(--highlight-bg);
+            padding: 20px;
+            border-left: 5px solid var(--secondary-color);
+            border-radius: 4px;
+            margin-bottom: 35px;
+        }
+        .question-text {
+            font-weight: bold;
+            font-size: 1.15em;
+            color: #D84315;
+        }
+        h2 {
+            color: var(--primary-color);
+            font-size: 1.4em;
+            border-bottom: 1px dashed #ccc;
+            padding-bottom: 8px;
+            margin-top: 30px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        h2::before {
+            content: '☸';
+            color: var(--secondary-color);
+        }
+        .comparison {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin-top: 15px;
+        }
+        .card {
+            padding: 20px;
+            border-radius: 8px;
+            border: 1px solid #eee;
+            text-align: justify;
+        }
+        .card-material {
+            background-color: #f5f5f5;
+            border-top: 4px solid #9e9e9e;
+        }
+        .card-dharma {
+            background-color: #fff9f5;
+            border-top: 4px solid var(--secondary-color);
+        }
+        .card h3 {
+            margin-top: 0;
+            font-size: 1.1em;
+            text-align: center;
+        }
+        .analysis-section {
+            background: #fafafa;
+            padding: 20px;
+            border-radius: 8px;
+            margin-top: 15px;
+        }
+        .noble-path {
+            background-color: #E8F5E9;
+            border-left: 5px solid #2E7D32;
+            padding: 20px;
+            border-radius: 4px;
+            margin-top: 30px;
+        }
+        .noble-path h3 {
+            color: #1B5E20;
+            margin-top: 0;
+        }
+        .footer-note {
+            margin-top: 40px;
+            padding-top: 20px;
+            border-top: 1px solid #eee;
+            font-style: italic;
+            font-size: 0.9em;
+            text-align: right;
+            color: #777;
+        }
+        .btn-print {
+            display: block;
+            width: fit-content;
+            margin: 0 auto 20px auto;
+            padding: 10px 25px;
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+            font-weight: bold;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        @media print {
+            .btn-print { display: none; }
+            body { background: white; padding: 0; }
+            .container { box-shadow: none; border-radius: 0; padding: 0; width: 100%; max-width: 100%; }
+            .comparison { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+
+    <button class="btn-print" onclick="window.print()">🖨️ In Bài Học (A4)</button>
+
+    <div class="container">
+        <div class="header">
+            <h1>Kinh Tăng Nhất A Hàm</h1>
+            <div style="color: var(--secondary-color); font-weight: bold; margin-top: 5px;">HƯỚNG DẪN ÔN THI TỰ LUẬN</div>
+        </div>
+
+        <div class="question-box">
+            <span class="question-text">
+                Câu 1: Phân tích sự khác biệt giữa "thừa tự pháp" và "thừa tự tài vật" (Bài kinh Thừa tự pháp - Phẩm 18). Vì sao Đức Phật nhấn mạnh đệ tử chân chính phải lấy giáo pháp làm gia tài?
+            </span>
+        </div>
+
+        <h2>1. Sự khác biệt giữa "Thừa tự pháp" và "Thừa tự tài vật"</h2>
+        <div class="comparison">
+            <div class="card card-material">
+                <h3>📦 Thừa tự Tài vật</h3>
+                <p><strong>Bản chất:</strong> Là con đường <strong>Tục đế</strong>. Người tu hướng tâm vào lợi dưỡng, danh vọng và vật chất cúng dường.</p>
+                <p><strong>Thái độ:</strong> Xem tứ sự (ăn, mặc, ở, thuốc) là mục đích bám víu thay vì chỉ là phương tiện duy trì mạng sống để tu học.</p>
+                <p><strong>Hệ lụy:</strong> Làm hoại diệt hình ảnh Phật pháp, khiến hành giả trở nên buông lung, không thực hành chánh pháp.</p>
+            </div>
+            <div class="card card-dharma">
+                <h3>📖 Thừa tự Pháp</h3>
+                <p><strong>Bản chất:</strong> Là con đường <strong>Xuất thế gian</strong>. Người đệ tử tiếp nhận, bảo trì và trực tiếp hành trì chân lý do Phật chứng ngộ.</p>
+                <p><strong>Thái độ:</strong> Thích đời sống tịch tĩnh, an trú trong giáo pháp để nhìn nhận và giải quyết mọi vấn đề cuộc sống.</p>
+                <p><strong>Hệ lụy:</strong> Xây dựng nền tảng đạo nghiệp vững chắc, đưa đến sự an lạc và giải thoát thực thụ.</p>
+            </div>
+        </div>
+
+        <h2>2. Lý do phải lấy Giáo pháp làm gia tài, Tu tập làm sự nghiệp</h2>
+        <div class="analysis-section">
+            <ul style="margin: 0; padding-left: 20px;">
+                <li><strong>Vật chất là chướng ngại nguy hiểm:</strong> Chạy theo lợi dưỡng làm thui chột đạo nghiệp. Đức Phật khẳng định "biển cả không chứa tử thi": quy luật nhân quả sẽ tự đào thải những kẻ tu hành giả dối ra khỏi Tăng đoàn.</li>
+                <li><strong>Giáo pháp là gia tài duy nhất diệt khổ:</strong> Chỉ có Chân lý (Duyên sinh, Vô ngã) mới là tài sản đích thực giúp đoạn trừ gốc rễ phiền não và luân hồi sinh tử.</li>
+                <li><strong>Trách nhiệm bảo tồn:</strong> Đệ tử chân chính thừa tự pháp chính là cách trực tiếp nhất để giữ cho ngọn đèn chánh pháp luôn rạng rỡ ở thế gian.</li>
+            </ul>
+        </div>
+
+        <div class="noble-path">
+            <h3>🛡️ 3. Vận dụng Bát Chánh Đạo vào việc "Thừa tự Pháp"</h3>
+            <p style="text-align: justify; margin-bottom: 0;">
+                Sự khác biệt cốt lõi không nằm ở lý thuyết suông mà ở việc <strong>thực hành trọn vẹn 8 đạo phẩm</strong> của bậc Hiền thánh: 
+                <br><em>Chánh kiến, Chánh tư duy, Chánh ngữ, Chánh nghiệp, Chánh mạng, Chánh tinh tấn, Chánh niệm và Chánh định.</em>
+                <br><br>
+                Đây chính là con đường <strong>Trung đạo</strong>. Khi hành giả dấn thân thực hành, trí tuệ sẽ phát sinh, dứt sạch trói buộc và đạt đến Niết bàn. Đây mới là ý nghĩa toàn vẹn nhất của việc kế thừa gia tài từ bậc Đạo sư.
+            </div>
+        </div>
+
+        <div class="footer-note">
+            Tài liệu lưu hành nội bộ - Ôn thi cuối học kỳ
+        </div>
+    </div>
+
+</body>
+</html>

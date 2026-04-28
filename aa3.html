@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ôn thi Kinh Tăng Nhất A Hàm - Câu 3</title>
+    <style>
+        :root {
+            --primary-color: #5D4037; /* Màu Nâu Sòng */
+            --secondary-color: #E65100; /* Màu Cam Pháp phục */
+            --bg-color: #FDFBF7;
+            --text-color: #333;
+            --highlight-bg: #FFF3E0;
+            
+            /* Three pillars colors */
+            --wisdom-color: #1976D2;
+            --ethics-color: #388E3C;
+            --meditation-color: #7B1FA2;
+        }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            line-height: 1.6;
+            margin: 0;
+            padding: 20px;
+        }
+        .container {
+            max-width: 850px;
+            margin: auto;
+            background: #fff;
+            padding: 40px;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+        }
+        .header {
+            text-align: center;
+            border-bottom: 3px solid var(--secondary-color);
+            margin-bottom: 30px;
+            padding-bottom: 20px;
+        }
+        h1 {
+            color: var(--primary-color);
+            font-size: 1.8em;
+            margin: 0;
+            text-transform: uppercase;
+        }
+        .question-box {
+            background-color: var(--highlight-bg);
+            padding: 20px;
+            border-left: 5px solid var(--secondary-color);
+            border-radius: 4px;
+            margin-bottom: 30px;
+        }
+        .question-text {
+            font-weight: bold;
+            font-size: 1.15em;
+            color: #D84315;
+            line-height: 1.5;
+        }
+        
+        .intro-text {
+            font-size: 1.05em;
+            text-align: justify;
+            margin-bottom: 30px;
+        }
+
+        /* 3 Group Sections */
+        .path-group {
+            background: #fff;
+            border: 1px solid #eee;
+            border-radius: 8px;
+            margin-bottom: 25px;
+            overflow: hidden;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.02);
+            transition: transform 0.2s ease;
+        }
+        .path-group:hover {
+            transform: translateX(5px);
+            box-shadow: 0 4px 10px rgba(0,0,0,0.06);
+        }
+        
+        .group-header {
+            padding: 12px 20px;
+            font-size: 1.2em;
+            font-weight: bold;
+            color: white;
+        }
+        .header-wisdom { background-color: var(--wisdom-color); }
+        .header-ethics { background-color: var(--ethics-color); }
+        .header-meditation { background-color: var(--meditation-color); }
+
+        .group-content {
+            padding: 20px;
+            background-color: #fafafa;
+        }
+        
+        .action-block {
+            margin-bottom: 15px;
+        }
+        .action-block:last-child {
+            margin-bottom: 0;
+        }
+        .label-prac {
+            font-weight: bold;
+            color: var(--primary-color);
+            display: block;
+            margin-bottom: 5px;
+        }
+        .label-app {
+            font-weight: bold;
+            color: var(--secondary-color);
+            display: block;
+            margin-bottom: 5px;
+        }
+        .content-text {
+            text-align: justify;
+            margin-bottom: 10px;
+            font-size: 0.98em;
+        }
+
+        /* Conclusion Box */
+        .conclusion-box {
+            background-color: #FEF9E7;
+            border: 2px dashed #FBC02D;
+            padding: 20px 25px;
+            border-radius: 8px;
+            margin-top: 35px;
+            text-align: justify;
+        }
+        .conclusion-box strong {
+            color: #F57F17;
+            font-size: 1.1em;
+        }
+
+        .footer-note {
+            margin-top: 40px;
+            padding-top: 20px;
+            border-top: 1px solid #eee;
+            font-style: italic;
+            font-size: 0.9em;
+            text-align: right;
+            color: #777;
+        }
+        .btn-print {
+            display: block;
+            width: fit-content;
+            margin: 0 auto 20px auto;
+            padding: 10px 25px;
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+            font-weight: bold;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            transition: background 0.3s;
+        }
+        .btn-print:hover {
+            background-color: #3E2723;
+        }
+        @media print {
+            .btn-print { display: none; }
+            body { background: white; padding: 0; }
+            .container { box-shadow: none; border-radius: 0; padding: 0; width: 100%; max-width: 100%; }
+            .path-group { break-inside: avoid; border: 1px solid #ccc; }
+        }
+    </style>
+</head>
+<body>
+
+    <button class="btn-print" onclick="window.print()">🖨️ In Bài Học (A4)</button>
+
+    <div class="container">
+        <div class="header">
+            <h1>Kinh Tăng Nhất A Hàm</h1>
+            <div style="color: var(--secondary-color); font-weight: bold; margin-top: 5px;">HƯỚNG DẪN ÔN THI TỰ LUẬN</div>
+        </div>
+
+        <div class="question-box">
+            <div class="question-text">
+                Câu 3 (Vận dụng nâng cao): Hãy vận dụng con đường Bát Chánh Đạo để thuyết minh cụ thể cách một người đệ tử Phật thực hành "thừa tự chánh pháp" trong đời sống hiện tại.
+            </div>
+        </div>
+
+        <div class="intro-text">
+            Theo lời dạy, "thừa tự chánh pháp" là người đệ tử không lấy lợi dưỡng, danh vọng làm mục đích (thừa tự tài vật), mà lấy giáo pháp làm gia tài, tu tập làm sự nghiệp. Tôn giả Xá Lợi Phất đã khẳng định, biểu hiện trọn vẹn nhất của việc này chính là thực hành <strong>Tám đạo phẩm của bậc hiền thánh (Bát Chánh Đạo)</strong>. Dưới đây là cách vận dụng cụ thể:
+        </div>
+
+        <!-- Nhóm Tuệ Học -->
+        <div class="path-group">
+            <div class="group-header header-wisdom">
+                1. Vận dụng Chánh kiến & Chánh tư duy (Thừa tự bằng Trí tuệ)
+            </div>
+            <div class="group-content">
+                <div class="action-block">
+                    <span class="label-prac">🔸 Thực hành:</span>
+                    <div class="content-text">Người đệ tử không mù quáng chạy theo giá trị vật chất tạm bợ. Họ kế thừa giáo pháp bằng cách siêng năng học hỏi lời Phật dạy (nghe từ người khác) và thường xuyên "như lý tác ý" (tự mình tư duy sâu sắc về giáo pháp).</div>
+                </div>
+                <div class="action-block">
+                    <span class="label-app">🔹 Ứng dụng thực tế:</span>
+                    <div class="content-text">Khi đối mặt với nghịch cảnh hay cám dỗ lợi dưỡng, họ dùng <strong>Chánh kiến</strong> để nhìn nhận sự vật đúng với bản chất duyên sinh, vô thường, vô ngã. Bằng <strong>Chánh tư duy</strong>, họ hướng suy nghĩ đến sự ly tham, từ bỏ ích kỷ và không để tâm trí mắc kẹt vào các lậu hoặc (dục lậu, hữu lậu, vô minh lậu).</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Nhóm Giới Học -->
+        <div class="path-group">
+            <div class="group-header header-ethics">
+                2. Vận dụng Chánh ngữ, Chánh nghiệp & Chánh mạng (Thừa tự bằng Giới hạnh)
+            </div>
+            <div class="group-content">
+                <div class="action-block">
+                    <span class="label-prac">🔸 Thực hành:</span>
+                    <div class="content-text">Thừa tự pháp phải được thể hiện qua hành vi đạo đức cụ thể. Người thừa tự pháp là người không buông lung, không làm ác và chuyên tâm làm điều lành.</div>
+                </div>
+                <div class="action-block">
+                    <span class="label-app">🔹 Ứng dụng thực tế:</span>
+                    <div class="content-text">Trong đời sống, họ áp dụng <strong>Chánh ngữ</strong> (nói lời chân thật, không lừa dối), <strong>Chánh nghiệp</strong> (hành động lương thiện, không tổn hại chúng sanh), và <strong>Chánh mạng</strong> (nuôi sống bằng nghề nghiệp chân chính). Họ từ chối lối sống vì vật chất mà phá bỏ phạm hạnh, bởi họ hiểu rõ luật nhân quả sẽ tự đào thải kẻ giả dối tu hành giống như <em>"biển cả không chứa tử thi"</em>.</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Nhóm Định Học -->
+        <div class="path-group">
+            <div class="group-header header-meditation">
+                3. Vận dụng Chánh tinh tấn, Chánh niệm & Chánh định (Thừa tự bằng Định lực)
+            </div>
+            <div class="group-content">
+                <div class="action-block">
+                    <span class="label-prac">🔸 Thực hành:</span>
+                    <div class="content-text">Trí tuệ và đạo nghiệp đòi hỏi sự nỗ lực hành trì liên tục. Người thừa tự pháp thích sống tịch tĩnh, luôn hộ trì các căn và đoạn trừ năm triền cái.</div>
+                </div>
+                <div class="action-block">
+                    <span class="label-app">🔹 Ứng dụng thực tế:</span>
+                    <div class="content-text">Dùng <strong>Chánh tinh tấn</strong> để siêng năng trau dồi giáo pháp, không lười biếng. Bằng <strong>Chánh niệm</strong>, họ tỉnh giác giám sát thân, thọ, tâm, pháp từng phút giây, phòng hộ sáu căn không để sắc, thanh, hương, vị, xúc chi phối. Cuối cùng, nhờ <strong>Chánh định</strong>, tâm không còn loạn tưởng, đạt được sự an trú vững chãi trong chánh pháp.</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Kết Luận -->
+        <div class="conclusion-box">
+            <strong>🎯 KẾT LUẬN LÀM BÀI THI:</strong><br><br>
+            Như Thầy giáo thọ đã nhấn mạnh, chỉ khi đưa Bát Chánh Đạo vào hành trì, giáo lý mới không dừng lại ở kiến thức suông mà biến thành trí tuệ chuyển hóa nội tâm. Việc vận dụng Bát Chánh Đạo chính là đi trên con đường <strong>"Trung đạo"</strong>, giúp người đệ tử đắc được pháp nhãn tịnh, dứt sạch trói buộc và đạt đến Niết Bàn. Đó mới chính là ý nghĩa toàn vẹn và rốt ráo nhất của việc "thừa tự chánh pháp" từ Đức Như Lai.
+        </div>
+
+        <div class="footer-note">
+            Tài liệu lưu hành nội bộ - Ôn thi cuối học kỳ Kinh Tăng Nhất A Hàm
+        </div>
+    </div>
+
+</body>
+</html>

@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hệ Thống Ôn Tập Kinh Tăng Nhất A Hàm</title>
+    <style>
+        :root {
+            --primary-color: #5D4037; /* Màu Nâu Sòng */
+            --secondary-color: #E65100; /* Màu Cam Pháp phục */
+            --bg-color: #FDFBF7;
+            --text-color: #333;
+            --card-bg: #FFFFFF;
+        }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            margin: 0;
+            padding: 40px 20px;
+            display: flex;
+            justify-content: center;
+        }
+        .container {
+            max-width: 1000px;
+            width: 100%;
+            background: var(--card-bg);
+            padding: 40px;
+            border-radius: 12px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+        }
+        header {
+            text-align: center;
+            margin-bottom: 40px;
+            border-bottom: 2px solid var(--secondary-color);
+            padding-bottom: 20px;
+        }
+        h1 {
+            color: var(--primary-color);
+            font-size: 1.8em;
+            margin: 0;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        .subtitle {
+            color: #795548;
+            font-size: 1.1em;
+            margin-top: 8px;
+            font-weight: bold;
+        }
+
+        .dashboard-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 25px;
+        }
+
+        .section-box {
+            background: #fff;
+            border: 1px solid #eee;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.02);
+        }
+
+        .section-header {
+            padding: 12px 15px;
+            color: white;
+            font-weight: bold;
+            font-size: 1em;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .bg-aa { background-color: #5D4037; }
+        .bg-bb { background-color: #2E7D32; }
+        .bg-cc { background-color: #1976D2; }
+        .bg-dd { background-color: #7B1FA2; }
+
+        .menu-list {
+            padding: 10px;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+        .menu-item {
+            display: flex;
+            align-items: flex-start;
+            text-decoration: none;
+            background: #fafafa;
+            padding: 12px;
+            border-radius: 6px;
+            color: var(--text-color);
+            transition: all 0.2s ease;
+            font-size: 0.9em;
+            border: 1px solid transparent;
+        }
+        .menu-item:hover {
+            background-color: #fff;
+            border-color: var(--secondary-color);
+            color: var(--secondary-color);
+            transform: translateX(5px);
+            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+        }
+        .file-tag {
+            font-family: monospace;
+            background: #eceff1;
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-size: 0.8em;
+            margin-right: 10px;
+            color: #546e7a;
+            font-weight: bold;
+            min-width: 30px;
+            text-align: center;
+        }
+
+        .footer-note {
+            margin-top: 40px;
+            padding: 20px;
+            background-color: #f5f5f5;
+            border-radius: 8px;
+            text-align: center;
+            font-size: 0.9em;
+            color: #666;
+            line-height: 1.5;
+        }
+        
+        .print-btn-sm {
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+            padding: 5px 10px;
+            background: #fff;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 12px;
+            cursor: pointer;
+            color: #777;
+            margin-bottom: 20px;
+        }
+        .print-btn-sm:hover { background: #f9f9f9; color: #333; }
+
+        @media (max-width: 600px) {
+            .dashboard-grid { grid-template-columns: 1fr; }
+            .container { padding: 20px; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <div style="text-align: right;">
+            <button class="print-btn-sm" onclick="window.print()">🖨️ In trang chủ</button>
+        </div>
+
+        <header>
+            <h1>Hệ Thống Ôn Tập Kinh Điển</h1>
+            <div class="subtitle">Kinh Tăng Nhất A Hàm - Học kỳ 3</div>
+        </header>
+
+        <div class="dashboard-grid">
+            <div class="section-box">
+                <div class="section-header bg-aa">📋 Cấu trúc & Đề ôn 1</div>
+                <div class="menu-list">
+                    <a href="aa0.html" class="menu-item"><span class="file-tag">aa0</span>Cấu trúc đề thi & Trọng tâm bài thi</a>
+                    <a href="aa1.html" class="menu-item"><span class="file-tag">aa1</span>Câu 1: Thừa tự pháp & Thừa tự tài vật</a>
+                    <a href="aa2.html" class="menu-item"><span class="file-tag">aa2</span>Câu 2: Nguy hại của lợi dưỡng vật chất</a>
+                    <a href="aa3.html" class="menu-item"><span class="file-tag">aa3</span>Câu 3: Vận dụng Bát Chánh Đạo (Câu 1 & 2)</a>
+                </div>
+            </div>
+
+            <div class="section-box">
+                <div class="section-header bg-bb">📖 Đề Ôn Tập 2</div>
+                <div class="menu-list">
+                    <a href="bb1.html" class="menu-item"><span class="file-tag">bb1</span>Câu 4: Tăng trưởng trí tuệ & Ngã mạn vi tế</a>
+                    <a href="bb2.html" class="menu-item"><span class="file-tag">bb2</span>Câu 5: Đối trị lười biếng & ham ngủ nghỉ</a>
+                    <a href="bb3.html" class="menu-item"><span class="file-tag">bb3</span>Câu 6: Văn - Tư - Tu (Kiến thức & Trí tuệ)</a>
+                </div>
+            </div>
+
+            <div class="section-box">
+                <div class="section-header bg-cc">⚖️ Đề Ôn Tập 3</div>
+                <div class="menu-list">
+                    <a href="cc1.html" class="menu-item"><span class="file-tag">cc1</span>Câu 7: Nhân quả Nghèo khổ & Hào tộc</a>
+                    <a href="cc2.html" class="menu-item"><span class="file-tag">cc2</span>Câu 8: Cội nguồn Phước báu & Y báo</a>
+                    <a href="cc3.html" class="menu-item"><span class="file-tag">cc3</span>Câu 9: Thái độ tu tập (Tự soi mình)</a>
+                </div>
+            </div>
+
+            <div class="section-box">
+                <div class="section-header bg-dd">💝 Kinh Báo Đáp & Tri Ân</div>
+                <div class="menu-list">
+                    <a href="dd1.html" class="menu-item"><span class="file-tag">dd1</span>Câu 10: Kinh Báo đáp (Tri ân & Báo ân)</a>
+                    <a href="dd2.html" class="menu-item"><span class="file-tag">dd2</span>Câu 11: Ý nghĩa Gần Như Lai - Xa Như Lai</a>
+                    <a href="dd3.html" class="menu-item"><span class="file-tag">dd3</span>Câu 12: Gần Như Lai là Gần Chánh Pháp</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="footer-note">
+            Lưu ý: Bạn hãy lưu file này vào cùng một thư mục với 13 file nội dung để các đường dẫn hoạt động chính xác. <br>
+            Chúc bạn ôn tập tinh tấn và đạt kết quả cao trong kỳ thi!
+        </div>
+    </div>
+
+</body>
+</html>

@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ôn thi Kinh Tăng Nhất A Hàm - Câu 11</title>
+    <style>
+        :root {
+            --primary-color: #5D4037; /* Nâu sòng */
+            --secondary-color: #E65100; /* Cam pháp phục */
+            --bg-color: #FDFBF7;
+            --text-color: #333;
+            --highlight-bg: #FFF3E0;
+            --close-color: #2E7D32; /* Xanh lá - Tương ưng */
+            --far-color: #C62828; /* Đỏ - Không tương ưng */
+        }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            line-height: 1.7;
+            margin: 0;
+            padding: 20px;
+        }
+        .container {
+            max-width: 850px;
+            margin: auto;
+            background: #fff;
+            padding: 40px;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+        }
+        .header {
+            text-align: center;
+            border-bottom: 3px solid var(--secondary-color);
+            margin-bottom: 30px;
+            padding-bottom: 20px;
+        }
+        h1 {
+            color: var(--primary-color);
+            font-size: 1.8em;
+            margin: 0;
+            text-transform: uppercase;
+        }
+        .question-box {
+            background-color: var(--highlight-bg);
+            padding: 20px;
+            border-left: 5px solid var(--secondary-color);
+            border-radius: 4px;
+            margin-bottom: 30px;
+        }
+        .question-text {
+            font-weight: bold;
+            font-size: 1.15em;
+            color: #D84315;
+            line-height: 1.5;
+        }
+        
+        .intro-text {
+            font-size: 1.05em;
+            text-align: justify;
+            margin-bottom: 30px;
+            padding: 15px;
+            background-color: #f9f9f9;
+            border-left: 4px solid var(--primary-color);
+            border-radius: 4px;
+        }
+
+        h2 {
+            color: var(--primary-color);
+            font-size: 1.35em;
+            border-bottom: 1px dashed #ccc;
+            padding-bottom: 8px;
+            margin-top: 35px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        h2::before {
+            content: '☸';
+            color: var(--secondary-color);
+        }
+
+        /* Distance Cards */
+        .distance-section {
+            margin-top: 25px;
+            display: flex;
+            flex-direction: column;
+            gap: 25px;
+        }
+        
+        .card {
+            background: #fff;
+            border: 1px solid #eee;
+            border-radius: 8px;
+            padding: 25px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.02);
+            transition: transform 0.2s ease;
+        }
+        .card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+        }
+
+        .card-close {
+            border-left: 5px solid var(--close-color);
+        }
+        .card-close h3 {
+            color: var(--close-color);
+            margin-top: 0;
+            border-bottom: 1px dashed #A5D6A7;
+            padding-bottom: 10px;
+        }
+
+        .card-far {
+            border-left: 5px solid var(--far-color);
+        }
+        .card-far h3 {
+            color: var(--far-color);
+            margin-top: 0;
+            border-bottom: 1px dashed #EF9A9A;
+            padding-bottom: 10px;
+        }
+
+        .sub-point {
+            margin-bottom: 15px;
+        }
+        .sub-point:last-child {
+            margin-bottom: 0;
+        }
+        .sub-point-title {
+            font-weight: bold;
+            color: var(--primary-color);
+            display: block;
+            margin-bottom: 5px;
+        }
+        .sub-point-content {
+            text-align: justify;
+            margin: 0;
+            font-size: 0.98em;
+        }
+
+        /* Hộp Bài học tu tập */
+        .lesson-box {
+            background-color: #FEF9E7;
+            border: 2px solid #FBC02D;
+            padding: 25px;
+            border-radius: 8px;
+            margin-top: 40px;
+            text-align: justify;
+        }
+        .lesson-box h3 {
+            color: #F57F17;
+            margin-top: 0;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 1.25em;
+            text-transform: uppercase;
+        }
+        .lesson-content {
+            margin: 0;
+            color: #3E2723;
+            font-size: 1.05em;
+            line-height: 1.6;
+        }
+        .highlight-text {
+            font-weight: bold;
+            color: #D84315;
+        }
+
+        .footer-note {
+            margin-top: 40px;
+            padding-top: 20px;
+            border-top: 1px solid #eee;
+            font-style: italic;
+            font-size: 0.9em;
+            text-align: right;
+            color: #777;
+        }
+        .btn-print {
+            display: block;
+            width: fit-content;
+            margin: 0 auto 20px auto;
+            padding: 10px 25px;
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+            font-weight: bold;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            transition: background 0.3s;
+        }
+        .btn-print:hover {
+            background-color: #3E2723;
+        }
+        @media print {
+            .btn-print { display: none; }
+            body { background: white; padding: 0; }
+            .container { box-shadow: none; border-radius: 0; padding: 0; width: 100%; max-width: 100%; }
+            .card { break-inside: avoid; }
+        }
+    </style>
+</head>
+<body>
+
+    <button class="btn-print" onclick="window.print()">🖨️ In Bài Học (A4)</button>
+
+    <div class="container">
+        <div class="header">
+            <h1>Kinh Tăng Nhất A Hàm</h1>
+            <div style="color: var(--secondary-color); font-weight: bold; margin-top: 5px;">HƯỚNG DẪN ÔN THI TỰ LUẬN</div>
+        </div>
+
+        <div class="question-box">
+            <div class="question-text">
+                Câu 11: Hãy giải thích ý nghĩa sâu sắc đằng sau lời khẳng định của Đức Phật: Người biết báo ân dù ở xa ngàn dặm vẫn được xem là ở gần Như Lai; kẻ vô ơn dù ở cạnh bên cũng là cách xa Như Lai.
+            </div>
+        </div>
+
+        <div class="intro-text">
+            Ý nghĩa sâu sắc đằng sau lời khẳng định này của Đức Phật nằm ở thước đo về khoảng cách trong đạo Phật: Khoảng cách giữa đệ tử và bậc Đạo sư <strong>không được đo lường bằng không gian vật lý hay thời gian, mà được đo bằng sự tương ưng với Chánh pháp</strong>. Dựa vào bài giảng của Thầy, ý nghĩa này được giải thích cụ thể qua hai khía cạnh:
+        </div>
+
+        <div class="distance-section">
+            <div class="card card-close">
+                <h3>🙏 1. Người biết báo ân dù ở xa ngàn dặm vẫn là ở gần Như Lai</h3>
+                
+                <div class="sub-point">
+                    <span class="sub-point-title">Vượt qua không gian và thời gian:</span>
+                    <p class="sub-point-content">Chữ "xa" ở đây có thể là khoảng cách xa xôi về mặt địa lý (xa ngàn gia tuần), hoặc khoảng cách xa xôi về mặt thời gian (như chúng ta ngày nay đang sống cách thời Đức Thế Tôn hàng ngàn năm).</p>
+                </div>
+                
+                <div class="sub-point">
+                    <span class="sub-point-title">Gần bằng sự hành trì:</span>
+                    <p class="sub-point-content">Khi một người thực hành tâm tri ân và báo ân, người đó đang biến đạo lý thành một phẩm chất đạo đức bền vững bên trong mình. Việc sống với lòng biết ơn chính là đang gần với giáo pháp của Như Lai, gần với cái hạnh của Như Lai và gần với đời sống của Như Lai. Vì họ sống đúng với những gì Phật dạy, <strong>sự tương ưng về mặt tâm thức và đạo hạnh này đã xóa nhòa mọi khoảng cách vật lý</strong>, khiến họ như đang hiện diện ngay bên cạnh Đức Phật.</p>
+                </div>
+            </div>
+
+            <div class="card card-far">
+                <h3>🚶 2. Kẻ vô ơn dù ở cạnh bên cũng là cách xa Như Lai</h3>
+                
+                <div class="sub-point">
+                    <span class="sub-point-title">Gần hình thức nhưng xa đạo lý:</span>
+                    <p class="sub-point-content">Một người lãng quên ân nghĩa, dẫu có cái phước được khoác áo tu hành, được trực tiếp hầu hạ ngay bên cạnh Phật, hay thậm chí học thuộc lòng giáo pháp của Ngài, thì vẫn bị xem là đang cách rất xa Như Lai.</p>
+                </div>
+                
+                <div class="sub-point">
+                    <span class="sub-point-title">Tâm không tương ưng với Chánh pháp:</span>
+                    <p class="sub-point-content">Sự "cách xa" ở đây là do tâm của kẻ vô ơn hoàn toàn không tương ưng với Chánh pháp. Giá trị của người tu học không nằm ở hình thức bề ngoài hay việc được sống gần một bậc Thánh, mà nằm ở sự tri ân và báo ân. Học giáo pháp mà không hành trì, không có được nền tảng đạo đức căn bản là lòng biết ơn thì hoàn toàn không thấu đạt được tinh thần giải thoát.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="lesson-box">
+            <h3>💡 Bài học tu tập rút ra</h3>
+            <p class="lesson-content">
+                Lời dạy này của Đức Phật là một lời nhắc nhở sâu sắc đối với người học Phật: Đừng ỷ lại vào việc mình có điều kiện đi chùa nhiều, tụng kinh nhiều hay sống gần các bậc thiện tri thức. 
+                <br><br>
+                Nếu không tự mình thực hành giáo pháp — bắt đầu từ những đạo đức căn bản nhất như lòng tri ân và báo ân — thì chúng ta vẫn mãi là <span class="highlight-text">kẻ "lạc loài", trôi dạt cách xa vô tận với gia tài Chánh pháp của Đức Như Lai</span>.
+            </p>
+        </div>
+
+        <div class="footer-note">
+            Tài liệu lưu hành nội bộ - Ôn thi cuối học kỳ Kinh Tăng Nhất A Hàm
+        </div>
+    </div>
+
+</body>
+</html>
